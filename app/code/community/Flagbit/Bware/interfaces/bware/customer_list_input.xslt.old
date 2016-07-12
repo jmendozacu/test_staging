@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+     
+    <xsl:template match="/">
+        <data array="true">
+            <xsl:apply-templates select="/OLCustomers/Customer"/>
+        </data>
+    </xsl:template>
+    
+    <xsl:template match="Customer">
+        <customer>
+            <xsl:apply-templates select="descendant::*"/>
+        </customer>
+    </xsl:template>
+    
+    <xsl:template match="NODE_Account/DATA_Kto">
+        <customer_id>
+            <xsl:value-of select="."/>
+        </customer_id>
+        <mip_datahash_id>
+            <xsl:value-of select="."/>
+        </mip_datahash_id>        
+        <entity_type_id>1</entity_type_id>
+        <attribute_set_id>0</attribute_set_id>
+        <store_id>{{config module="mip_olsi" group="products" field="store_id"}}</store_id>
+        <website_id>{{config module="mip_olsi" group="products" field="website_id"}}</website_id> 
+        <group_id>{{config module="mip_olsi" group="products" field="group_id"}}</group_id>
+        <password><xsl:value-of select="."/>xx</password>
+        <!--
+        <unlock_customer>1</unlock_customer>
+        <customer_activated>1</customer_activated>
+-->
+    </xsl:template>    
+    
+    <xsl:template match="DATA_EMail">
+        <email>
+            <xsl:value-of select="."/>
+        </email>
+    </xsl:template>
+    
+    <xsl:template match="DATA_USER_Schnaeppchenmail">
+        <subscription>
+            <xsl:choose>
+                <xsl:when test=". = '-1'">
+                    <xsl:text>1</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:text>0</xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>	
+        </subscription>
+    </xsl:template>
+
+    <xsl:template match="DATA_Rabattsatz">
+        <group_id>
+            <xsl:choose>
+                <xsl:when test=". = '15'">
+                    <xsl:text>4</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:text>1</xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>	            
+        </group_id>
+    </xsl:template>
+
+    <xsl:template match="DATA_Anrede">
+        <prefix>
+            <xsl:choose>
+                <xsl:when test=". = 'Herrn'">
+                    <xsl:text>Herr</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="."/>
+                </xsl:otherwise>
+            </xsl:choose>            
+        </prefix>
+    </xsl:template>
+    
+    <xsl:template match="DATA_USER_ServicePasswort">
+        <password>
+            <xsl:value-of select="."/>
+        </password>
+    </xsl:template>    
+    
+    <xsl:template match="DATA_USER_Geburtsdatum">
+        <dob>
+            <xsl:value-of select="."/>
+        </dob>
+    </xsl:template>      
+    
+    <xsl:template match="DATA_Name2">
+
+        <xsl:choose>
+            <xsl:when test=".">
+                <firstname><xsl:value-of select="substring-before(., ' ')"/></firstname>
+                <lastname><xsl:value-of select="substring-after(., ' ')"/></lastname>
+                <company><xsl:value-of select="substring-after(../DATA_Name1, ' ')"/></company>
+            </xsl:when>
+            <xsl:otherwise>
+                <firstname><xsl:value-of select="substring-before(../DATA_Name1, ' ')"/></firstname>
+                <lastname><xsl:value-of select="substring-after(../DATA_Name1, ' ')"/></lastname>
+                <company><xsl:value-of select="substring-after(../DATA_Name1, ' ')"/></company>           
+            </xsl:otherwise>
+        </xsl:choose>
+    
+    </xsl:template>
+    
+
+    
+    <xsl:template match="DATA_Lieferstrasse">
+        <address array="true">
+            <address>
+                <address_id><xsl:value-of select="../NODE_Account/DATA_Kto"/></address_id>
+                <city><xsl:value-of select="../DATA_LieferOrt"/></city>
+                <company> 
+                    <xsl:choose>
+                        <xsl:when test="../DATA_Anrede = 'Firma'">
+                            <xsl:value-of select="../DATA_Name1"/> 
+                        </xsl:when>
+                    </xsl:choose>                
+                </company>
+                <country_id><xsl:value-of select="../DATA_LieferLand"/></country_id>
+                <fax><xsl:value-of select="../DATA_Telefax"/></fax>
+                <telephone>
+                    <xsl:choose>
+                        <xsl:when test="../DATA_Telefon">
+                            <xsl:value-of select="../DATA_Telefon"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:text>000</xsl:text>
+                        </xsl:otherwise>
+                    </xsl:choose>                 
+                </telephone>
+                <firstname>
+                    <xsl:choose>
+                        <xsl:when test="../DATA_Name2">
+                            <xsl:value-of select="substring-before(../DATA_Name2, ' ')"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="substring-before(../DATA_Name1, ' ')"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </firstname>
+                <region_id>81</region_id>
+                <lastname>
+                    <xsl:choose>
+                        <xsl:when test="../DATA_Name2">
+                            <xsl:value-of select="substring-after(../DATA_Name2, ' ')"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="substring-after(../DATA_Name1, ' ')"/>
+                        </xsl:otherwise>
+                    </xsl:choose>                
+                </lastname>
+                <postcode><xsl:value-of select="../DATA_LieferPLZ"/></postcode>
+                <street><xsl:value-of select="."/></street>
+                <is_default_billing>1</is_default_billing>
+                <is_default_shipping>1</is_default_shipping>
+            </address>
+        </address>       
+    </xsl:template>    
+    
+    
+    <xsl:template match="*|text()"></xsl:template>
+    
+</xsl:stylesheet>

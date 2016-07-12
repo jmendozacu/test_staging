@@ -1,0 +1,366 @@
+@import 'variables.less';
+
+.header-wrapper {
+  margin-top:10px;
+}
+
+.container {
+  width:@container-width;
+  .pd-right-0;
+  .pd-left-0;
+}
+
+// --- Search --- //
+
+.header .logo {
+  margin-bottom: 10px;
+}
+.header .logo img {
+  height: auto;
+  max-width: 270px;
+}
+
+.header-container.type3 .header {
+  margin-top: 20px;
+}
+
+.header .form-search #search, .header-container.type3 .header .form-search {
+  border-radius: 3px;
+  color: @standard;
+  height: auto;
+  padding: 3px 8px;
+}
+
+.header-container.type3 .header .form-search #search {
+  color: @standard;
+
+  &::-webkit-input-placeholder,
+  &:-moz-placeholder, &::-moz-placeholder, &:-ms-input-placeholder {
+     color: #ddd;
+  }
+}
+
+.header-container.type3 .header .form-search {
+  background: @blue;
+}
+
+.header-container.type3 .header .form-search #cat {
+  background: @red;
+  border: @red;
+}
+
+.header-container.type3 .header .form-search #cat:focus {
+  outline: none;
+}
+
+.header-container.type3 .header .form-search button.button {
+  background: rgba(0, 0, 0, 0) url("../img/suche.png") no-repeat scroll 0 0;
+  border-radius: 0 3px 3px 0;
+  margin: 2px;
+  width: 36px;
+  height: 28px;
+
+  i.icon-search {
+    display: none;
+  }
+}
+
+.header-container.type3 .header #search_mini_form {
+  background: @blue;
+  border-radius: 3px;
+  margin-top:10px;
+  border: 1px solid #d9d9d9;
+  border-top-color: #c0c0c0;
+  -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1) inset;
+}
+
+// --- Links --- //
+
+.header-container.type3 .top-links-container {
+  background-color: transparent;
+}
+
+.header-container.type3 .top-links-container li a::before {
+  background: rgba(0, 0, 0, 0) url("../img/li.png") no-repeat scroll 0 0;
+  content: "";
+  display: inline-block;
+  height: 7px;
+  width: 10px;
+}
+
+.header-container.type3 .top-links-container a, .header-container.type3 .top-links ul.links a {
+  .fs-normal;
+  .no-transform;
+  font-weight: bold;
+  color: @standard;
+}
+
+.header-container.type3 .links li {
+  border: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0;
+}
+
+// --- Leistungen --- //
+
+.header-leistungen li {
+  float: left;
+  .mg-right-20;
+}
+
+.header-leistungen li span {
+  .mg-tp-5;
+  color: @grey;
+  float: left;
+  margin-top: 5px;
+  display: block;
+}
+
+.header-leistungen li img {
+  float: left;
+  margin-right: 10px;
+}
+
+.header-icon {
+  .mg-tp-10;
+  .mg-left-10;
+  .mg-right-10;
+}
+
+// --- Cart --- //
+
+.mini-cart .cart-qty {
+  display: block;
+  font-size: 16px;
+  height: 30px;
+  padding-top: 4px;
+  width: 30px;
+  border: 3px solid @white;
+  border-radius: 100%;
+  background: #e71f00; /* Old browsers */
+  background: -moz-linear-gradient(top, #e71f00 0%, #b31600 83%, #b31600 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #e71f00 0%, #b31600 83%, #b31600 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #e71f00 0%, #b31600 83%, #b31600 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e71f00', endColorstr='#b31600', GradientType=0); /* IE6-9 */
+}
+
+.mini-cart .mybag-link {
+  background: rgba(0, 0, 0, 0) url("../img/cart.png") no-repeat scroll 0 0;
+  height: 40px;
+  width: 40px;
+}
+
+.header-container.type3 .mybag-link .cart-info {
+  margin-left: 20px;
+  margin-top: -35px;
+  position: absolute;
+}
+
+.mini-cart-total {
+  display: block;
+  height: 40px;
+  width: 100%;
+  position: absolute;
+  right:25px;
+  top:50px;
+}
+.mini-cart-total .price {
+  color: #000;
+  display: block;
+  height: 50px;
+  width: 100%;
+  font-size: 18px;
+  .font-dosis-bold;
+}
+
+.mini-cart .actions a {
+  .background-gradient;
+}
+
+
+.mini-cart .actions a:hover {
+  .background-gradient-hover;
+}
+
+.mini-cart .totals, .mini-cart .qty-price {
+  color: @red;
+}
+
+.header-container.type3 .mini-cart {
+  left: auto;
+  right: 85px;
+  top: 40px;
+}
+.cart-area {
+  left: auto;
+  right:0;
+}
+
+.topCartContent {
+  border-radius: 0;
+  border:none;
+}
+.topCartContent::before {
+  display: none;
+}
+
+// --- Navigation --- //
+
+.main-nav {
+  margin: 0 auto;
+  max-width: @container-width;
+
+  .background-gradient;
+}
+
+.fixed-header .menu li, .main-nav .menu li {
+
+  &:first-child {
+    a {
+      background: transparent url("http://www.matratzendiscount.de/skin/frontend/ps/md/images/home-inactive.png") no-repeat scroll 0 0;
+      background-position: center;
+      .no-indent;
+      width: 40px;
+    }
+
+    &.act {
+      & a:not(.level1):not(.level2):not(.level3):not(.level4):not(.level5) {
+        background: @blue url("http://www.matratzendiscount.de/skin/frontend/ps/md/images/home.png") no-repeat scroll 0 0;
+        background-position: center;
+        .no-indent;
+        width:40px;
+      }
+    }
+    &:hover {
+      & a:not(.level1):not(.level2):not(.level3):not(.level4):not(.level5) {
+        background: @blue url("http://www.matratzendiscount.de/skin/frontend/ps/md/images/home.png") no-repeat scroll 0 0;
+        background-position: center;
+        .no-indent;
+        width:40px;
+      }
+
+    }
+  }
+
+  & ul li  {
+
+    & a {
+      & span {
+        font-weight: 300;
+        text-transform: none;
+        .no-decoration;
+      }
+    }
+    &:first-child, :first-child.act {
+      & a {
+        text-indent: 0;
+        background: 0;
+        width:auto;
+
+
+      }
+    }
+  }
+}
+
+.nav-sublist-dropdown {
+  border-top: none;
+}
+
+.header-container.type3 .main-nav ul.menu > li.act > a, .header-container.type3 .main-nav ul.menu > li:hover > a {
+  background-color: @blue;
+  color: @red;
+}
+
+.header-container.type3 .main-nav ul.menu > li > a {
+  margin-right: 0;
+  font-weight: 300;
+  .no-decoration;
+  .fs-medium;
+  text-transform: none;
+}
+
+.header-container.type3 .main-nav ul.menu > li.menu-full-width > a, .header-container.type3 .main-nav ul.menu > li.menu-item-has-children > a, .header-container.type3 .main-nav ul.menu > li.menu-static-width > a {
+  padding: 10px 30px!important;
+  border-left: 1px solid #9f1100;
+  margin-left: -4px!important;
+}
+
+.header-container.type3 .main-nav ul.menu > li > a {
+  padding: 10px 20px;
+}
+
+.fixed-header ul.menu > li.menu-full-width > a::after, .fixed-header ul.menu > li.menu-item-has-children > a::after, .main-nav ul.menu > li.menu-full-width > a::after, .main-nav ul.menu > li.menu-item-has-children > a::after, .fixed-header ul.menu > li.menu-static-width > a::after, .main-nav ul.menu > li.menu-static-width > a::after {
+  display: none;
+}
+
+.fixed-header .menu > li.menu-full-width .nav-sublist-dropdown, .main-nav .menu > li.menu-full-width .nav-sublist-dropdown {
+  border-radius: 0;
+}
+
+.fixed-header .menu > li.menu-full-width .nav-sublist-dropdown, .main-nav .menu > li.menu-full-width .nav-sublist-dropdown {
+  border:none;
+}
+
+.fixed-header ul.menu > li, .main-nav ul.menu > li {
+  border-radius: 0;
+}
+
+.fixed-header ul.menu > li.menu-full-width, .fixed-header ul.menu > li.menu-item-has-children, .main-nav ul.menu > li.menu-full-width, .main-nav ul.menu > li.menu-item-has-children, .fixed-header ul.menu > li.menu-static-width, .fixed-header ul.menu > li.menu-item-has-children, .main-nav ul.menu > li.menu-static-width, .fixed-header ul.menu > li.menu-full-width.act:hover, .fixed-header ul.menu > li.menu-item-has-children.act:hover, .main-nav ul.menu > li.menu-full-width.act:hover, .main-nav ul.menu > li.menu-item-has-children.act:hover, .fixed-header ul.menu > li.menu-static-width.act:hover, .fixed-header ul.menu > li.menu-item-has-children.act:hover, .main-nav ul.menu > li.menu-static-width.act:hover {
+  border-radius: 0;
+  .mg-left-0;
+  .mg-right-0;
+}
+
+.header-container.type2 .main-nav .menu-wrapper, .header-container.type3 .main-nav, .header-container.type4 .main-nav .menu-wrapper, .header-container.type9 .main-nav .menu-wrapper, .header-container.type10 .header-wrapper, .header-container.type3.sticky-header .header-wrapper, .header-container.type4.sticky-header .header-wrapper, .header-container.type10.sticky-header .header-wrapper {
+  .background-gradient;
+  padding:0!important;
+}
+
+.header-container.sticky-header .menu-wrapper .mybag-link {
+  background-size: 30px auto;
+  top:8px;
+}
+
+// --- Breadcrumbs --- //
+
+.top-container > .breadcrumbs {
+  background:@blue;
+
+  & li {
+    .fs-normal;
+  }
+  & li > a {
+    color: @standard;
+    .fs-normal;
+  }
+}
+
+.breadcrumbs li {
+  .fs-normal;
+}
+
+.breadcrumbs li .icon-right-open {
+  font-size: 8px;
+}
+
+// --- Container --- //
+
+.main-container {
+  padding-top:0;
+}
+
+// --- Arrow --- //
+
+
+#totop {
+  .background-gradient;
+  color: @white;
+}
+
+#totop:hover {
+  .background-gradient-hover;
+}

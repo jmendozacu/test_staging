@@ -1,0 +1,132 @@
+.redux-main .redux-group-tab:first-child h3{
+	display:none;
+}
+.xt-docs{
+	/* font-family: 'Roboto', sans-serif; */
+	position: relative;
+	top:-20px;
+}
+
+.xt-docs .container{
+	background: #fff;
+	padding:0 20px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	margin: 0;
+}
+
+.xt-docs .panel {
+	background: #f3f3f3;
+	padding: 20px;
+	border-radius: 3px;
+}
+
+.xt-docs .top .box {
+	background: #212121;
+}
+.xt-docs .borderTop{
+	border-top: 1px solid #222;;
+}
+.xt-docs h1{
+	font-size:24px;
+	color: #181818;
+}
+.xt-docs h2{
+	font-size:20px;
+	text-transform: uppercase;
+}
+.xt-docs h3{
+	font-size:16px;
+	text-transform: uppercase;
+	margin:1.8em 0 1em;
+}
+.xt-docs hr{
+	border:0;
+	border-top: 1px solid #ddd;
+	background: transparent;
+	margin-top:20px;
+	width:100%;
+	display:block;
+}
+.xt-docs .clearfix{
+	border:0;
+	background: transparent;
+	margin-top:20px;
+	width:100%;
+	display:block;
+}
+.xt-docs em{
+	margin:0 5px;
+}
+.xt-docs code{
+	color:#777;
+	margin:0 5px
+}
+
+.xt-docs .info { background:#f9f9f9;}
+.xt-docs .append-0 {padding-right:5x;}
+.xt-docs .append-1 {padding-right:15px;}
+.xt-docs .prepend-1 {padding-left:15px;}
+
+.xt-docs ul {
+	list-style: disc;
+	padding-left: 2em;
+}
+.xt-docs li {
+	margin: 0 0 4px;
+}
+.xt-docs .thankyou {
+	margin-bottom: 5px;
+	margin-top: 5px;	
+	clear: both;
+	display: inline-block;
+}
+.xt-docs .toggle{
+	text-decoration: none;
+	font-size: 26px;
+}
+.xt-docs .changelog{
+	display:none;
+}
+.xt-docs .changelog ul {
+	padding:0px;
+	border: 1px solid #eee;
+}
+.xt-docs .changelog ul li {
+	margin: 0!important;
+	display:block;
+	padding:6px;
+}
+.xt-docs .changelog ul li strong{
+	background:#ffffcc;
+	color:#000;
+	padding:1px 5px;
+	border-radius:3px;
+}
+
+.xt-docs .changelog ul li:nth-child(even){
+	background: #f3f3f3;
+}
+.xt-docs .changelog li span{
+	padding:1px 8px;
+	margin-right:10px;
+	display:inline-block;
+	border-radius: 3px;
+	font-size:12px;
+	text-align: center;
+	width: 50px;
+}
+
+.xt-docs .changelog li span.initial{
+	background: rgb(228, 228, 169);
+}
+.xt-docs .changelog li span.fix{
+	background: rgb(244, 197, 197);
+}
+.xt-docs .changelog li span.new{
+	background: rgb(175, 231, 175);
+}
+.xt-docs .changelog li span.enhance{
+	background: rgb(190, 212, 242);
+}

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Flagbit_Bware>
+            <active>true</active>
+            <codePool>community</codePool>
+            <version>0.3.0</version>			
+        </Flagbit_Bware>
+    </modules>
+    
+    <global>
+        <models>
+			<bware>
+				<class>Flagbit_Bware_Model</class>
+			</bware>
+		</models>
+		
+        <sales>
+            <order>
+                <statuses>
+                    <mip_transmitted translate="label"><label>Transmitted</label></mip_transmitted>
+                </statuses>
+                <states>
+                    <mip_transmitted translate="label">
+                        <label>Transmitted</label>
+                        <statuses>
+                            <pending/>
+                        </statuses>
+                        <visible_on_front/>
+                    </mip_transmitted>
+                </states>
+            </order>            
+        </sales>
+ 	<resources>
+            <order_setup>
+                <setup>
+                    <module>Flagbit_Bware</module>
+					<class>Flagbit_Bware_Model_Resource_Setup</class>
+                </setup>
+     		</order_setup>
+        </resources>
+    </global>
+
+
+	<!--<crontab>
+		<jobs>
+			<flagbit_bware>
+				<schedule><cron_expr>30 5 * * *</cron_expr></schedule>
+				<run><model>bware/observer::generateNewOrderExports</model></run>
+			</flagbit_bware>
+		</jobs>
+	</crontab>-->
+
+
+</config>

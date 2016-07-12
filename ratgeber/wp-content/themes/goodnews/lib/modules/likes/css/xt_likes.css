@@ -1,0 +1,70 @@
+/* Post Voting */
+.xt-votes {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.xt-likes, .xt-dislikes {
+  border-radius: 3px;
+  padding: 8px 20px;
+  text-align: center;
+  display: inline-block;
+  line-height: 1em;
+}
+.xt-likes .fa, .xt-dislikes .fa{
+  margin-right:5px;
+  font-size:16px
+}
+body.rtl .xt-likes .fa, .xt-dislikes .fa {
+	margin-left:5px;
+	margin-right:inherit;
+}
+
+.xt-votes .xt-likes {
+  	margin: 0 10px 0 0;
+  	color: #59AA19;
+}
+body.rtl .xt-votes .xt-likes {
+	margin: 0 0 0 10px;
+}
+
+.xt-votes .xt-dislikes {
+  margin: 0;
+  color: #c84848;
+}
+.xt-likes i, .xt-dislikes span {
+  font-size: 14px;
+  margin: 0 3px 0 0;
+}
+.xt-votes .xt-like_btn {
+  color: #59AA19;
+}
+.xt-votes .xt-dislike_btn {
+  color: #c84848;
+}
+.xt-like_btn, .xt-dislike_btn {
+  text-decoration: none;
+  display: inline-block;
+}
+.xt-votes .xt-like_btn:hover {
+  color: #59AA19;
+}
+.xt-votes .xt-dislike_btn:hover {
+  color: #c84848;
+}
+.xt-like_btn:hover, .xt-dislike_btn:hover {
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+@media (max-width: 479px) {
+	.xt-likes, .xt-dislikes {
+	    display: block;
+	}
+	.xt-votes .xt-likes{
+	    margin:0 0 10px;
+	}
+}
+
+
+
+

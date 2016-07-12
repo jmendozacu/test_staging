@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+    <!--
+    * @package \local\Sleepz\Adnymics
+    * @version 1.0.0.2
+    * @since 08.02.2016
+    -->
+    <modules>
+        <Sleepz_Adnymics>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Sleepz_Adnymics>
+    </modules>
+</config>

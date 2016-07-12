@@ -1,0 +1,34 @@
+<?php
+
+/*
+ * @sleepz: edited by us
+ *
+ */
+
+$ratingCount = $this->getReviewsCount();
+
+echo '<div class="product-ratingbox">';
+if ($ratingCount) {
+    echo '<a href="' . $this->getReviewsUrl() . '" title="Bewertungen ansehen">';
+    $ratingVal = $this->getRatingSummary();
+    if ($ratingVal) {
+        $ratingVal = round($ratingVal / 100 * 5);
+        $tempClass = "star-yellow";
+        echo '<span class="stars">';
+        for ($countStars = 1; $countStars <= 5; $countStars++) {
+            if ($countStars > $ratingVal) {
+                $tempClass = "star-grey";
+            }
+            // add rating star (loop)
+            echo '<span class="' . $tempClass . '"></span>';
+        }
+        echo '</span>';
+        // number of ratings
+        echo '<span class="count">(' . $ratingCount . ')</span>';
+    }
+    echo '</a>';
+}
+echo '</div>';
+
+?>
+

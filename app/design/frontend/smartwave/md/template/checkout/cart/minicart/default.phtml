@@ -1,0 +1,56 @@
+<?php
+$_item = $this->getItem();
+$isVisibleProduct = $_item->getProduct()->isVisibleInSiteVisibility();
+$canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage_Catalog_Model_Product_Attribute_Source_Msrp_Type::TYPE_BEFORE_ORDER_CONFIRM);
+
+$store = Mage::app()->getStore();
+$code  = $store->getCode();
+?>
+<?php $_msrpPrice = ($_item->getProduct()->getMsrp() ? $this->helper('core')->currency($_item->getProduct()->getMsrp(),true,true) : false) ?>
+<tr>
+    <td>
+      <!-- Image -->
+      <div class="product-image clearfix">
+        <?php if ($this->hasProductUrl()):?>
+          <a href="<?php echo $this->getProductUrl() ?>" title="<?php echo $this->htmlEscape($this->getProductName()) ?>" class="product-image">
+        <?php endif;?>
+            <img src="<?php echo $this->getProductThumbnail()->resize(80,80); ?>" alt="<?php echo $this->htmlEscape($this->getProductName()) ?>" class="img-responsive" />
+        <?php if ($this->hasProductUrl()):?>
+          </a>
+        <?php endif;?>
+      </div>
+    </td>
+    <td class="product-name-cell">
+      <!-- <p class="manufacturer"> -->
+        <!-- Hersteller ? -->
+      <!-- </p> -->
+      <!-- Name -->
+      <p class="product-name">
+        <?php if ($this->hasProductUrl()):?>
+            <a href="<?php echo $this->getProductUrl() ?>">
+              <?php echo $this->htmlEscape($this->getProductName()) ?>
+            </a>
+        <?php else: ?>
+            <?php echo $this->htmlEscape($this->getProductName()) ?>
+        <?php endif; ?>
+      </p>
+    </td>
+
+    <td class="a-center">
+      <?php echo $this->getQty() ?>
+    </td>
+
+    <td class="a-center">
+      <?php $_incl = $this->helper('checkout')->getPriceInclTax($_item); ?>
+      <span class="cart-price">
+        <?php echo $this->helper('checkout')->formatPrice($_incl-$_item->getWeeeTaxDisposition()) ?>
+      </span>
+    </td>
+
+    <td class="a-right">
+        <?php $_incl = $this->helper('checkout')->getSubtotalInclTax($_item); ?>
+        <span class="cart-price">
+          <?php echo $this->helper('checkout')->formatPrice($_incl-$_item->getWeeeTaxRowDisposition()) ?>
+        </span>
+    </td>
+</tr>

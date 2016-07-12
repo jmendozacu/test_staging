@@ -1,0 +1,431 @@
+<?xml version="1.0"?>
+<!--
+    /**
+    * This source file is subject to the Magento Integration Platform License
+    * that is bundled with this package in the file LICENSE_MIP.txt.
+    * It is also available through the world-wide-web at this URL:
+    * http://www.flagbit.de/license/mip
+    * If you did not receive a copy of the license and are unable to
+    * obtain it through the world-wide-web, please send an email
+    * to magento@flagbit.de so we can send you a copy immediately.
+    *
+    * The Magento Integration Platform is a property of Flagbit GmbH & Co. KG.
+    * It is NO part or deravative version of Magento and as such NOT published
+    * as Open Source. It is NOT allowed to copy, distribute or change the
+    * Magento Integration Platform or any of its parts. If you wish to adapt
+    * the software to your individual needs, feel free to contact us at
+    * http://www.flagbit.de or via e-mail (magento@flagbit.de) or phone
+    * (+49 (0)800 FLAGBIT (3524248)).
+    *
+    *
+    *
+    * Dieser Quelltext unterliegt der Magento Integration Platform License,
+    * welche in der Datei LICENSE_MIP.txt innerhalb des MIP Paket hinterlegt ist.
+    * Sie ist außerdem über das World Wide Web abrufbar unter der Adresse:
+    * http://www.flagbit.de/license/mip
+    * Falls Sie keine Kopie der Lizenz erhalten haben und diese auch nicht über
+    * das World Wide Web erhalten können, senden Sie uns bitte eine E-Mail an
+    * magento@flagbit.de, so dass wir Ihnen eine Kopie zustellen können.
+    *
+    * Die Magento Integration Platform ist Eigentum der Flagbit GmbH & Co. KG.
+    * Sie ist WEDER Bestandteil NOCH eine derivate Version von Magento und als
+    * solche nicht als Open Source Softeware veröffentlicht. Es ist NICHT
+    * erlaubt, die Software als Ganze oder in Einzelteilen zu kopieren,
+    * verbreiten oder ändern. Wenn Sie eine Anpassung der Software an Ihre
+    * individuellen Anforderungen wünschen, kontaktieren Sie uns unter
+    * http://www.flagbit.de oder via E-Mail (magento@flagbit.de) oder Telefon
+    * (+49 (0)800 FLAGBIT (3524248)).
+    *
+    *
+    *
+    * @copyright   2009 by Flagbit GmbH & Co. KG
+    * @author      Flagbit Magento Team <magento@flagbit.de>
+    */
+
+
+    /**
+    * @package     Flagbit
+    * @subpackage  Flagbit_Mip
+    *        */
+-->
+<config>
+    <modules>
+        <Flagbit_Mip>
+            <active>true</active>
+            <codePool>community</codePool>
+            <version>0.2.8.2</version>
+        </Flagbit_Mip>
+    </modules>
+
+    <global>
+        <helpers>
+            <mip>
+                <class>Flagbit_Mip_Helper</class>
+            </mip>
+        </helpers>
+        <blocks>
+            <mip>
+                <class>Flagbit_Mip_Block</class>
+            </mip>
+        </blocks>
+        <ignoredModules>
+            <entities>
+                <mip />
+            </entities>
+        </ignoredModules>
+        <models>
+            <mip>
+                <class>Flagbit_Mip_Model</class>
+                <resourceModel>mip_mysql4</resourceModel>
+            </mip>
+            <mip_mysql4>
+                <class>Flagbit_Mip_Model_Mysql4</class>
+                <entities>
+                    <data_queue>
+                        <table>mip_dataqueue</table>
+                    </data_queue>
+                    <data_relation>
+                        <table>mip_relation</table>
+                    </data_relation>
+                    <data_hash>
+                        <table>mip_datahash</table>
+                    </data_hash>
+                    <!-- deprecated only used by setup script to remove the sql table -->
+                    <data_import>
+                        <table>mip_importdata</table>
+                    </data_import>
+                    <task>
+                        <table>mip_task</table>
+                    </task>
+                    <product_website>
+                        <table>mip_product_website</table>
+                    </product_website>
+                </entities>
+            </mip_mysql4>
+            <customer>
+                <rewrite>
+                    <address>Flagbit_Mip_Model_Customer_Address</address>
+                    <customer>Flagbit_Mip_Model_Customer_Customer</customer>
+                </rewrite>
+            </customer>
+            <core>
+                <rewrite>
+                    <cache>Flagbit_Mip_Model_Cache</cache>
+                </rewrite>
+            </core>
+        </models>
+        <resources>
+            <mip_setup>
+                <setup>
+                    <module>Flagbit_Mip</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </mip_setup>
+            <mip_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </mip_write>
+            <mip_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </mip_read>
+        </resources>
+
+
+        <events>
+            <mip_before_input_product_attributes>
+                <observers>
+                    <mip_observer_website_collect>
+                        <type>singleton</type>
+                        <class>mip/observer_website</class>
+                        <method>collect</method>
+                    </mip_observer_website_collect>
+                </observers>
+            </mip_before_input_product_attributes>
+             <mip_after_input_product_attributes>
+                <observers>
+                    <mip_observer_website_save>
+                        <type>singleton</type>
+                        <class>mip/observer_website</class>
+                        <method>save</method>
+                    </mip_observer_website_save>
+                </observers>
+            </mip_after_input_product_attributes>
+
+            <mip_before_input_product_list>
+                <observers>
+                    <mip_observer_website_collect>
+                        <type>singleton</type>
+                        <class>mip/observer_website</class>
+                        <method>collect</method>
+                    </mip_observer_website_collect>
+                </observers>
+            </mip_before_input_product_list>
+
+            <mip_after_input_product_list>
+                <observers>
+                    <mip_observer_website_save>
+                        <type>singleton</type>
+                        <class>mip/observer_website</class>
+                        <method>save</method>
+                    </mip_observer_website_save>
+                </observers>
+            </mip_after_input_product_list>
+            <mip_after_input>
+                <observers>
+                    <mip_observer_index_enable>
+                        <type>singleton</type>
+                        <class>mip/observer_index</class>
+                        <method>enable</method>
+                    </mip_observer_index_enable>
+                    <mip_observer_index>
+                        <type>singleton</type>
+                        <class>mip/observer_index</class>
+                        <method>reindex</method>
+                    </mip_observer_index>
+                    <mip_observer_cache>
+                        <type>singleton</type>
+                        <class>mip/observer_cache</class>
+                        <method>deleteCache</method>
+                    </mip_observer_cache>
+                    <mip_observer_cachecleaning>
+                        <type>singleton</type>
+                        <class>mip/observer_cache</class>
+                        <method>enableCacheCleaning</method>
+                    </mip_observer_cachecleaning>
+                </observers>
+            </mip_after_input>
+            <mip_before_input>
+                <observers>
+                    <mip_observer_index_disable>
+                        <type>singleton</type>
+                        <class>mip/observer_index</class>
+                        <method>disable</method>
+                    </mip_observer_index_disable>
+                    <mip_observer_cachecleaning>
+                        <type>singleton</type>
+                        <class>mip/observer_cache</class>
+                        <method>disableCacheCleaning</method>
+                    </mip_observer_cachecleaning>
+                </observers>
+            </mip_before_input>
+            <sales_order_save_after>
+                <observers>
+                    <mip>
+                        <type>singleton</type>
+                        <class>mip/observer</class>
+                        <method>handleEvents</method>
+                    </mip>
+                </observers>
+            </sales_order_save_after>
+            <sales_order_place_after>
+                <observers>
+                    <mip>
+                        <type>singleton</type>
+                        <class>mip/observer</class>
+                        <method>handleEvents</method>
+                    </mip>
+                </observers>
+            </sales_order_place_after>
+            <catalog_product_delete_after>
+                <observers>
+                    <mip>
+                        <type>singleton</type>
+                        <class>mip/observer</class>
+                        <method>deleteProduct</method>
+                    </mip>
+                </observers>
+            </catalog_product_delete_after>
+            <catalog_category_delete_after>
+                <observers>
+                    <mip>
+                        <type>singleton</type>
+                        <class>mip/observer</class>
+                        <method>deleteCategory</method>
+                    </mip>
+                </observers>
+            </catalog_category_delete_after>
+            <customer_delete_after>
+                <observers>
+                    <mip>
+                        <type>singleton</type>
+                        <class>mip/observer</class>
+                        <method>deleteCustomer</method>
+                    </mip>
+                </observers>
+            </customer_delete_after>
+            <customer_load_after>
+                <observers>
+                    <mip>
+                        <type>singleton</type>
+                        <class>mip/observer</class>
+                        <method>addCustomerFields</method>
+                    </mip>
+                </observers>
+            </customer_load_after>
+            <customer_address_load_after>
+                <observers>
+                    <mip>
+                        <type>singleton</type>
+                        <class>mip/observer</class>
+                        <method>addAddressFields</method>
+                    </mip>
+                </observers>
+            </customer_address_load_after>
+            <sales_order_address_load_after>
+                <observers>
+                    <mip>
+                        <type>singleton</type>
+                        <class>mip/observer</class>
+                        <method>addAddressFields</method>
+                    </mip>
+                </observers>
+            </sales_order_address_load_after>
+            <eav_entity_attribute_delete_after>
+                <observers>
+                    <mip>
+                        <type>singleton</type>
+                        <class>mip/observer</class>
+                        <method>deleteAttribute</method>
+                    </mip>
+                </observers>
+            </eav_entity_attribute_delete_after>
+        </events>
+
+    </global>
+
+    <admin>
+        <routers>
+            <mip>
+                <use>admin</use>
+                <args>
+                    <module>Flagbit_Mip</module>
+                    <frontName>mip</frontName>
+                </args>
+            </mip>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <mip before="Mage_Adminhtml">Flagbit_Mip</mip>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <translate>
+            <modules>
+                <Flagbit_Mip>
+                    <files>
+                        <default>Mage_Mip.csv</default>
+                    </files>
+                </Flagbit_Mip>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <Flagbit_Mip>
+                    <file>mip.xml</file>
+                </Flagbit_Mip>
+            </updates>
+        </layout>
+    </adminhtml>
+    <frontend>
+        <routers>
+            <mip>
+                <use>standard</use>
+                <args>
+                    <module>Flagbit_Mip</module>
+                    <frontName>mip</frontName>
+                </args>
+            </mip>
+        </routers>
+        <events>
+            <mip_interface_trigger>
+                <observers>
+                    <loadCustomerQuote>
+                        <type>singleton</type>
+                        <class>checkout/observer</class>
+                        <method>loadCustomerQuote</method>
+                    </loadCustomerQuote>
+                </observers>
+            </mip_interface_trigger>
+            <customer_logout>
+                <observers>
+                    <unsetAll>
+                        <type>singleton</type>
+                        <class>checkout/observer</class>
+                        <method>unsetAll</method>
+                    </unsetAll>
+                </observers>
+            </customer_logout>
+            <sales_quote_save_after>
+                <observers>
+                    <set_checkout_quote_id>
+                        <type>singleton</type>
+                        <class>checkout/observer</class>
+                        <method>salesQuoteSaveAfter</method>
+                    </set_checkout_quote_id>
+                </observers>
+            </sales_quote_save_after>
+        </events>
+    </frontend>
+    <default>
+        <mip_core>
+            <settings>
+                <task_lifetime>86400</task_lifetime>
+            </settings>
+        </mip_core>
+        <carriers>
+            <mip>
+                <title>MIP Shipping</title>
+                <active>0</active>
+                <sallowspecific>0</sallowspecific>
+                <showmethod>0</showmethod>
+                <model>mip/carrier_fix</model>
+                <name>MIP Fixed</name>
+                <specificerrmsg>The Shipping-price is calculated and inserted by MIP.</specificerrmsg>
+                <type>O</type>
+                <handling_type>F</handling_type>
+            </mip>
+        </carriers>
+    </default>
+
+    <crontab>
+        <jobs>
+            <mip_data_handler>
+                <run>
+                    <model>mip/data_queue::execute</model>
+                </run>
+                <schedule>
+                    <cron_expr>* * * * *</cron_expr>
+                </schedule>
+            </mip_data_handler>
+            <mip_task_expiration>
+                <run>
+                    <model>mip/task::removeExpiredTasks</model>
+                </run>
+                <schedule>
+                    <cron_expr>* * * * *</cron_expr>
+                </schedule>
+            </mip_task_expiration>
+        </jobs>
+        <events>
+            <default>
+                <observers>
+                    <mip_observer>
+                        <type>singleton</type>
+                        <class>mip/observer</class>
+                        <method>dispatch</method>
+                    </mip_observer>
+                </observers>
+            </default>
+        </events>
+    </crontab>
+
+</config>

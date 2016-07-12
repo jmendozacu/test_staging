@@ -1,0 +1,56 @@
+<?php if($this->canShowBlock()): ?>
+<?php $_filters = $this->getFilters() ?>
+<div class="block block-layered-nav">
+    <div class="block-title" style="display:none;">
+        <strong><span><?php echo $this->__('Shop by') ?></span></strong>
+    </div>
+    <div class="block-content">
+        <?php if($this->canShowOptions()): ?>
+            <p class="block-subtitle" style="display:none;"><?php echo $this->__('Shopping Options') ?></p>
+            <dl id="narrow-by-list">
+                <?php foreach ($_filters as $_filter):?>
+                	<?php if( $_filter->hasItems()):?>
+                    <?php
+                    $label = $_filter->getLabel2();
+                    if (empty($label))
+                    {
+                        $label = $_filter->getName();
+                    }
+                    ?>
+                    <dt><?php echo $this->__($label);?></dt>
+                    <dd><?php echo $_filter->getHtml() ?></dd>
+                    <?php endif;?>
+                <?php endforeach; ?>
+            </dl>
+            <script type="text/javascript">decorateDataList('narrow-by-list')</script>
+        <?php endif; ?>
+        <?php echo $this->getStateHtml() ?>
+    </div>
+</div>
+<script type="text/javascript">
+    var multifilter = function (name, param, clear){
+        var url_params = $H(location.search.toQueryParams());
+        //wenn es keine clear url ist dann brauchen wir die Parameter
+        if(clear) {
+            if(url_params.get(name) != undefined) {
+                param = url_params.get(name).split("_").without(param).join("_");
+                if(!param.empty()) {
+                    url_params.set(name,param);
+                } else {
+                    url_params.unset(name);
+                }
+            } else {
+                url_params.unset(name);
+            }
+        } else {
+            //wenn Parameter dann muss ich den zweiten noch anhängen
+            if(url_params.get(name) != undefined) {
+                param = url_params.get(name)+"<?php echo Icyapp_Solr_Block_Layer_Filter_Abstract::MULTI_FILTER_SEPARATOR; ?>"+param;
+            }
+            url_params.set(name,param);
+        }
+        var param_string = url_params.toQueryString();
+        setLocation([location.protocol, '//', location.host, location.pathname].join('') + "?" +param_string);
+    }
+</script>
+<?php endif; ?>

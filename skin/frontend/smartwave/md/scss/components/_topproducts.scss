@@ -1,0 +1,211 @@
+.homepage {
+  margin: 20px 0;
+
+  img {
+    margin: 0 0 20px;
+    max-width: 100%;
+  }
+}
+
+.topproducts-container {
+
+  margin: 0 0 20px;
+  background-color: $white;
+
+  .title {
+    padding: 10px 20px;
+    h4 {
+      text-transform: uppercase;
+      color: $md-red;
+      @include fs-normal;
+    }
+  }
+
+  .topproducts-list {
+    margin-top: 10px;
+    list-style: none;
+
+    li.item {
+      margin-right: 15px;
+    }
+  }
+
+  // .regular-price {
+  //   margin-bottom: 10px;
+  //   .from {
+  //     font-weight: $fw-bold;
+  //     @include fs-big;
+  //     line-height: 38px;
+  //     vertical-align: bottom;
+  //   }
+  //   .price {
+  //     font-size: 38px;
+  //     line-height: 48px;
+  //     font-family: $font-dosis-bold;
+  //   }
+  // }
+  .price-box {
+    text-align:left;
+    margin-top: 0;
+  }
+
+  .review-wishlist {
+    @include clearfix;
+
+    > div {
+      float: left;
+    }
+    .review {
+      width: 40%;
+    }
+    .wishlist {
+      width: 60%;
+      text-align: right;
+    }
+  }
+
+  .ratings {
+    background:none;
+  }
+  .ratings .rating-box {
+    float: left;
+
+  }
+  li.item .item-area {
+    position: relative;
+  }
+  li.item .details-area {
+    padding: 0 20px;
+
+    .product-name {
+      font-size: 14px;
+      color: $standard;
+      text-align:left;
+      font-weight: bold;
+      min-height: 4em;
+
+      & a {
+        color:$standard;
+      }
+
+      & a:hover {
+        color:$md-red;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .product-image-area {
+    border-radius: 0;
+    border:none;
+  }
+
+  .products-grid .ratings {
+    clear: both;
+  }
+
+  a.addtowishlist, .link-wishlist {
+    border:none;
+    border-radius: 0;
+    @include fs-normal;
+    font-weight: bold;
+    width: auto;
+  }
+
+
+  .savings{
+    overflow: hidden;
+    display: block;
+    width:100%;
+    background: #cd1900; /* Old browsers */
+    background: -moz-linear-gradient(top,  #cd1900 93%, #ff4f32 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(93%,#cd1900), color-stop(100%,#ff4f32)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #cd1900 93%,#ff4f32 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #cd1900 93%,#ff4f32 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #cd1900 93%,#ff4f32 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #cd1900 93%,#ff4f32 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cd1900', endColorstr='#ff4f32',GradientType=0 ); /* IE6-9 */
+    border: 1px solid #bf290e;
+    @include md-text-shadow;
+
+    font-family: $font-dosis-bold;
+    font-size: 30px;
+    border-radius: 10px;
+
+  }
+
+  .line {
+    border-top:1px solid #e6f0f5;
+  }
+
+  .category-image {
+    @include mg-tp(10);
+    @include mg-bt(10);
+  }
+
+  .delivery-options {
+    text-align: left;
+    margin-top: 5px;
+  }
+}
+
+.savings-banner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 45%;
+  z-index: 1;
+
+  text-align: center;
+  @include font-dosis-bold;
+  color: $white;
+  border-radius: 12px;
+  max-width: 85%;
+  margin: 0 auto 5px;
+  font-size: 26px;
+  padding: 10px;
+  overflow: hidden;
+  @include background-image(linear-gradient(to bottom, #cd1900 93%,#ff4f32 100%));
+  @include md-text-shadow;
+}
+
+.owl-theme {
+  .owl-controls {
+    .owl-nav {
+      > div {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        height: 45px;
+        width: 29px;
+        background-color: $md-red;
+        margin: 0;
+
+        border-radius: 0px;
+
+        &.owl-prev {
+          left: 0;
+          background: url('../img/control-left.png') no-repeat;
+        }
+
+        &.owl-next {
+          right: 0;
+          background: url('../img/control-right.png') no-repeat;
+        }
+      }
+    }
+  }
+  &.nav-bottom {
+    .owl-controls {
+      .owl-buttons {
+        > div {
+          position: absolute;
+          top: auto;
+          bottom: 5%;
+          transform: translateY(-50%);
+        }
+      }
+    }
+  }
+}

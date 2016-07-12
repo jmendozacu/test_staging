@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    Mage
+ * @package     Mage_Adminhtml
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+-->
+<config>
+    <menu>
+        <report translate="title" module="mip">
+            <title>Reports</title>
+            <sort_order>80</sort_order>
+            <children>
+
+                <mip translate="title" module="mip">
+                    <title>Integration Platform</title>
+                    <children>
+                        <log translate="title" module="mip">
+                            <title>Log</title>
+                            <action>adminhtml/report_mip_log/log</action>
+                        </log>
+                    </children>
+                </mip>
+
+            </children>
+        </report>
+        <system translate="title" module="mip">
+            <title>System</title>
+            <children>
+                <mip translate="title" module="mip">
+                    <sort_order>100</sort_order>
+                    <title>Integration Platform</title>
+                    <children>
+                        <status translate="title" module="mip">
+                            <sort_order>10</sort_order>
+                            <title>Integration Manager</title>
+                            <action>adminhtml/system_mip_status</action>
+                        </status>
+                        <task translate="title" module="mip">
+                            <sort_order>15</sort_order>
+                            <title>Task Management</title>
+                            <action>adminhtml/system_mip_tasks</action>
+                        </task>
+                        <relation translate="title" module="mip">
+                            <sort_order>20</sort_order>
+                            <title>Relation Management</title>
+                            <action>adminhtml/system_mip_relations</action>
+                        </relation>
+                        <importexport translate="title" module="mip">
+                            <sort_order>25</sort_order>
+                            <title>Imports / Exports</title>
+                            <action>adminhtml/system_mip_importexport</action>
+                        </importexport>
+                    </children>
+                </mip>
+            </children>
+        </system>
+    </menu>
+    <translate>
+        <modules>
+            <Flagbit_Mip>
+                <files>
+                    <default>Mage_Mip.csv</default>
+                </files>
+            </Flagbit_Mip>
+        </modules>
+    </translate>
+    <layout>
+        <updates>
+            <Flagbit_Mip>
+                <file>mip.xml</file>
+            </Flagbit_Mip>
+        </updates>
+    </layout>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <mip translate="title" module="mip">
+                                <title>Integration Platform</title>
+                                <sort_order>1</sort_order>
+                                <children>
+                                    <status translate="title" module="mip">
+                                        <sort_order>5</sort_order>
+                                        <title>Integration Platform</title>
+                                    </status>
+                                    <task translate="title" module="mip">
+                                        <sort_order>15</sort_order>
+                                        <title>Task Management</title>
+                                    </task>
+                                    <relation translate="title" module="mip">
+                                        <sort_order>20</sort_order>
+                                        <title>Relation Management</title>
+                                    </relation>
+                                    <importexport translate="title" module="mip">
+                                        <sort_order>25</sort_order>
+                                        <title>Imports / Exports</title>
+                                    </importexport>
+                                </children>
+                            </mip>
+                        </children>
+                    </system>
+                    <report>
+                        <children>
+                            <mip translate="title" module="mip">
+                                <title>Integration Platform</title>
+                                <children>
+                                    <log translate="title" module="mip">
+                                        <title>Log</title>
+                                    </log>
+                                </children>
+                            </mip>
+                        </children>
+                    </report>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

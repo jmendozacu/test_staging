@@ -1,0 +1,597 @@
+/* ### main elements */
+
+body {
+    min-width: 1200px;
+}
+
+.page {
+    background-color: #e6f0f5;
+    background-image: none;
+}
+
+
+/* ### header */
+.header-container.type3 {
+    background-color: #fff;
+}
+
+
+/* ### navigation */
+.header-container.type3 .main-nav ul.menu > li > a {
+    font-weight: 400 !important;
+    font-size: 14px !important;
+}
+
+.main-nav .container {
+    margin: 0;
+}
+
+.form-search span span {
+    display: none;
+}
+
+
+
+/* ### footer */
+.footer-top {
+    background-color: #fff;
+    text-align: left;
+}
+
+.footer-fussnote {
+    font-size: 11px;
+    line-height: 14px;
+}
+
+.footer-menu a {
+    color: #000;
+}
+
+#brands-slider .owl-carousel {
+    margin: 15px 0;
+}
+
+.footer .fs-small {
+    line-height: 10px;
+    font-size: 9px;
+}
+
+.footer input {
+    color: #1a92c3;
+    font-weight: bold;
+}
+
+.footer button.button {
+    border-radius: 0;
+}
+
+.footer button.button * {
+    color: #1a92c3 !important;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.footer-newsletter .row {
+    width: 1180px;
+    margin: 0 auto;
+}
+
+.footer-newsletter .input-box.row {
+    width: auto;
+}
+
+.footer-newsletter .img-responsive.pull-right.five-image {
+    margin-top: 14px;
+    position: relative;
+}
+
+.footer-newsletter .input-box.row {
+    margin-top: 30px;
+}
+
+.footer-newsletter .col-md-3.text-left {
+    padding-top: 15px;
+}
+
+.footer-trust {
+    float: right;
+}
+.footer-trust .features {
+    padding-right: 13px;
+}
+.footer-trust ul, .trust-list li {
+    float: left;
+}
+.trust-list a::before {
+    background: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+}
+.trust-list a:hover {
+    text-decoration: none;
+}
+.trust-list .verbraucherschutz {
+    padding: 9px 8px 0 11px;
+}
+
+/* ### breadcrumbs */
+
+.breadcrumbs li a {
+    color: #666;
+    font-weight: bold;
+}
+
+.breadcrumbs li a:hover {
+    color: #d81c00;
+}
+
+
+/* ### category view */
+
+#solr_search_facets {
+    margin-top: 0;
+}
+
+
+/* ### product view */
+
+.product-icons > img {
+    height: 110px;
+    margin: 3px;
+}
+
+.addtocart-wrapper .payment-methods {
+    text-align: center;
+}
+
+.addtocart-wrapper .payment-methods img {
+    margin: 8px 3px 0;
+    width: auto;
+}
+
+.addtocart-wrapper .large.orange.expand {
+    border-radius: 0;
+}
+
+
+/* ### homepage */
+
+.home-top-area-left {
+    margin: 0 13px 0 11px;
+    padding: 0;
+    width: 936px;
+}
+
+.home-top-area-right {
+    height: 100%;
+    padding: 0;
+    width: 230px;
+}
+
+.owl-theme .owl-controls .owl-nav > div {
+    opacity: 0.5 !important;
+    top: 82% !important;
+}
+
+#angebote {
+    padding-left: 0 !important; /* fixes line-break of 5th slider element */
+    margin-top: 1px !important;
+}
+
+.topproducts-container .price-box span, .topproducts-container .product-name a {
+    color: #333 !important;
+}
+
+.topproducts-container .product-name > a {
+    hyphens: auto;
+}
+
+
+/* ### cms pages */
+
+.cms-page-view .std {
+    padding: 10px;
+    background-color: #fff;
+}
+
+.cms-page-view .std a {
+    color: #d81c00;
+}
+
+.cms-page-view .main-container .row {
+    margin: 0;
+}
+
+.cms-page-view .sidebar .block {
+    background-color: #fff;
+    padding: 10px;
+}
+
+.cms-page-view .sidebar .block a:hover {
+    text-decoration: none;
+}
+
+.md-partner .button a {
+    background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #ef2000 17%, #9b1200 100%) repeat scroll 0 0;
+    border-radius: 3px;
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    margin: 10px 0 0;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.partner-benefits {
+    background-color: #e6f0f5;
+    padding: 20px 10px;
+    margin-bottom: 10px;
+}
+
+.sidebar .block li.active a {
+    color: #1a92c3 !important;
+    font-weight: bold;
+}
+
+.md-partner-steps {
+    margin-bottom: 30px;
+}
+
+.md-partner-steps .steps-nr {
+    background: rgba(0, 0, 0, 0) url("../img/steps.png") no-repeat scroll 0 0;
+    clear: both;
+    color: #fff;
+    font-weight: bold;
+    height: 34px;
+    line-height: 24px;
+    text-align: center;
+    width: 117px;
+}
+
+.md-partner-steps .steps-nr:hover {
+    background: rgba(0, 0, 0, 0) url("../img/steps.png") no-repeat scroll 0 -36px;
+}
+
+.steps.three {
+    margin: -7px 0;
+}
+.steps {
+    margin: 2px 0;
+}
+
+.md-love {
+    margin-bottom: 30px;
+}
+
+.md-love img {
+    float: right;
+}
+
+.our-banner {
+    margin-bottom: 20px;
+}
+
+.partner-register {
+    background-color: #ebeff1;
+    border: 1px dashed #b8c2c7;
+    margin: 20px 0 30px;
+    padding: 20px 0 16px;
+    text-align: center;
+}
+
+.partner-register-img {
+    float: right;
+    width: 130px;
+}
+
+.printing {
+    float: right;
+}
+
+.sr-header .col-sm-4 {
+    margin: 10px 0;
+}
+
+.sr-header .sr-cols {
+    clear: both;
+}
+
+#showroom .owl-stage-outer {
+    margin-bottom: 40px;
+}
+
+#showroom .owl-nav div {
+    margin-top: 130px;
+    opacity: 0.5;
+}
+
+.lp-product .special-price .price {
+    color: #333 !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    line-height: 15px !important;
+}
+
+.lp-product .product-name {
+    font-size: 20px;
+    margin: 10px 15px;
+}
+
+.lp-product .short-description h2 {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.lp-product .description br {
+    position: absolute;
+}
+
+.lp-product img {
+    width: 100%;
+    height: auto;
+}
+
+.lp-product .details {
+    color: #000;
+}
+
+.lp-product .label {
+    color: #555 !important;
+}
+
+.lp-product .item-price {
+    margin: 30px 0 10px;
+}
+
+.lp-product button {
+    background: #ffa53c !important;
+    border-radius: 0 !important;
+}
+
+.lp-product {
+    margin: 20px 0 50px;
+}
+
+.lp h1 {
+    margin: 20px 0 5px;
+}
+
+
+/* ### matratzenheld landingpage */
+#mh-lan-pag-wrapper{
+    padding: 0px 20px;
+}
+
+.mh-header {
+    width: 100%;
+    height: auto;
+    margin: 15px auto;
+    padding-top: 10px;
+}
+
+.mh-header div.orbit-wrapper div.slider-nav span{
+    height: 8%;
+    width: 2%;
+    top: 37%;
+}
+.mh-header div.orbit-wrapper div.slider-nav span.left{
+    background: url("../images/left.png") no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+.mh-header div.orbit-wrapper div.slider-nav span.right{
+    background: url("../images/right.png") no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+.mh-header div.orbit img.fluid-placeholder {
+    visibility: visible;
+    width: 100%;
+}
+.mh-header div.orbit .orbit-slide {
+    width: 100%;
+}
+.mh-header > a > img {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border: 1px solid #e6f0f5
+}
+
+.mh-cols {
+    display: -webkit-flex;  /*Safari*/
+    display: -ms-flexbox;   /*IE 10*/
+    display: flex;
+    -webkit-flex-direction: row; /* Safari*/
+    -ms-flex-direction: row;     /* IE 10*/
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-justify-content: space-between;
+    -ms-justify-content: space-between;
+    justify-content: space-between;
+    -ms-flex-pack: justify;
+    width: 100%;
+    height: auto;
+    padding-top: 5px;
+}
+.mh-3-col {
+    margin: 15px 0 0;
+    width: 32%;
+    height: auto;
+    min-width: 219px;
+    border: 1px solid #e6f0f5;
+}
+.mh-col-content {
+    margin: 10px;
+    color: #000;
+}
+.mh-col-content > img {
+    width: 95%;
+    padding: 5px 0 0 5%;
+}
+.mh-col-content > p {
+    width: 100%;
+}
+.mh-col-content > h3 {
+    width: 95%;
+    padding: 5px 0;
+    line-height: 1;
+    margin: 0;
+    font-size: 16px;
+}
+.mh-3-col a, .mh-3-col a:hover {
+    color:#000000 ;
+    text-decoration: none;
+}
+
+.mh-col-9{
+    width: 66%;
+    min-width: 250px;
+}
+.mh-col-2{
+    width: 34%;
+    min-width: 100px;
+}
+
+.mh-btn {
+    background: #e50305;
+    background-image: -webkit-linear-gradient(top, #e50305, #950203);
+    background-image: -moz-linear-gradient(top, #e50305, #950203);
+    background-image: -ms-linear-gradient(top, #e50305, #950203);
+    background-image: -o-linear-gradient(top, #e50305, #950203);
+    background-image: linear-gradient(to bottom, #e50305, #950203);
+    color: #ffffff;
+    padding: 5px 15px;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    float: right;
+    margin-top: 15px;
+    letter-spacing: 1.2px;
+    font-family: Dosis, sans-serif;
+    font-weight: 700;
+}
+.mh-btn-product {
+    position: relative;
+    top: -23px;
+}
+.mh-btn span {
+    font-size: 14px;
+    font-weight: 900;
+}
+.mh-header .mh-btn {
+    margin: 0;
+}
+.content-main {
+    padding-bottom: 50px;
+    padding-top: 20px;
+}
+.content-main > h2  {
+    font-size: 20px;
+}
+.content-main > h3  {
+    font-size: 18px;
+}
+.content-main > h4  {
+    font-size: 14px;
+}
+.content-main > p  {
+    font-size: 14px;
+}
+.content-main > p > img  {
+    width: 30%;
+    min-width: 330px;
+    margin: 0 0 2% 2%;
+    float:right;
+}
+.spacer {
+    height: 10px;
+}
+
+.mh-product-icon-container {
+    justify-content: space-between;
+    -ms-flex-pack: space-between;
+    -webkit-justify-content: space-between;
+}
+
+.mh-product-icon-container div {
+    border: 1px solid #e6f0f5;
+    box-sizing: border-box;
+    font-size: 13px;
+    margin: 12px 6px;
+    padding: 12px 15px;
+    width: 350px;
+}
+
+.mh-product-icon-container img {
+    float: left;
+    height: 108px;
+    margin: 4px 15px 5px 0;
+    width: 65px;
+}
+
+.mh-product-icon-container h4 {
+    font-size: 14px;
+}
+
+.cms-matratzenheld h1, .cms-matratzenheld h2, .cms-matratzenheld h3 {
+    font-weight: bold;
+}
+
+
+.mh-col-content {
+    position: relative;
+    height: 100%;
+}
+
+.mh-col-content ul {
+    margin-bottom: 70px;
+}
+
+.mh-price-and-btn {
+    bottom: 0;
+    padding: 15px 0;
+    position: absolute;
+    width: 100%;
+}
+
+#wrapper-promo .savings {
+    color: #fff;
+    display: inline-block;
+    font-weight: bold;
+    position: absolute;
+    right: 20px;
+    top: 0;
+    width: auto;
+    padding: 0 5px;
+}
+
+#wrapper-promo .products {
+    padding: 0 5px;
+}
+
+#wrapper-promo .product-name a {
+    color: #000;
+    font-weight: bold;
+}
+
+#wrapper-promo .no-rating, #wrapper-promo .amount, #wrapper-promo .delivery-time {
+    display: none;
+}
+
+#wrapper-promo .div-wishlist {
+    float: right;
+    margin: 10px 0;
+}
+
+
+
+/* ### checkout */
+.checkout-button-wrapper li  {
+    list-style: none;
+}

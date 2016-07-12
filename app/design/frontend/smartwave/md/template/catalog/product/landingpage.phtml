@@ -1,0 +1,52 @@
+<?php
+$productId = $this->getProduct_id();
+$_product = Mage::getModel('catalog/product')->load($productId); //load the product
+$producturl = $_product->getProductUrl(); 
+    if (substr($producturl,-1,1)!="/") {
+        $producturl.="/";
+    }
+$finalprice = Mage::helper('tax')->getPrice($_product, $_product->getPrice(), true, null, null, null, null, false);
+$msrpprice = $_product->getMsrp();
+$_msrpPrice = $this->helper('core')->currency($_product->getMsrp(),true,true);
+?>
+<div class="col-sm-4">
+	<div class="lp-product">
+		<a href="<?php echo $producturl; ?>" title="<?php echo $_product->getName(); ?>">
+			<p class="product-name"><?php echo $_product->getName(); ?></p>
+			<img src="<?php echo Mage::helper('catalog/image')->init($_product, 'image')->resize(370, 222)->setQuality(84); ?>" alt="<?php echo $_product->getName();?>" title="<?php echo $_product->getName();?>" width="370"  height="222"  />
+		</a>
+		<div class="p-info">
+			<div class="item-price">
+                <div class="special-price msrp">
+                    <?php if ($_product->getMsrp() and $msrpprice > $finalprice): ?>
+                            <span class="price-label"><?php echo $this->__('Manufacturer\'s Suggested Retail Price'); ?></span>
+                            <span class="old-price"><?php echo $_msrpPrice ?></span>
+                            <?php $totalPercent = ($specialprice / $msrpprice *100) - 100;?>
+                                    <?php //if ($totalPercent < -50): ?>
+                                        <?php /* <div class="topdeal"><?php echo $this->__("Topdeal") ?></div> */ ?>
+                                    <?php if ($totalPercent < -2): ?>
+                                        <div class="savings">
+                                            <span class="percentage"><?php echo round($totalPercent); ?></span> %
+                                        </div>
+                                    <?php endif;?>
+					<?php endif; ?>
+                </div> <!-- / .special-price msrp --> 
+                <?php
+                            $priceFromText = ' ';
+                            if($_product->getData('type_id') == 'configurable'){
+                                $priceFromText = Mage::helper('tax')->__('from ');
+                            }
+                ?> 
+                <div class="price-box">
+                    <span class="regular-price">
+                        <span class="price">
+                    	    <?php $pricewithtax = $this->helper('tax')->getPrice($_product, $_product->getFinalPrice()); ?>
+                            <?php echo $priceFromText ?><?php echo $this->helper('core')->currency($pricewithtax,true,false); ?>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <a class="gotoproduct" href="<?php echo $producturl; ?>" title="<?php echo $_product->getName(); ?>"><?php echo $this->__('Zum Produkt >'); ?></a>
+        </div>
+	</div>
+</div>

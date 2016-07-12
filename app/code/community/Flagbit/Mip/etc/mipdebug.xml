@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config>
+    <miplog>
+        <configuration xmlns="http://logging.apache.org/log4php/">
+
+             <appenders>
+
+                <file name="file" class="LoggerAppenderFile">
+                    <layout class="LoggerLayoutPattern">
+                        <param name="conversionPattern" value="%date %-6level (%r/%mem) [%logger] %message%newline" />
+                    </layout>
+                    <params>
+                        <file name="file" value="var/log/mip.log" />
+                    </params>
+                </file>
+
+                <echo name="echo" class="LoggerAppenderEcho">
+                    <layout class="LoggerLayoutHtml">
+                        <param name="locationInfo" value="true" />
+                        <param name="title" value="Mip Debug Output"/>
+                    </layout>
+                </echo>
+
+             </appenders>
+
+            <root>
+                <level value="TRACE" />
+                <appenders_ref>
+                    <ref_file ref="file" />
+                    <ref_echo ref="echo" />
+                </appenders_ref>
+            </root>
+
+        </configuration>
+    </miplog>
+</config>

@@ -1,0 +1,11 @@
+<div class="bestseller-wrapper">
+  <div class="row">
+    <div class="col-xs-12">
+      <?php foreach($this->getBestsellerByCategory() as $product): ?>
+        <p>
+          <?php echo $product->getName(); ?>
+        </p>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</div>

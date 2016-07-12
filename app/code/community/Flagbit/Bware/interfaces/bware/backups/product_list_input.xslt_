@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns="http://mip.flagbit.com/magento-data" xmlns:dyn="http://exslt.org/dynamic"  version="1.0">
+
+	<xsl:variable name="variantsdef" select="document(concat(mip:getBaseDir(),'/var/mip/bware/VariantsDef.XML'))/OLProducts" />
+
+	<!-- 
+		defines Price with or without tax, managed at Configuration Backend
+	 -->
+	<xsl:variable name="pricetype">
+		<xsl:choose>
+			<xsl:when test="mip:config('price_type', 'products', 'mip_bware', null) = '1'"><xsl:text>DATA_Einzelpreis</xsl:text></xsl:when>
+			<xsl:otherwise><xsl:text>DATA_EinzelpreisBrutto</xsl:text></xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	
+	<xsl:variable name="pricelist_id" select="mip:config('pricelist_id', 'products', 'mip_bware', null)"/>
+
+	<xsl:template match="/">
+		<data array="true">
+			<xsl:apply-templates select="/OLProducts/Product"/>
+		</data>
+	</xsl:template>
+	
+	<xsl:template match="Product">
+		<!-- 
+			Manage Subproducts 
+		-->	
+		<xsl:apply-templates select="NODE_Variant[DATA_AuspraegungID != '0']" mode="subproducts">
+			<xsl:with-param name="configurable_attribute1" select="concat('ol_',translate($variantsdef/Product[DATA_Variante = current()/NODE_Variant[DATA_AuspraegungID != '0']/DATA_Variante]/DATA_BezAuspraegung1, 'ABCDEFGHIJKLNMOPQRSTUVWXYZ', 'abcdefghijklnmopqrstuvwxyz'))"/>
+			<xsl:with-param name="configurable_attribute2" select="concat('ol_',translate($variantsdef/Product[DATA_Variante = current()/NODE_Variant[DATA_AuspraegungID != '0']/DATA_Variante]/DATA_BezAuspraegung2, 'ABCDEFGHIJKLNMOPQRSTUVWXYZ', 'abcdefghijklnmopqrstuvwxyz'))"/>
+			<xsl:with-param name="ol_auspraegung1" select="string($variantsdef/Product[DATA_Variante = current()/NODE_Variant[DATA_AuspraegungID != '0']/DATA_Variante]/DATA_BezAuspraegung1)"/>
+			<xsl:with-param name="ol_auspraegung2" select="string($variantsdef/Product[DATA_Variante = current()/NODE_Variant[DATA_AuspraegungID != '0']/DATA_Variante]/DATA_BezAuspraegung2)"/>			
+			<xsl:with-param name="set" select="concat('OL_', string($variantsdef/Product[DATA_Variante = current()/NODE_Variant[DATA_AuspraegungID != '0']/DATA_Variante]/DATA_Variante))"/>
+		</xsl:apply-templates>
+		
+		<!-- 
+			get Mainproducts
+		 -->
+		<product>
+			<xsl:apply-templates select="*">
+				<xsl:with-param name="configurable_attribute1" select="concat('ol_',translate($variantsdef/Product[DATA_Variante = current()/NODE_Variant[DATA_AuspraegungID != '0']/DATA_Variante]/DATA_BezAuspraegung1, 'ABCDEFGHIJKLNMOPQRSTUVWXYZ', 'abcdefghijklnmopqrstuvwxyz'))"/>
+				<xsl:with-param name="configurable_attribute2" select="concat('ol_',translate($variantsdef/Product[DATA_Variante = current()/NODE_Variant[DATA_AuspraegungID != '0']/DATA_Variante]/DATA_BezAuspraegung2, 'ABCDEFGHIJKLNMOPQRSTUVWXYZ', 'abcdefghijklnmopqrstuvwxyz'))"/>
+				<xsl:with-param name="ol_auspraegung1" select="string($variantsdef/Product[DATA_Variante = current()/NODE_Variant[DATA_AuspraegungID != '0']/DATA_Variante]/DATA_BezAuspraegung1)"/>
+				<xsl:with-param name="ol_auspraegung2" select="string($variantsdef/Product[DATA_Variante = current()/NODE_Variant[DATA_AuspraegungID != '0']/DATA_Variante]/DATA_BezAuspraegung2)"/>				
+				<xsl:with-param name="set" select="concat('OL_', string($variantsdef/Product[DATA_Variante = current()/NODE_Variant[DATA_AuspraegungID != '0']/DATA_Variante]/DATA_Variante))"/>	
+			</xsl:apply-templates>
+		</product>
+	</xsl:template>
+
+
+	<!-- 
+	######### Subproducts 
+	 -->
+	<xsl:template match="NODE_Variant" mode="subproducts">
+		<xsl:param name="configurable_attribute1"/>
+		<xsl:param name="configurable_attribute2"/>
+		<xsl:param name="ol_auspraegung1"/>
+		<xsl:param name="ol_auspraegung2"/>		
+		<xsl:param name="set"/>
+		
+		<product>
+			<sku><xsl:value-of select="./DATA_Produktnummer"/></sku>
+			<type>simple</type>
+            <mip_datahash_id><xsl:value-of select="./DATA_Produktnummer"/></mip_datahash_id>
+			
+			<xsl:call-template name="website_and_store_ids"/>
+			<xsl:call-template name="stock">
+				<xsl:with-param name="qty" select="./DATA_LagerbestandVerfuegbar"/>
+			</xsl:call-template>				
+	
+            
+            
+			<name><xsl:value-of select="./DATA_Bezeichnung" /></name>
+			<short_teaser><xsl:value-of select="../NODE_Description/DATA_Bezeichnung1"/></short_teaser>
+			<description><xsl:value-of select="../NODE_Description/DATA_Langtext"/></description>		
+			<xsl:apply-templates select="../NODE_Descriptions"/>
+            
+
+			<!-- 
+				Attributes for Configurable Products
+			 -->
+			<xsl:element name="{$configurable_attribute1}">
+				<xsl:value-of select="mip:attributeOptionValue($configurable_attribute1, string(./DATA_Auspraegung1), null, 0, null, true)"/>
+			</xsl:element>
+			<xsl:element name="{$configurable_attribute2}">
+				<xsl:value-of select="mip:attributeOptionValue($configurable_attribute2, string(./DATA_Auspraegung2), null, 0, null, true)"/>
+			</xsl:element>			
+						
+			<status>1</status>
+			<visibility>1</visibility>
+
+			<tax_class_id>
+				<xsl:call-template name="tax">
+					<xsl:with-param name="elem" select="./NODE_Pricelists"/>
+				</xsl:call-template>				
+			</tax_class_id>	
+			
+			<xsl:if test="./NODE_Pricelists/NODE_Pricelist[DATA_PreislisteID=mip:config('pricelist_id', 'products', 'mip_bware', null) and DATA_AbMenge != '1,0000' and DATA_AbMenge != '0,0000']">
+				<tier_price array="true">
+					<xsl:apply-templates select="./NODE_Pricelists/NODE_Pricelist[DATA_PreislisteID=mip:config('pricelist_id', 'products', 'mip_bware', null) and DATA_AbMenge != '1,0000' and DATA_AbMenge != '0,0000']"/>	
+				</tier_price>
+			</xsl:if>			
+			<xsl:apply-templates select="./NODE_Pricelists/NODE_Pricelist[DATA_PreislisteID=mip:config('pricelist_id', 'products', 'mip_bware', null) and (DATA_AbMenge = '0,0000' or DATA_AbMenge = '0,0000')]"/>
+						
+			<status>1</status>			
+			<visibility>1</visibility>
+			<xsl:call-template name="set">
+				<xsl:with-param name="attribute_set_name" select="$set"/>
+			</xsl:call-template>
+		</product>
+	</xsl:template>
+
+	
+	<!-- 
+	######### Mainproducts 
+	 -->
+	<xsl:template match="DATA_Artikelnummer">
+	
+		<xsl:param name="configurable_attribute1"/>
+		<xsl:param name="configurable_attribute2"/>
+		<xsl:param name="ol_auspraegung1"/>
+		<xsl:param name="ol_auspraegung2"/>			
+		<xsl:param name="set"/>
+		<xsl:param name="type">
+			<xsl:choose>
+				<xsl:when test="count(../NODE_Variant[DATA_AuspraegungID != '0']) > 0"><xsl:text>configurable</xsl:text></xsl:when>
+				<xsl:otherwise><xsl:text>simple</xsl:text></xsl:otherwise>
+			</xsl:choose>		
+		</xsl:param>
+	
+		<sku><xsl:value-of select="."/></sku>	
+		<type><xsl:value-of select="$type"/></type>
+
+		<mip_datahash_id><xsl:value-of select="."/></mip_datahash_id>
+		<xsl:call-template name="website_and_store_ids"/>
+		<xsl:call-template name="stock">
+			<xsl:with-param name="qty" select="../NODE_Variant/DATA_LagerbestandVerfuegbar"/>
+		</xsl:call-template>
+		<weight><xsl:value-of select="../NODE_Variant/DATA_Gewicht"/></weight>
+		
+
+		<meta_title>
+			<xsl:value-of select="../NODE_Descriptions/NODE_Description/DATA_USER_MetaTitle"/>
+		</meta_title>
+		<meta_keyword>
+			<xsl:value-of select="../NODE_Descriptions/NODE_Description/DATA_USER_MetaKeywords"/>
+		</meta_keyword>
+		<meta_description>
+			<xsl:value-of select="../NODE_Descriptions/NODE_Description/DATA_USER_MetaDescription"/>
+		</meta_description>
+        <schimmel_dimensionstext>
+			<xsl:value-of select="../NODE_Descriptions/NODE_Description/DATA_Dimensionstext"/>
+		</schimmel_dimensionstext>
+        
+		<asdf>
+        	<xsl:value-of select="mip:attributeOptionValue('asdf', string(../NODE_Descriptions/NODE_Description/DATA_Color), null, 0, null, true)"/>
+        </asdf>
+            
+         <test1>
+			<xsl:value-of select="mip:attributeOptionValue('test1', string(../NODE_Descriptions/NODE_Description/DATA_test1), null, 0, null, true)"/>
+		</test1>
+        
+		<status>1</status>
+        
+        
+        
+        
+        
+        
+		
+		<xsl:call-template name="set">
+			<xsl:with-param name="attribute_set_name" select="$set"/>
+		</xsl:call-template>	
+			
+		<xsl:if test="$type = 'configurable'">		
+			<configurable_products_data array="true">
+				<xsl:apply-templates select="../NODE_Variant[DATA_AuspraegungID != '0']" mode="configurable_products_data">
+					<xsl:with-param name="configurable_attribute1" select="$configurable_attribute1"/>
+					<xsl:with-param name="configurable_attribute2" select="$configurable_attribute2"/>
+				</xsl:apply-templates>	
+			</configurable_products_data>
+	
+			<configurable_attributes_data array="true">
+				<node>
+					<use_default>1</use_default>
+					<label></label>
+					<position>1</position>
+					<attribute_id><xsl:value-of select="mip:getid('attribute', 'attribute_code', $configurable_attribute1)"/></attribute_id>
+					<attribute_code><xsl:value-of select="$configurable_attribute1"/></attribute_code>
+					<values array="true">
+						<xsl:apply-templates select="../NODE_Variant[DATA_AuspraegungID != '0']" mode="configurable_attributes_data">
+							<xsl:with-param name="configurable_attribute" select="$configurable_attribute1"/>	
+							<xsl:with-param name="number">1</xsl:with-param>			
+						</xsl:apply-templates>
+					</values>
+				</node>
+				<xsl:if test="$configurable_attribute1 != ''">		
+					<node>
+						<use_default>1</use_default>
+						<label></label>
+						<position>2</position>
+						<attribute_id><xsl:value-of select="mip:getid('attribute', 'attribute_code', $configurable_attribute2)"/></attribute_id>
+						<attribute_code><xsl:value-of select="$configurable_attribute2"/></attribute_code>
+						<values array="true">
+							<xsl:apply-templates select="../NODE_Variant[DATA_AuspraegungID != '0']" mode="configurable_attributes_data">
+								<xsl:with-param name="configurable_attribute" select="$configurable_attribute2"/>	
+								<xsl:with-param name="number">2</xsl:with-param>			
+							</xsl:apply-templates>						
+						</values>
+					</node>					
+				</xsl:if>
+			</configurable_attributes_data>		
+		</xsl:if>
+
+	</xsl:template>
+	
+	<xsl:template match="NODE_Variant[DATA_AuspraegungID != '0']" mode="configurable_products_data">
+		<xsl:param name="configurable_attribute1"/>
+		<xsl:param name="configurable_attribute2"/>
+
+		<node>
+			<id><xsl:value-of select="./DATA_Produktnummer"/></id>
+			<values array="true">
+				<value>
+					<attribute_id><xsl:value-of select="mip:getid('attribute', 'attribute_code', $configurable_attribute1)"/></attribute_id>
+					<value_index><xsl:value-of select="mip:attributeOptionValue($configurable_attribute1, string(./DATA_Auspraegung1), null, 0, null, true)"/></value_index>
+				</value>
+				<xsl:if test="./DATA_Auspraegung2 != ''">
+					<value>
+						<attribute_id><xsl:value-of select="mip:getid('attribute', 'attribute_code', $configurable_attribute2)"/></attribute_id>
+						<value_index><xsl:value-of select="mip:attributeOptionValue($configurable_attribute2, string(./DATA_Auspraegung2), null, 0, null, true)"/></value_index>
+					</value>					
+				</xsl:if>				
+			</values>
+		</node>
+
+	</xsl:template>		
+	
+	<xsl:template match="NODE_Variant[DATA_AuspraegungID != '0']" mode="configurable_attributes_data">
+		<xsl:param name="variant_price" select="translate(./NODE_Pricelists/NODE_Pricelist[DATA_PreislisteID = $pricelist_id]/*[name() = $pricetype], ',.' , '.,' )"/>
+		<xsl:param name="product_price" select="translate(../NODE_Variant[DATA_AuspraegungID = '0']/NODE_Pricelists/NODE_Pricelist[DATA_PreislisteID = $pricelist_id]/DATA_EinzelpreisBrutto, ',.' , '.,' )"/>
+		<xsl:param name="configurable_attribute"/>
+		<xsl:param name="number"/>
+			
+		<value>
+			<value_index><xsl:value-of select="mip:attributeOptionValue($configurable_attribute, string(dyn:evaluate(concat('./DATA_Auspraegung',$number))), null, 0, null, true)"/></value_index>
+			<is_percent>0</is_percent>
+			<xsl:choose>
+				<xsl:when test="$number = 2 and string($variant_price - $product_price) != 'NaN'">
+					<pricing_value><xsl:value-of select="$variant_price - $product_price"/></pricing_value>
+				</xsl:when>
+				<xsl:otherwise>
+					<pricing_value></pricing_value>
+				</xsl:otherwise>
+			</xsl:choose>
+			
+		</value>
+	</xsl:template>		
+	
+	
+	<xsl:template name="set">
+		<xsl:param name="attribute_set_name"/>
+		<set>
+			<xsl:choose>
+				<xsl:when test="$attribute_set_name = '' or mip:getid('attributeset', 'attribute_set_name', $attribute_set_name) = ''">
+					<xsl:value-of select="mip:config('attribute_set', 'products', 'mip_bware', null)"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="mip:getid('attributeset', 'attribute_set_name', $attribute_set_name)"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</set>
+	</xsl:template>	
+
+	<xsl:template name="stock">
+		<xsl:param name="qty"/>
+		<xsl:choose>
+			<xsl:when test="mip:config('manage_stock', 'products', 'mip_bware', null) = '1'">
+				<stock_data>
+					<qty><xsl:value-of select="$qty"/></qty>
+					<use_config_manage_stock>1</use_config_manage_stock>
+					<is_in_stock>1</is_in_stock>
+					<use_config_min_sale_qty>1</use_config_min_sale_qty>
+					<use_config_max_sale_qty>1</use_config_max_sale_qty>
+					<use_config_backorders>1</use_config_backorders>
+					<use_config_notify_stock_qty>1</use_config_notify_stock_qty>
+				</stock_data>			
+			</xsl:when>
+			<xsl:otherwise>
+				<stock_data>
+					<qty>100</qty>
+					<use_config_manage_stock>1</use_config_manage_stock>
+					<is_in_stock>1</is_in_stock>
+					<use_config_min_sale_qty>1</use_config_min_sale_qty>
+					<use_config_max_sale_qty>1</use_config_max_sale_qty>
+					<use_config_backorders>1</use_config_backorders>
+					<use_config_notify_stock_qty>1</use_config_notify_stock_qty>
+				</stock_data>			
+			</xsl:otherwise>
+		</xsl:choose>	
+	</xsl:template>
+
+	<xsl:template name="website_and_store_ids">
+		<website_ids array="true">
+			<website_id><xsl:value-of select="mip:config('website_id', 'products', 'mip_bware', null, '1')"/></website_id>
+		</website_ids>
+		<store_ids array="true">
+			<store_id><xsl:value-of select="mip:config('shop_id', 'products', 'mip_bware', null, '0')"/></store_id>
+		</store_ids>	
+	</xsl:template>
+
+	<xsl:template name="DATA_ArtGrpID" match="DATA_ArtGrpID">
+		<xsl:param name="str" select="."/>
+		<xsl:param name="id" select="0" />
+		<xsl:choose>
+			<xsl:when test="$id = 0">
+				<!-- only for first recursion run -->
+				<xsl:choose>
+					<xsl:when test="contains($str,',')">
+						<xsl:call-template name="DATA_ArtGrpID">
+							<xsl:with-param name="str"
+								select="substring-after($str, ',')"/>
+							<xsl:with-param name="id" select="substring-before($str, ',')"/>
+						</xsl:call-template>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:call-template name="DATA_ArtGrpID">
+							<xsl:with-param name="str"
+								select="''"/>
+							<xsl:with-param name="id" select="$str"/>
+						</xsl:call-template>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:when>
+			<xsl:otherwise>
+
+			<!-- cancel recursion when string is empty -->
+			<xsl:choose>
+				<xsl:when  test="string-length($str) > 0">
+				<xsl:choose>
+					<xsl:when test="contains($str,',')">
+						<xsl:call-template name="DATA_ArtGrpID">
+							<xsl:with-param name="str"
+								select="substring-after($str, ',')"/>
+							<xsl:with-param name="id" select="substring-before($str, ',')"/>
+						</xsl:call-template>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:call-template name="DATA_ArtGrpID">
+							<xsl:with-param name="str"
+								select="''"/>
+							<xsl:with-param name="id" select="$str"/>
+						</xsl:call-template>
+					</xsl:otherwise>
+				</xsl:choose>
+				</xsl:when>
+				<xsl:otherwise>
+					<category_ids>
+						<xsl:value-of select="."/>
+					</category_ids>
+				</xsl:otherwise>							
+			</xsl:choose>
+		</xsl:otherwise>
+	</xsl:choose>
+				
+	</xsl:template>
+
+	
+	<xsl:template match="DATA_Langtext">
+		<short_description>
+			<xsl:choose>
+				<xsl:when test=".">
+					<xsl:value-of select="."/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:call-template name="Description" />
+				</xsl:otherwise>
+			</xsl:choose>
+		</short_description>
+		<description>
+			<xsl:choose>
+				<xsl:when test=".">
+					<xsl:value-of select="."/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:call-template name="Description" />
+				</xsl:otherwise>
+			</xsl:choose>			
+		</description>
+	</xsl:template>
+	
+	<xsl:template match="DATA_images">
+		<images array="true">
+			<xsl:call-template name="parseImages">
+				<xsl:with-param name="str" select="."/>
+				<xsl:with-param name="splitString" select="','"/>
+			</xsl:call-template>
+		</images>
+	</xsl:template>
+	
+	<xsl:template match="NODE_Descriptions">
+		<name>
+			<xsl:call-template name="Description" />
+		</name>
+		<short_teaser>
+			<xsl:value-of select="NODE_Description/DATA_Bezeichnung2"/>
+		</short_teaser>
+		<description>
+			<xsl:value-of select="NODE_Description/DATA_Langtext"/>
+		</description>
+	</xsl:template>
+	
+	<xsl:template name="Description">
+		<xsl:choose>
+			<xsl:when test="NODE_Description/DATA_USER_WebshopBez1/text()">
+				<xsl:value-of select="NODE_Description/DATA_USER_WebshopBez1"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="NODE_Description/DATA_Bezeichnung1"/>
+				<xsl:text> </xsl:text>
+				<xsl:value-of select="NODE_Description/DATA_Bezeichnung2"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template match="NODE_Variant[DATA_AuspraegungID = '0']">
+		<xsl:apply-templates select="*"/>
+	</xsl:template>
+
+	<xsl:template match="NODE_Pricelists">
+
+		<xsl:apply-templates select="NODE_Pricelist[DATA_PreislisteID=mip:config('pricelist_id', 'products', 'mip_bware', null) and DATA_AbMenge='0,0000']"/>
+		<xsl:if test="NODE_Pricelist[not(DATA_PreislisteID=mip:config('pricelist_id', 'products', 'mip_bware', null) and DATA_AbMenge='0')]">
+			<tier_price array="true">
+				<xsl:apply-templates select="NODE_Pricelist[DATA_PreislisteID=mip:config('pricelist_id', 'products', 'mip_bware', null) and DATA_AbMenge != '1,0000' and DATA_AbMenge != '0,0000']" />
+			</tier_price>
+		</xsl:if>
+		
+		<tax_class_id>
+			<xsl:call-template name="tax">
+				<xsl:with-param name="elem" select="."/>
+			</xsl:call-template>
+		</tax_class_id>			
+		
+	</xsl:template>
+	
+	<xsl:template name="tax">
+		<xsl:param name="elem" select="."/>
+		<xsl:choose>
+			<xsl:when test="$elem/NODE_Pricelist[DATA_PreislisteID = mip:config('pricelist_id', 'products', 'mip_bware', null)]/DATA_Steuersatz ='19'"><xsl:value-of select="mip:config('regular_tax', 'tax', 'mip_bware', null)"/></xsl:when>
+			<xsl:when test="$elem/NODE_Pricelist[DATA_PreislisteID = mip:config('pricelist_id', 'products', 'mip_bware', null)]/DATA_Steuersatz ='7'"><xsl:value-of select="mip:config('reduced_tax', 'tax', 'mip_bware', null)"/></xsl:when>			
+			<xsl:otherwise><xsl:text>0</xsl:text></xsl:otherwise>
+		</xsl:choose>	
+	</xsl:template>
+	
+	<xsl:template match="NODE_Pricelist[DATA_PreislisteID=mip:config('pricelist_id', 'products', 'mip_bware', null) and DATA_AbMenge='0,0000']">
+		<price>
+			<xsl:value-of select="translate(dyn:evaluate($pricetype), ',.' , '.,' )"/>
+		</price>
+		<price_type>
+			<xsl:text>1</xsl:text>
+		</price_type>
+	</xsl:template>
+	
+	<xsl:template match="NODE_Pricelist[DATA_PreislisteID=mip:config('pricelist_id', 'products', 'mip_bware', null) and DATA_AbMenge != '1,0000' and DATA_AbMenge != '0,0000']">
+		<tier_price>
+			<price><xsl:value-of select="translate(dyn:evaluate($pricetype), ',.' , '.,' )"/></price>
+			<cust_group></cust_group>
+			<price_qty><xsl:value-of select="translate(DATA_AbMenge, ',.' , '.,' )"/></price_qty>
+			<website_id>0</website_id>
+		</tier_price>
+	
+	</xsl:template>
+	
+	
+	<!-- Functions -->
+	<xsl:template name="parseImages">
+		<xsl:param name="str" select="."/>
+		<xsl:param name="splitString" select="' '"/>
+		
+		<xsl:variable name="filename">
+			<xsl:choose>
+				<xsl:when test="contains($str, $splitString)">
+					<xsl:value-of select="substring-before($str, $splitString)"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="$str"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		
+		<image>
+			<types array="true">
+			
+				<xsl:choose>
+					<xsl:when test="contains($filename, '_1.')">
+						<type><xsl:text>thumbnail</xsl:text></type>
+						<type><xsl:text>image</xsl:text></type>
+						<type><xsl:text>small_image</xsl:text></type>						
+					</xsl:when>
+					<xsl:when test="contains($filename, '_2.')">
+
+					</xsl:when>						
+				</xsl:choose>					
+			
+			</types>
+			<label/>
+			<position>
+				<xsl:choose>
+					<xsl:when test="contains($filename, '_1.')">
+						<xsl:text>1</xsl:text>
+					</xsl:when>
+					<xsl:when test="contains($filename, '_2.')">
+						<xsl:text>2</xsl:text>
+					</xsl:when>
+					<xsl:when test="contains($filename, '_3.')">
+						<xsl:text>3</xsl:text>
+					</xsl:when>
+					<xsl:when test="contains($filename, '_4.')">
+						<xsl:text>4</xsl:text>
+					</xsl:when>
+					<xsl:when test="contains($filename, '_5.')">
+						<xsl:text>5</xsl:text>
+					</xsl:when>
+					<xsl:when test="contains($filename, '_6.')">
+						<xsl:text>6</xsl:text>
+					</xsl:when>	
+					<xsl:when test="contains($filename, '_7.')">
+						<xsl:text>7</xsl:text>
+					</xsl:when>	
+					<xsl:when test="contains($filename, '_8.')">
+						<xsl:text>8</xsl:text>
+					</xsl:when>						
+					<xsl:when test="contains($filename, '_9.')">
+						<xsl:text>9</xsl:text>
+					</xsl:when>
+                    <xsl:when test="contains($filename, '_10.')">
+						<xsl:text>10</xsl:text>
+					</xsl:when>
+                    <xsl:when test="contains($filename, '_11.')">
+						<xsl:text>11</xsl:text>
+					</xsl:when>
+                    <xsl:when test="contains($filename, '_12.')">
+						<xsl:text>12</xsl:text>
+					</xsl:when>
+                    <xsl:when test="contains($filename, '_13.')">
+						<xsl:text>13</xsl:text>
+					</xsl:when>
+                    <xsl:when test="contains($filename, '_14.')">
+						<xsl:text>14</xsl:text>
+					</xsl:when>
+                    <xsl:when test="contains($filename, '_15.')">
+						<xsl:text>15</xsl:text>
+					</xsl:when>
+					
+					<xsl:otherwise>
+						<xsl:text>image</xsl:text>
+					</xsl:otherwise>					
+				</xsl:choose>
+			</position>			
+			<file>
+				<xsl:value-of select="concat('/var/mip/bware/images/product_images/', $filename)"/>
+			</file>
+			<cache>
+				<xsl:value-of select="mip:filetime(concat('/var/mip/bware/images/product_images/', string($filename)))"/>
+			</cache>
+		</image>
+		
+		<xsl:if test="contains($str,$splitString)">
+			<xsl:call-template name="parseImages">
+				<xsl:with-param name="str"
+					select="substring-after($str,$splitString)"/>
+				<xsl:with-param name="splitString" select="$splitString"/>
+			</xsl:call-template>
+		</xsl:if>
+	</xsl:template>
+	
+	<xsl:template name="tokens">
+		<xsl:param name="str" select="."/>
+		<xsl:param name="splitString" select="' '"/>
+		<xsl:param name="tagName" select="'token'"/>
+		<xsl:choose>
+			<xsl:when test="contains($str,$splitString)">
+				<xsl:element name="{$tagName}">
+					<xsl:value-of select="substring-before($str,$splitString)"/>
+				</xsl:element>
+				<xsl:call-template name="tokens">
+					<xsl:with-param name="str"
+						select="substring-after($str,$splitString)"/>
+					<xsl:with-param name="splitString" select="$splitString"/>
+					<xsl:with-param name="tagName" select="$tagName"/>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:element name="{$tagName}">
+					<xsl:value-of select="$str"/>
+				</xsl:element>>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+	
+	<xsl:template match="*"> </xsl:template>
+	
+</xsl:stylesheet>

@@ -1,0 +1,379 @@
+<?xml version="1.0"?>
+<!--
+    /*                                                                       *
+    * This script is part of the MIP project 								 *
+    *                                                                        *
+    * Mip is free software; you can redistribute it and/or modify it 		 *
+    * under the terms of the GNU General Public License version 2 as         *
+    * published by the Free Software Foundation.                             *
+    *                                                                        *
+    * This script is distributed in the hope that it will be useful, but     *
+    * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHAN-    *
+    * TABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General      *
+    * Public License for more details.                                       *
+    *                                                                        */
+    
+    /**
+    * MIP Config
+    *
+    * @version $Id:$
+    * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
+    * @package MIP
+    */
+-->
+<config>
+    <mip>
+        
+        
+        <!-- #################################################### 
+            ################# Scheduled Tasks ##################
+            #################################################### -->        
+        <cron>
+            <!--          
+            <bware_categories>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>bware</interface>
+                    <resource>product</resource>
+                    <action>list</action>
+                    <file>/var/mip/bware/Products.XML</file>
+                    <direction>input</direction>
+                </settings>   
+            </bware_categories>       
+            
+            
+
+            <bware_products>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>bware</interface>
+                    <resource>product</resource>
+                    <action>items</action>
+                    <file>/var/products.xml</file>
+                    <direction>output</direction>
+                </settings>   
+            </bware_products>
+            
+            <bware_attributes>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>bware</interface>
+                    <resource>product</resource>
+                    <action>attributes</action>
+                    <file>/var/attributes.xml</file>
+                    <direction>output</direction>
+                </settings>   
+            </bware_attributes>  
+            
+            <bware_customer_tax>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>bware</interface>
+                    <resource>tax</resource>
+                    <action>customerTaxes</action>
+                    <file>/var/customer_tax.xml</file>
+                    <direction>output</direction>
+                </settings>   
+            </bware_customer_tax>     
+            
+            <bware_product_tax>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>bware</interface>
+                    <resource>tax</resource>
+                    <action>customerProductTaxes</action>
+                    <file>/var/product_tax.xml</file>
+                    <direction>output</direction>
+                </settings>   
+            </bware_product_tax>    
+            
+            -->
+        </cron>
+        
+        <!-- #################################################### 
+            #################### URL Tasks #####################
+            #################################################### -->         
+        <request>
+            <stock>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>bware</interface>
+                    <resource>product</resource>
+                    <action>attributes</action>
+                    <file>/var/mip/bware/Stock.XML</file>
+                    <xslt>stock.xslt</xslt>
+                    <direction>input</direction>
+                    <instancecheck></instancecheck>
+                </settings>
+            </stock>
+            
+            <categories>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>bware</interface>
+                    <resource>category</resource>
+                    <action>list</action>
+                    <file>/var/mip/bware/Categories.XML</file>
+                    <direction>input</direction>
+                    <is_queueable>true</is_queueable>
+                    <!--<remove_up_to_date_data>true</remove_up_to_date_data>-->
+                    <instancecheck>true</instancecheck>
+                    <debug></debug>
+                </settings>   
+            </categories>
+			
+			<!--
+            <categories_en>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>bware</interface>
+                    <resource>category</resource>
+                    <action>list</action>
+                    <file>/var/mip/bware/Categories_EN.XML</file>
+                    <xslt>category_list_input_en.xslt</xslt>
+                    <direction>input</direction>
+                    <is_queueable>true</is_queueable>
+                    <remove_up_to_date_data>true</remove_up_to_date_data>
+                    <instancecheck>true</instancecheck>
+                </settings>   
+            </categories_en>			             
+    		-->
+            <attributes>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>bware</interface>
+                    <resource>attribute</resource>
+                    <action>list</action>
+                    <file>/var/mip/bware/Varianten.XML</file>
+					<!--<xslt>attribute_list_input.xslt</xslt>-->
+                    <direction>input</direction>
+					<is_queueable>true</is_queueable>
+                    <debug></debug>
+	            </settings>   
+            </attributes>	
+<!--
+            <attributes2>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>bware</interface>
+                    <resource>attribute</resource>
+                    <action>list</action>
+                    <file>/var/mip/bware/Varianten2.XML</file>
+					<xslt>attribute_list_input2.xslt</xslt>
+                    <direction>input</direction>
+                    <instancecheck></instancecheck>
+                    <debug>true</debug>
+	            </settings>   
+            </attributes2>
+-->            
+            <!--<products>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>bware</interface>
+                    <resource>product</resource>
+                    <action>list</action>
+                    <file>/var/mip/bware/Products.XML</file>
+                    <direction>input</direction>
+					<debug></debug>
+                    <is_queueable>true</is_queueable>
+                    <instancecheck>true</instancecheck>
+					<remove_up_to_date_data>true</remove_up_to_date_data>
+					<stock_data><use_config_min_sale_qty>1</use_config_min_sale_qty><use_config_max_sale_qty>1</use_config_max_sale_qty></stock_data>
+                </settings>   
+            </products>-->
+			
+			
+			
+			 <products>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>bware</interface>
+                    <resource>product</resource>
+                    <action>list</action>
+                    <file>/var/mip/bware/Products.XML</file>
+                    <direction>input</direction>
+                    <debug></debug>
+					<que_only>1</que_only>
+					<data_parts_size>500</data_parts_size>
+					<data_parts_limit>500></data_parts_limit>
+          			<instancecheck>true</instancecheck>
+					<is_queueable>1</is_queueable>
+					<!--<remove_up_to_date_data>true</remove_up_to_date_data>-->
+					<stock_data><use_config_min_sale_qty>1</use_config_min_sale_qty><use_config_max_sale_qty>1</use_config_max_sale_qty></stock_data>
+                </settings>   
+            </products>
+			
+			
+			
+			
+			 <productsfilter>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>bware</interface>
+                    <resource>product</resource>
+                    <action>attributes</action>
+                    <file>/var/mip/bware/Productsfilter.XML</file>
+					<xslt>productfilter_list_input.xslt</xslt>
+                    <direction>input</direction>
+					<debug></debug>
+					<is_queueable>true</is_queueable>
+                    <instancecheck>true</instancecheck>
+                </settings>   
+            </productsfilter>
+			
+			
+			
+			<productsoptions>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>bware</interface>
+                    <resource>product</resource>
+                    <action>list</action>
+                    <file>/var/mip/bware/Productsoptions.XML</file>
+                    <direction>input</direction>
+					<debug></debug>
+                </settings>   
+            </productsoptions>
+			
+			<!--
+            <products_en>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>bware</interface>
+                    <resource>product</resource>
+                    <action>list</action>
+                    <file>/var/mip/bware/Products.XML</file>
+                    <xslt>product_list_input_en.xslt</xslt>
+                    <direction>input</direction>
+
+                    <data_parts_size>60</data_parts_size>
+                    <data_parts_limit>50</data_parts_limit>
+                    <remove_up_to_date_data>true</remove_up_to_date_data>
+                    <is_queueable>true</is_queueable>
+                    <instancecheck>true</instancecheck>
+                </settings>   
+            </products_en> 			             
+            -->
+			<!--
+            <bundles>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>bware</interface>
+                    <resource>product</resource>
+                    <action>list</action>
+                    <file>/var/mip/bware/Stueckliste.XML</file>
+                    <xslt>bundle.xslt</xslt>
+                    <direction>input</direction>
+                    <data_parts_size>50</data_parts_size>
+                    <data_parts_limit>50</data_parts_limit>
+                    <remove_up_to_date_data>true</remove_up_to_date_data>
+                    <is_queueable>true</is_queueable>
+                    <instancecheck>true</instancecheck>
+
+                </settings>   
+            </bundles>             
+            --> 
+			 
+            <productsdelete>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>bware</interface>
+                    <resource>product</resource>
+                    <action>attributes</action>
+                    <file>/var/mip/bware/ProductsDelete.XML</file>
+                    <xslt>product_list_deleted.xslt</xslt>
+                    <direction>input</direction>
+                </settings>   
+            </productsdelete> 			 
+			 
+            <customers>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>bware</interface>
+                    <resource>customer</resource>
+                    <action>list</action>
+                    <file>/var/mip/bware/Customers.XML</file>
+                    <direction>input</direction>
+                    <data_parts_size>50</data_parts_size>
+                    <data_parts_limit>50</data_parts_limit>
+                    <remove_up_to_date_data>true</remove_up_to_date_data>
+                    <is_queueable>true</is_queueable>
+                    <instancecheck>true</instancecheck>
+                </settings>   
+            </customers> 
+                             
+            <orders>
+                <settings>
+                    <trigger>url</trigger>
+                    <interface>bware</interface>
+                    <resource>order</resource>
+                    <action>list</action>
+                    <params>
+                        <status>pending,processed_ogone</status>
+                    </params>
+                    <direction>output</direction>
+                    
+                </settings>   
+            </orders>          
+         
+            <orderupdate>
+                <settings>
+                    <trigger>url</trigger>
+                    <interface>bware</interface>
+                    <resource>order</resource>
+                    <action>update</action>
+                    <adapter>standard</adapter>                
+                    <direction>input</direction>
+                </settings>    
+            </orderupdate>           
+         
+        </request>
+        
+        
+        <!-- #################################################### 
+            ################### Events Tasks ###################
+            #################################################### -->              
+        <event>
+
+            <sales_order_save_after>
+                
+                <bware_orders>
+                    <settings>
+                        <trigger>file</trigger>
+                        <interface>bware</interface>
+                        <resource>order</resource>
+                        <action>info</action>
+                        <params>
+                            <status>pending</status>
+							<id>{{order/increment_id}}</id>
+                        </params>
+                        <file>/var/mip/bware/orders/order_{{order/increment_id}}.xml</file>
+                        <direction>output</direction>
+                    </settings>   
+                </bware_orders>                 
+                
+            </sales_order_save_after>    
+        </event>    
+        
+        <!-- #################################################### 
+            #################### Interfaces ####################
+            #################################################### -->             
+        <interfaces>
+            <bware>
+                <module>Flagbit_Bware</module>
+                <adapter>xml</adapter>
+                <handler>default</handler>                
+                <active>1</active>
+            </bware>
+            <default>
+                <use>bware</use>
+            </default>
+        </interfaces>      
+
+    </mip>
+</config>

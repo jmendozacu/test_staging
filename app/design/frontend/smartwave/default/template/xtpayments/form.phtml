@@ -1,0 +1,12 @@
+
+<fieldset class="form-list">
+    <?php $_code=$this->getMethodCode() ?>
+	 <?php  $_img = $this->getPaymentImageSrc($_code)?>
+		<!-- <img src="<?php echo $_img ?>"> -->
+	
+    <ul id="payment_form_<?php echo $_code ?>" style="display:none"> 
+        <li>
+            <?php echo $this->__('You will be redirected to XT Payments Checkout website when you place an order.') ?>
+        </li>
+    </ul>
+</fieldset>

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+
+	
+	<xsl:template match="/data">
+		<OLOrders>
+			<Version1.1/>
+			<xsl:apply-templates select="order" />
+			<xsl:if test="count(order) = 0"><Response>No orders found</Response></xsl:if>
+		</OLOrders>
+	</xsl:template>
+	
+	
+	<xsl:template match="data/order">
+		<OLWebOrder>
+			<TransactionHeader>
+				<TransactionID><xsl:value-of select="increment_id"/></TransactionID>
+			</TransactionHeader>
+			<OrderHeader>
+				<xsl:call-template name="OrderHeader"></xsl:call-template>
+			</OrderHeader>
+			<OrderPositions>
+				<xsl:apply-templates select="items/item"></xsl:apply-templates>
+			</OrderPositions>
+			
+		</OLWebOrder>
+	</xsl:template>
+	
+	<xsl:template name="OrderHeader">
+		
+		<Representative><xsl:value-of select="salesman"/></Representative>
+		<DeliveryCode><xsl:value-of select="eventcode"/></DeliveryCode>
+		<HeaderText><xsl:value-of select="history/history[1]/comment"/></HeaderText>
+		<Debitor>
+			<xsl:choose>
+				<xsl:when test="payment/method = 'debit'">
+					<DebBank><xsl:value-of select="payment/data/get_account_bankname"/></DebBank>
+					<DebBankAccount><xsl:value-of select="payment/data/get_account_number"/></DebBankAccount>
+					<DebBankCode><xsl:value-of select="payment/data/get_account_bl_z"/></DebBankCode>
+					<DebBankDebit>1</DebBankDebit>
+				</xsl:when>
+			</xsl:choose>
+			
+		</Debitor>
+		<Address>
+			
+			<xsl:choose>
+				<xsl:when test="customer_is_guest != 1">
+					
+					<Title><xsl:value-of select="customer_prefix" /></Title>
+					<Name1><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="customer_firstname"/></xsl:call-template><xsl:text> </xsl:text><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="customer_lastname"/></xsl:call-template></Name1>
+					<Name2><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="customer_company"/></xsl:call-template></Name2>
+					<Name3></Name3>
+					<USER_Vorname><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="customer_firstname"/></xsl:call-template></USER_Vorname>
+					<USER_Nachname><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="customer_lastname"/></xsl:call-template></USER_Nachname>
+					<USER_ServiceBenutzername><xsl:value-of select="customer_email" /></USER_ServiceBenutzername>
+					<Matchcode>
+						<xsl:choose>
+							<xsl:when test="customer_company != ''"><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="customer_company"/></xsl:call-template>, <xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/city"/></xsl:call-template></xsl:when>
+							<xsl:otherwise><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="customer_lastname"/></xsl:call-template> <xsl:call-template name="ucfirst"><xsl:with-param name="str" select="customer_firstname"/></xsl:call-template>, <xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/city"/></xsl:call-template></xsl:otherwise>
+						</xsl:choose>					
+					</Matchcode>
+					<AddrBriefness>
+						<xsl:choose>
+							<xsl:when test="customer_prefix = 'Frau'">Sehr geehrte Frau <xsl:call-template name="ucfirst"><xsl:with-param name="str" select="customer_lastname"/></xsl:call-template>,</xsl:when>
+							<xsl:when test="customer_prefix = 'Herr'">Sehr geehrter Herr <xsl:call-template name="ucfirst"><xsl:with-param name="str" select="customer_lastname"/></xsl:call-template>,</xsl:when>
+							<xsl:otherwise>Sehr geehrte Damen und Herren,</xsl:otherwise>
+						</xsl:choose>
+					</AddrBriefness>
+					<Street><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/street"/></xsl:call-template></Street>
+					<ZIPCode><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/postcode"/></xsl:call-template></ZIPCode>
+					<City><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/city"/></xsl:call-template></City>
+					<Country><xsl:value-of select="billing_address/country_id"/></Country>
+					<EMail><xsl:value-of select="customer_email"/></EMail>
+					<Addr_Telefon><xsl:value-of select="billing_address/telephone"/></Addr_Telefon>
+					
+				</xsl:when>
+				<xsl:otherwise>
+					
+					<Title><xsl:value-of select="billing_address/prefix" /></Title>
+					<Name1><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/firstname"/></xsl:call-template><xsl:text> </xsl:text><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/lastname"/></xsl:call-template></Name1>
+					<Name2><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/company"/></xsl:call-template></Name2>
+					<Name3></Name3>
+					<USER_Vorname><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/firstname"/></xsl:call-template></USER_Vorname>
+					<USER_Nachname><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/lastname"/></xsl:call-template></USER_Nachname>
+					<USER_ServiceBenutzername><xsl:value-of select="billing_address/email" /></USER_ServiceBenutzername>
+					<Matchcode>
+						<xsl:choose>
+							<xsl:when test="billing_address/company != ''"><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/company"/></xsl:call-template>, <xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/city"/></xsl:call-template></xsl:when>
+							<xsl:otherwise><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/lastname"/></xsl:call-template> <xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/firstname"/></xsl:call-template>, <xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/city"/></xsl:call-template></xsl:otherwise>
+						</xsl:choose>					
+					</Matchcode>
+					<AddrBriefness>
+						<xsl:choose>
+							<xsl:when test="billing_address/prefix = 'Frau'">Sehr geehrte Frau <xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/lastname"/></xsl:call-template>,</xsl:when>
+							<xsl:when test="billing_address/prefix = 'Herr'">Sehr geehrter Herr <xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/lastname"/></xsl:call-template>,</xsl:when>
+							<xsl:otherwise>Sehr geehrte Damen und Herren,</xsl:otherwise>
+						</xsl:choose>
+					</AddrBriefness>
+					<Street><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/street"/></xsl:call-template></Street>
+					<ZIPCode><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/postcode"/></xsl:call-template></ZIPCode>
+					<City><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/city"/></xsl:call-template></City>
+					<Country><xsl:value-of select="billing_address/country_id"/></Country>
+					<EMail><xsl:value-of select="customer_email"/></EMail>	
+					<Addr_Telefon><xsl:value-of select="billing_address/telephone"/></Addr_Telefon>
+					
+				</xsl:otherwise>
+			</xsl:choose>	
+			<EUUstID><xsl:value-of select="customer_taxvat"/></EUUstID>
+			<USER_Geburtsdatum><xsl:value-of select="substring(customer_dob,9,2)"/>.<xsl:value-of select="substring(customer_dob,6,2)"/>.<xsl:value-of select="substring(customer_dob,1,4)"/></USER_Geburtsdatum>
+			<USER_ServiceBenutzername><xsl:value-of select="customer_email"/></USER_ServiceBenutzername>
+			
+		</Address>
+		<DeliveryAddress>
+			<DATitle><xsl:value-of select="shipping_address/prefix"/></DATitle>
+			<DAName1>
+				<xsl:call-template name="ucfirst"><xsl:with-param name="str" select="shipping_address/firstname"/></xsl:call-template><xsl:text> </xsl:text><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="shipping_address/lastname"/></xsl:call-template>			
+			</DAName1>
+			<DAName2>
+				<xsl:call-template name="ucfirst"><xsl:with-param name="str" select="shipping_address/company"/></xsl:call-template>
+			</DAName2>
+			<DAName3/>
+			<DAStreet>
+				<xsl:call-template name="ucfirst"><xsl:with-param name="str" select="shipping_address/street"/></xsl:call-template>
+			</DAStreet>
+			<DAZIPCode><xsl:value-of select="shipping_address/postcode"/></DAZIPCode>
+			<DACity>
+				<xsl:call-template name="ucfirst"><xsl:with-param name="str" select="shipping_address/city"/></xsl:call-template>
+			</DACity>	
+			<DACountry><xsl:value-of select="shipping_address/country_id"/></DACountry>
+		</DeliveryAddress>
+		<InvoiceAddress>
+			<InvTitle><xsl:value-of select="billing_address/prefix"/></InvTitle>
+			<InvName1>
+				<xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/firstname"/></xsl:call-template><xsl:text> </xsl:text><xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/lastname"/></xsl:call-template>
+			</InvName1>
+			<InvName2>
+				<xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/company"/></xsl:call-template>
+			</InvName2>
+			<InvName3/>
+			<InvStreet>
+				<xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/street"/></xsl:call-template>
+			</InvStreet>			
+			<InvZIPCode><xsl:value-of select="billing_address/postcode"/></InvZIPCode>
+			<InvCity>
+				<xsl:call-template name="ucfirst"><xsl:with-param name="str" select="billing_address/city"/></xsl:call-template>
+			</InvCity>
+			<InvCountry><xsl:value-of select="billing_address/country_id"/></InvCountry>
+		</InvoiceAddress>
+		<ProcessingOptions>
+			<OrderDate><xsl:value-of select="created_at"/></OrderDate>
+			<CarrierCode><!--TODO Kürzel aus OL --></CarrierCode>
+			<DeliveryCode><!-- TODO Kürzel aus OL --></DeliveryCode>
+			<!-- OPTIONAL: Versandkosten/Zuschlaege Bruttokennzeichen 0 oder 1-->
+			<DeliveryPriceGross>0</DeliveryPriceGross>
+			<!-- OPTIONAL: Versandkosten -->
+			<DeliveryPrice><xsl:value-of select="payment/shipping_amount"/></DeliveryPrice>
+			<RefNo><xsl:value-of select="increment_id"/></RefNo>
+		</ProcessingOptions>
+		<Payment>
+			<!-- OPTIONAL: Waehrungskuerzel 3-stellig -->
+			<Currency><xsl:value-of select="base_currency_code"/><!-- could also be store or order currency code --></Currency>
+			<!-- OPTIONAL: Belegzahlungskondition, Kuerzel aus OL -->
+			<BelOLPayCond>
+				<xsl:choose>
+					<xsl:when test="payment/method = 'ipayment_cc'">
+						<xsl:value-of select="payment/cc_type"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="payment/method"/>
+					</xsl:otherwise>
+				</xsl:choose>				
+			</BelOLPayCond>
+			<!-- OPTIONAL: individuelle ZKD Nettotage -->
+			<NetDays/>
+			<!-- OPTIONAL: individuelle ZKD Skontotage -->
+			<SktoDays/>
+			<!-- OPTIONAL: individuelle ZKD Skontoprozent -->
+			<Skto/>
+			<!-- OPTIONAL: Valutadatum -->
+			<ValDate/>
+			
+			<xsl:choose>
+				<xsl:when test="payment/method = 'checkmo'">
+					<!-- OPTIONAL: Kreditkartengesellschaft -->
+					<KKGesellschaft><xsl:value-of select="payment/cc_type"/></KKGesellschaft>
+					<!-- OPTIONAL: Kreditkartennummer -->
+					<KKNummer>9999999999999999</KKNummer>
+					<!-- OPTIONAL: Kreditkarte Gueltigkeit (Zahlenfeld z.B. 0405) -->
+					<KKGueltigkeit><xsl:value-of select="payment/cc_month"/><xsl:value-of select="payment/cc_year"/></KKGueltigkeit>
+					<!-- OPTIONAL: Kreditkarten Genehmigungsnummer -->
+					<KKGenehmigung>999</KKGenehmigung>
+					<!-- OPTIONAL: Kreditkarteninhaber -->
+					<KKInhaber><xsl:value-of select="payment/cc_owner"/></KKInhaber>
+				</xsl:when>
+			</xsl:choose>			
+			
+			
+		</Payment>
+		<!-- OPTIONAL: Kopftext fuer Beleg -->
+		<HeaderText/>
+		<!-- OPTIONAL: Fusstext fuer Beleg -->
+		<FooterText/>
+		<!-- OPTIONAL: Rabattsatz1 fuer Beleg -->
+		<Discount1/>
+		<!-- OPTIONAL: Rabattbetrag1 fuer Beleg -->
+		<DiscountAbsolut1><xsl:value-of select="discount_amount * -1"/></DiscountAbsolut1>
+		<!-- OPTIONAL: RabattText1 fuer Beleg -->
+		<DiscountText1/>
+		<!-- OPTIONAL: Rabattsatz2 fuer Beleg -->
+		<Discount2/>
+		<!-- OPTIONAL: Rabattbetrag2 fuer Beleg -->
+		<DiscountAbsolut2/>
+		<!-- OPTIONAL: RabattText2 fuer Beleg -->
+		<DiscountText2/>
+		<!-- OPTIONAL: Rabattsatz3 fuer Beleg -->
+		<Discount3/>
+		<!-- OPTIONAL: Rabattbetrag3 fuer Beleg -->
+		<DiscountAbsolut3/>
+		<!-- OPTIONAL: RabattText3 fuer Beleg -->
+		<DiscountText3/>
+		<!-- OPTIONAL: User-Fields VK-Beleg-->
+		<USER_Fieldname/>
+	</xsl:template>
+
+	<xsl:template match="items/item">
+		<xsl:choose>
+			<xsl:when test="parent_item_id='' and product_type!='bundle'">
+				<xsl:call-template name="ConvertOrderItem"></xsl:call-template>
+			</xsl:when>
+			<xsl:when test="product_type='simple' and parent_item_id!=''">
+				<xsl:variable name="parent_item_id"><xsl:value-of select="parent_item_id"/></xsl:variable>
+				<xsl:if test="../item[item_id=$parent_item_id and product_type='bundle']">
+					<xsl:call-template name="ConvertOrderItem"></xsl:call-template>
+				</xsl:if>
+			</xsl:when>
+			<xsl:when test="product_type='simple' and parent_item_id=''">
+				<xsl:call-template name="ConvertOrderItem"></xsl:call-template>
+			</xsl:when>
+		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template name="ConvertOrderItem">
+		<Pos>
+			<LineNo><xsl:value-of select="position()"/></LineNo>
+			<ArticleNo>
+				<xsl:choose>
+					<xsl:when test="product_type = 'bundle'"><xsl:value-of select="substring-before(sku, '-')"/></xsl:when>
+					<xsl:otherwise><xsl:value-of select="sku"/></xsl:otherwise>
+				</xsl:choose>
+			</ArticleNo>
+			<VariantProductNumber><xsl:value-of select="product_options/simple_sku"/></VariantProductNumber>
+			<ArticleVariantID></ArticleVariantID>
+			<ArticleText1><xsl:value-of select="name"/></ArticleText1>
+			<ArticleText2><xsl:value-of select="product_options/simple_name"/></ArticleText2>
+			<ArticleText3></ArticleText3>
+			<ArticleText4><xsl:value-of select="description"/></ArticleText4>
+			<Quantity><xsl:value-of select="qty"/></Quantity>
+			<Price><xsl:value-of select="price_incl_tax"/></Price>
+			<PriceIsGross>1</PriceIsGross>
+			<Discount></Discount><!-- prozentual / gesamt  -->
+			<SellUnit/>
+			<Pricelist/>
+			<PriceUnit/>
+			<Store/>
+			<SNOption/>
+			<ArtGroup/>
+			<ArtGroupMain/>
+			<ArtGroupFather/>
+			<VatClass/>
+			<VatCode/>
+			<Length/>
+			<Width/>
+			<Height/>
+			<Weight></Weight>
+			<EANNumber/>
+			<Supplier/>
+			<SupplierArticleNo/>
+			<BuyPrice></BuyPrice>
+			<Manufactor/>
+			<ManufactorArticleNo/>
+			<USER_Fieldname/>
+		</Pos>
+	</xsl:template>
+	
+	<xsl:template name="ucfirst">
+		<xsl:param name="str"/>
+		<xsl:param name="strLen" select="string-length($str)"/>
+		<xsl:variable name="firstLetter" select="substring($str,1,1)"/>
+		<xsl:variable name="restString" select="substring($str,2,$strLen)"/>
+		<xsl:variable name="lower" select="'abcdefghijklmnopqrstuvwxyz'"/>
+		<xsl:variable name="upper" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
+		<xsl:variable name="translate" select="translate($firstLetter,$lower,$upper)"/>
+		<xsl:value-of select="concat($translate,$restString)"/>
+	</xsl:template>
+	
+	
+</xsl:stylesheet>

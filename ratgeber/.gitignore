@@ -1,0 +1,5 @@
+wp-config-local.php
+wp-content/cache/
+wp-content/uploads/
+wp-content/wp-cache-config.php
+wp-content/advanced-cache.php

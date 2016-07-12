@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Sleepz_DBSetup>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Sleepz_DBSetup>
+    </modules>
+</config>

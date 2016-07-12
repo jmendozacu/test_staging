@@ -1,0 +1,26 @@
+
+
+
+    <div class="entry-edit mip-container mip-last-5-tasks">
+        <div class="entry-edit-head"><h4><?php echo $this->__('Last 5 MIP Tasks') ?></h4></div>
+        <fieldset class="np"><?php echo $this->getChildHtml('mipProcessGrid'); ?></fieldset>
+    </div>
+    <script type="text/javascript">
+        Event.observe(document, 'dom:loaded', function() {
+            var target = $$('.dashboard-container .entry-edit').detect(function(n, index) { return index == 2; });
+            if(!target) {
+                return;
+            }
+            
+            var toMove = new Array();
+            $$('.mip-container').each(function(mipcontainer) {
+                toMove.push(mipcontainer.remove());
+            });
+
+            toMove.each(function(element) {
+                target.insert({
+                    after: element
+                });
+            });
+        });    
+    </script>

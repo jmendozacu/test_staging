@@ -1,0 +1,44 @@
+<?php $_items = $this->getReviewsCollection()->getItems();?>
+<?php if (count($_items)):?>
+<h2 style="display: block;"><?php echo $this->__('Kundenmeinungen'); ?></h2>
+<div class="collateral-box" id="product-customer-reviews">
+  <div class="row">
+    <div class="col-xs-12">
+      <ul>
+          <?php foreach ($_items as $_review):?>
+              <li>
+                  <div class="review-area">
+                    <div class="ratings-list">
+                    <?php foreach ($_review->getRatingVotes() as $_vote): ?>
+                      <div class="rating-item">
+                        <!-- <span class="label"><?php //echo $_vote->getRatingCode() ?></span> -->
+                        <div class="stars-<?php echo intval($_vote->getPercent()/20) ?>">
+                          <?php echo intval($_vote->getPercent()/20) ?> Stars
+                        </div>
+                        <!-- <div class="rating-box">
+                          <div class="rating"></div>
+                        </div> -->
+                      </div>
+                    <?php endforeach; ?>
+                    </div>
+                    <div class="review-content">
+                      <p class="review-customer">
+                        <?php echo $this->__('%s | %s', $this->htmlEscape($_review->getNickname()), $this->formatDate($_review->getCreatedAt())) ?>
+                      </p>
+                      <p class="review-title">
+                        <strong><?php echo $this->htmlEscape($_review->getTitle()) ?></strong>
+                      </p>
+                      <p><?php echo nl2br($this->htmlEscape($_review->getDetail())) ?></p>
+                    </div>
+                  </div>
+              </li>
+          <?php endforeach; ?>
+      </ul>
+    </div>
+  </div>
+</div>
+<?php endif;?>
+
+<div class="add-review">
+	<?php echo $this->getLayout()->createBlock('review/form')->setBlockId('product.review.form')->toHtml() ?>
+</div>

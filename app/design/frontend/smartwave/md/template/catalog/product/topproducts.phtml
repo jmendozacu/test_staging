@@ -1,0 +1,107 @@
+<?php
+    $store = Mage::app()->getStore();
+    $code  = $store->getCode();
+    // $_productCollection=$this->getLoadedProductCollection();
+    $_productCollection = $this->getProductsByCategory();
+    // $catname = $this->getCategoryName()->getName();
+    $_helper = $this->helper('catalog/output');
+    $_image_helper = $this->helper('catalog/image');
+    $ratio_width = 200;
+    $ratio_height = 120;
+
+    $catname = $this->getCategory()->getName();
+  ?>
+  <div class="topproducts-container">
+    <div class="title">
+      <h4><?php echo $catname; ?></h4>
+    </div>
+    <ul class="topproducts-list" id="<?php echo $this->getCarouselId() ?>">
+    <?php $i=0; foreach ($_productCollection as $_product): ?>
+      <?php $msrp = ($_product->getMsrp() ? intval($_product->getPrice()/$_product->getMsrp()*100) : false) ?>
+      <?php $product = Mage::getModel('catalog/product')->load($_product->getId()); ?>
+            <li class="item">
+              <div class="item-area">
+                <?php if($msrp): ?>
+                  <div class="savings-banner">
+                      -<?php echo $msrp ?> %
+                  </div>
+                <?php endif; ?>
+                <div class="product-image-area">
+                    <div class="loader-container">
+                        <div class="loader">
+                            <i class="ajax-loader medium animate-spin"></i>
+                        </div>
+                    </div>
+                    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image">
+                      <img class="product-collection-image-<?php echo $_product->getId(); ?> img-responsive" src="<?php echo $_image_helper->init($_product, 'small_image')->resize($ratio_width,$ratio_height); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"/>
+                    </a>
+                </div>
+                <div class="details-area">
+                  <?php echo $this->getPriceHtml($_product, true) ?>
+                  <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
+                  <div class="review-wishlist">
+                  <div class="review">
+                      <?php if (Mage::getStoreConfig("porto_settings/category/rating_star", $code)): ?>
+                          <?php
+                          if (Mage::helper('catalog')->isModuleEnabled('Mage_Review')):
+                              ?>
+                              <?php
+                              $review_html = $this->getReviewsSummaryHtml($product, 'short');
+                              if ($review_html) {
+                                  echo $review_html;
+                              } else {
+                                  ?>
+                                  &nbsp;
+                                  <div class="ratings" style="display: none;">
+                                      <div class="rating-box">
+                                          <div class="rating" style="width:0"></div>
+                                      </div>
+                                  </div>
+                              <?php
+                              }
+                              ?>
+                          <?php endif; ?>
+                      <?php endif; ?>
+                  </div>
+                  <div class="wishlist <?php echo 'pcount'.$this->getProductcount()?>">
+                      <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                          <a href="<?php if (Mage::getStoreConfig("ajaxcart/addtolinks/enablecategory", $code)): ?>javascript:void(0)<?php else: ?><?php echo $this->helper('wishlist')->getAddUrl($_product) ?><?php endif; ?>"
+                             <?php if (Mage::getStoreConfig("ajaxcart/addtolinks/enablecategory", $code)): ?>onclick="ajaxWishlist(this,'<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>','<?php echo $_product->getId() ?>');"<?php endif; ?>
+                             class="addtowishlist"><?php echo $this->__('Wishlist') ?></a>
+                      <?php endif; ?>
+                  </div>
+                </div>
+                <div class="delivery-time" style="display:none;">
+                  <?php if($_product->getData('type_id') == 'configurable'): ?>
+                      <?php echo $this->__('Delivery model dependent') ?>
+                  <?php else: ?>
+                      <?php if ($_product->getDelivery_time()):?>
+                          <?php echo $this->__('Delivery in') ?> <?php echo $this->htmlEscape($_product->getDelivery_time()) ?>
+                      <?php endif; ?>
+                  <?php endif; ?>
+                </div>
+                </div>
+            </div>
+          </li>
+        <?php endforeach ?>
+    </ul>
+  </div>
+
+  <script>
+    $j = jQuery.noConflict();
+    // var itemscount = <?php echo $this->getItemsCount() ?>;
+
+    $j(document).ready(function() {
+      $j('#<?php echo $this->getCarouselId() ?>').owlCarousel({
+        autoPlay: false, //Set AutoPlay to 3 seconds
+        items : <?php echo $this->getItemsCount() ?>, //5 items above 1000px browser width
+        // itemsDesktop : [1000,itemscount], //5 items between 1000px and 901px
+        // itemsDesktopSmall : [900,itemscountSmall + 1], // betweem 900px and 601px
+        // itemsTablet: [600,itemscountSmall], //2 items between 600 and 0
+        nav: true, // Show next and prev buttons
+        pagination : false, // Show next and prev buttons
+        navText: ["",""],
+        loop: true
+      });
+    });
+  </script>

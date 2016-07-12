@@ -1,0 +1,71 @@
+@import 'variables.less';
+
+
+.footer {
+  background-color: @white;
+}
+.footer-top, .footer-payments, .footer-menu {
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.footer h3 {
+  border-bottom:1px solid #e6f0f5;
+  color:@standard;
+  .fs-medium;
+  .pd-bt-5;
+}
+
+.footer-text-wrapper {
+  max-width:500px;
+}
+
+.footer-menu ul li {
+  line-height: @line-height-medium;
+
+}
+
+.footer-menu ul li a::before {
+  background: rgba(0, 0, 0, 0) url("../img/li.png") no-repeat scroll 0 0;
+  content: "";
+  display: inline-block;
+  height: 7px;
+  width: 10px;
+  .mg-right-10;
+}
+
+.footer .icon {
+  .mg-right-10;
+  .mg-bt-10;
+}
+
+.footer-newsletter {
+  background: #e71f00; /* Old browsers */
+  background: -moz-linear-gradient(top,  #e71f00 0%, #b31600 83%, #b31600 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #e71f00 0%,#b31600 83%,#b31600 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #e71f00 0%,#b31600 83%,#b31600 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e71f00', endColorstr='#b31600',GradientType=0 ); /* IE6-9 */
+}
+
+.footer-newsletter p {
+  color:@white;
+}
+
+.footer-newsletter .title {
+  margin-bottom: 0;
+}
+
+.footer-newsletter .input-text, .block.block-subscribe .input-box input.input-text {
+  height: 38px;
+  border-radius: 0;
+}
+.footer-newsletter button span {
+  border-radius: 0;
+}
+.footer-newsletter .five-image {
+
+
+}

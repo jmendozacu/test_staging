@@ -1,0 +1,144 @@
+
+/* ==========================================================================
+   8.0 Footer
+   ========================================================================== */
+
+/* 8.1 Site Footer
+   ========================================================================== */
+
+.footer_wrapper {
+	overflow: hidden;
+	background-color: $footer-bg-color;
+	color: $footer-text-color;
+	line-height: 22px;
+	font-weight: 300;
+	position: relative;
+	clear:both;	
+}
+
+.footer_wrapper .footer{
+	padding:40px 0;
+}
+
+.footer_wrapper a,
+.footer_wrapper .footer .widget ul li a{
+	color:$footer-link-color;
+	
+}
+
+.no-touch .footer_wrapper  a:hover,
+.no-touch .footer_wrapper .footer .widget ul li a:hover{
+	color:$footer-link-hover-color;
+}
+
+.footer_wrapper .footer p{
+	margin-bottom:25px;
+}
+.footer_wrapper .footer hr{
+	margin:0 0 30px;
+	border-top-color: $footer-seperator-color;
+	border-top-width: 2px;
+}
+
+
+.footer_wrapper .footer .widget{
+	@include box-sizing(border-box);
+	padding:0 10px;
+	margin-bottom:0;
+}
+
+@media #{$small-up} {
+	.footer_wrapper .footer .widget{
+		margin-bottom: 35px;
+	}
+	.footer_wrapper .footer .widget .widget{
+		margin-bottom: 0;
+		padding:0;
+	}
+}
+@media #{$large-up} {
+	.footer_wrapper .footer .widget{
+		margin-bottom: 0;
+	}
+}
+
+.footer_wrapper .footer .widget.about{
+	padding:0 20px 0 0;
+}
+.footer_wrapper .footer h2.widgettitle{
+	font-size:30px;
+	color:$footer-h2-color;
+	margin-bottom:18px;
+}
+ 
+.footer_wrapper .footer h3.widgettitle{
+	font-size:$base-font-size;
+	line-height: 1;
+	color:$footer-h3-color;
+	margin-bottom: 25px;
+	margin-top: 10px;
+} 
+
+.footer_wrapper .footer .widget p,
+.footer_wrapper .footer .widget ul li,
+.footer_wrapper .footer .widget ul li a{
+	color: $footer-text-color;
+	font-weight: 300;
+	line-height: 24px;
+	font-size: 14px;
+}
+
+
+@media #{$small-only} {
+	
+	.footer_wrapper .footer h3.widgettitle{
+		font-size: 18px;
+		font-weight: 400;
+	}
+	.footer_wrapper .footer .widget p, 
+	.footer_wrapper .footer .widget ul li, 
+	.footer_wrapper .footer .widget ul li a{
+		font-size: 18px;
+	}
+	.footer_wrapper .footer hr{
+		width:75%;
+	}
+
+}
+
+ 
+ 
+/* 8.2 Copyright
+   ========================================================================== */
+
+.footer_wrapper .copyright{
+	background-color: $sub-footer-bg-color;
+}
+
+.footer_wrapper .copyright p{
+	margin-bottom: 0;
+	font-size: $base-font-size;
+	font-weight: 300;
+	padding: 15px 0;
+}
+.footer_wrapper .copyright p,
+.footer_wrapper .copyright a{
+	line-height: 1.4;
+	color: $sub-footer-text-color;
+	vertical-align: middle;
+}
+.footer_wrapper .copyright a {
+	text-decoration: none;
+	color: $sub-footer-link-color;
+} 
+.footer_wrapper .copyright a i{
+	font-size: 35px;
+	position: relative;
+	top: -24px;
+	#{$default-float}: 50%;
+	color:$sub-footer-bg-color;
+}
+
+.no-touch .footer_wrapper .copyright a:hover{
+	color: $sub-footer-link-hover-color;
+}

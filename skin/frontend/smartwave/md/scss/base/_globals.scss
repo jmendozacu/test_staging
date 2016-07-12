@@ -1,0 +1,196 @@
+
+.main-container.col1-layout.opc {
+  position: relative;
+  padding: 0;
+}
+
+.main.container {
+  padding: 0;
+  background-color: transparent;
+
+  .col-main {
+    // padding: 0;
+
+    .page-title {
+        display: block;
+
+        h1 {
+          font-weight: $fw-bold;
+          color: $md-black;
+          font-size: 18px;
+        }
+    }
+  }
+}
+
+img {
+  @extend .img-responsive;
+}
+
+.header-container {
+  border-top: none;
+}
+
+.fw-bold {
+  font-weight: $fw-bold;
+}
+
+.box-white {
+  background-color: $white;
+}
+
+.pad-10 {
+  padding: 10px
+}
+
+textarea {
+  border-radius: 0;
+}
+
+button, button.button,
+a.btn {
+  border: none;
+  border-radius: $default-border-radius;
+  color: $md-light-blue;
+  background: $md-grey;
+  @include background-image(linear-gradient(to bottom, $md-grey 0%, $md-grey-gradient 83%));
+
+  &:hover {
+    @include background-image(linear-gradient(to bottom, $md-grey-gradient 0%, $md-grey 83%));
+  }
+
+  &.medium {
+    line-height: 28px;
+    padding: 10px 35px;
+    font-weight: $fw-bold;
+  }
+
+  &.large {
+    line-height: 50px;
+    padding: 0 10%;
+    font-weight: $fw-bold;
+    font-size: $font-big;
+  }
+
+  &.red {
+    color: $white;
+    background: $md-red;
+    @include background-image(linear-gradient(to bottom, $md-red 17%, $md-red-gradient 100%));
+
+    &:hover {
+      @include background-image(linear-gradient(to bottom, $md-orange 0%, $md-orange-gradient 100%));
+    }
+  }
+
+  &.green {
+    color: $white;
+    background: #008e00;
+    @include background-image(linear-gradient(to bottom, #008e00 0%,#00ad00 60%));
+
+    &:hover {
+      @include background-image(linear-gradient(to bottom, #00ad00 0%, #008e00 60%));
+    }
+  }
+
+  &.orange {
+    color: $white;
+    background: $md-orange;
+    @include background-image(linear-gradient(to bottom, $md-orange 0%, $md-orange-gradient 100%));
+
+    &:hover {
+      @include background-image(linear-gradient(to bottom, $md-orange-gradient 0%, $md-orange 100%));
+    }
+  }
+
+  &.plain {
+    color: $md-black;
+    background: none;
+  }
+
+  &.btn-checkout {
+    @extend button.red;
+    font-weight: $font-weight-bold;
+  }
+
+  &.expand {
+    width: 100%;
+  }
+}
+
+i {
+  &.green {
+    color: $success-green;
+  }
+}
+
+.img-responsive {
+  max-width: 100%;
+}
+
+.box {
+  box-sizing: border-box;
+  background-color: $white;
+  padding: 15px;
+}
+
+h1,h2,h3,h4,h5 {
+  color: $md-black;
+}
+
+.width-30 {
+  width: 30%;
+}
+.width-40 {
+  width: 40%;
+}
+.width-50 {
+  width: 50%;
+}
+
+.top-container > .breadcrumbs {
+  background-color: #e6f0f5;
+}
+
+.main-nav ul.menu >li .nav-sublist-dropdown {
+  border-top-color: $md-red;
+}
+
+#sr-lan-page-wrapper, .md-partner, .landing-page-wrapper {
+  padding: 15px 10px;
+  background-color: $white;
+}
+
+select {
+  border: 1px solid #B8C2C7;
+  color:#1a92c3;
+  font-weight: bold;
+  outline:none;
+  -moz-appearance: none;
+  text-indent: 0.01px;
+  height:27px;
+  padding:4px 40px 4px 7px;
+  background: rgba(0, 0, 0, 0) url("../img/select.png") no-repeat scroll 0 0;
+  background-position: right;
+  background-size: 27px 23px;
+  -webkit-appearance: none;
+  background-color: $white;
+}
+
+select:focus {
+  outline: none;
+}
+
+.header-container.type3 {
+  .header-leistungen {
+    .left {
+      ul li {
+        margin-right: 10px;
+      }
+    }
+    .right .links {
+      li {
+        padding: 0 5px;
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   Sleepz_Adnymics
+ * @package    Sleepz
+ * @author     Andre Manikofski<manikofski@sleepz.com>
+ * @website    http://www.sleepz.com
+ */
+ -->
+<config>
+    <modules>
+        <Sleepz_Adnymics>
+            <version>1.0.0.0</version>
+        </Sleepz_Adnymics>
+    </modules>
+    <global>
+        <events>
+            <sales_order_place_after>
+                <observers>
+                    <adnymics_rest_call>
+                        <type>singleton</type>
+                        <class>Sleepz_Adnymics_Model_Observer</class>
+                        <method>printCommandSettle</method>
+                    </adnymics_rest_call>
+                </observers>
+            </sales_order_place_after>
+        </events>
+        <helpers>
+            <adnymics>
+                <class>Sleepz_Adnymics_Helper</class>
+            </adnymics>
+        </helpers>
+        <default>
+            <!-- Define the mandatory fields forr adnymics minimal call -->
+            <adnymics>
+                <mandatory>
+                    <fields>
+                        <customerId/>
+                        <customerName/>
+                        <customerSurname/>
+                        <customerGender/>
+                        <orderId/>
+                    </fields>
+                </mandatory>
+            </adnymics>
+        </default>
+    </global>
+</config>

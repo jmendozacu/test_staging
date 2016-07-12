@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding="utf-8" ?>
+<!--
+/**
+ * Flagbit_FactFinder
+ *
+ * @category  Mage
+ * @package   Flagbit_FactFinder
+ * @copyright Copyright (c) 2010 Flagbit GmbH & Co. KG (http://www.flagbit.de/)
+ */
+
+/**
+ * Module Config
+ *
+ * @category  Mage
+ * @package   Flagbit_FactFinder
+ * @copyright Copyright (c) 2010 Flagbit GmbH & Co. KG (http://www.flagbit.de/)
+ * @author    Joerg Weller <weller@flagbit.de>
+ */
+-->
+<config>
+    <global>
+        <!--
+        <cache>
+            <request_processors>
+                <mip>Flagbit_Mip_Model_Request_Processor</mip>
+            </request_processors>
+        </cache>
+       -->
+        <models>
+            <core>
+                <rewrite>
+                    <cache>Flagbit_Mip_Model_Cache</cache>
+                </rewrite>
+            </core>
+        </models>
+    </global>
+</config>

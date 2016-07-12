@@ -1,0 +1,223 @@
+
+.category-description {
+  display: none;
+}
+
+  .main.container {
+    // max-width:calc($container-width - 30px);
+  }
+  .main.container .col-main.f-right {
+    background: $white;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+  }
+
+  .sidebar {
+    padding-left: 0;
+  }
+  .regular-price .price, .special-price .price {
+    font-size: 38px;
+    line-height: 42px;
+    font-family: $font-dosis-bold;
+  }
+
+  .price-box {
+    text-align:left;
+    margin-top: 0;
+  }
+
+  .ratings {
+    background:none;
+  }
+  .ratings .rating-box {
+    float: left;
+
+  }
+  .category-products .products-grid li.item .item-area {
+    position: relative;
+  }
+  .category-products .products-grid li.item .details-area .product-name {
+    color: $standard;
+    text-align:left;
+    font-weight: bold;
+    min-height: 4em;
+
+    & a {
+      color:$standard;
+    }
+
+    & a:hover {
+      color:$md-red;
+      text-decoration: underline;
+    }
+  }
+
+  .product-image-area {
+    border-radius: 0;
+    border:none;
+  }
+
+  .products-grid .ratings {
+    clear: both;
+  }
+
+  .pager .limiter select {
+    padding:7px 40px 7px 7px;
+  }
+
+  .sort-by select {
+    max-width:320px;
+    width:100%;
+
+  }
+
+  .sorter .sort-by {
+    width:70%;
+  }
+
+  a.addtowishlist, .link-wishlist {
+    border:none;
+    border-radius: 0;
+    @include fs-normal;
+    font-weight: bold;
+  }
+
+
+  .savings{
+    overflow: hidden;
+    display: block;
+    width:100%;
+    background: #cd1900; /* Old browsers */
+    background: -moz-linear-gradient(top,  #cd1900 93%, #ff4f32 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(93%,#cd1900), color-stop(100%,#ff4f32)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #cd1900 93%,#ff4f32 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #cd1900 93%,#ff4f32 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #cd1900 93%,#ff4f32 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #cd1900 93%,#ff4f32 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cd1900', endColorstr='#ff4f32',GradientType=0 ); /* IE6-9 */
+    border: 1px solid #bf290e;
+    @include md-text-shadow;
+
+    font-family: $font-dosis-bold;
+    font-size: 30px;
+    border-radius: 10px;
+
+  }
+
+  .line {
+    border-top:1px solid #e6f0f5;
+  }
+
+  .pager .pages li {
+    background-color: #EBEFF1;
+    border-radius: 0;
+    border:none;
+  }
+
+  .pager li > a, .pager li > span {
+    background-color: #EBEFF1;
+    border-radius: 0;
+    border:none;
+
+    &:hover {
+      background-color: #333333;
+    }
+  }
+
+  .pager .pages .current {
+    background-color: #333333;
+    border:none;
+
+  }
+
+  .category-image {
+    @include mg-tp(10);
+    @include mg-bt(10);
+  }
+
+  .delivery-options {
+    text-align: left;
+    margin-top: 5px;
+  }
+// }
+
+.toolbar {
+  .sorter {
+    label {
+      color: $md-black;
+      font-weight: $fw-bold;
+    }
+    a {
+      display: none;
+    }
+  }
+
+  .limiter {
+    display: none;
+  }
+}
+
+.line.toolbar-bottom {
+  text-align: center;
+
+  .sorter {
+    display: none;
+  }
+}
+
+.price-box {
+  .label {
+    font-weight: $fw-bold;
+    font-size: 16px;
+    line-height: 0;
+    vertical-align: text-bottom;
+  }
+  .regular-price .price {
+    font-size: 34px;
+  }
+}
+
+.savings-banner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 45%;
+  z-index: 1;
+
+  text-align: center;
+  font-family: $font-dosis-bold;
+  color: $white;
+  border-radius: 12px;
+  max-width: 85%;
+  margin: 0 auto 5px;
+  font-size: 26px;
+  padding: 10px;
+  overflow: hidden;
+  @include background-image(linear-gradient(to bottom, #cd1900 93%,#ff4f32 100%));
+  @include md-text-shadow;
+}
+
+.seo-wrapper {
+  border: 1px solid $white;
+  padding: 10px;
+
+  h2 {
+    @include fs-normal;
+    font-weight: $fw-bold;
+    margin-bottom: 10px;
+  }
+  p {
+    font-size: 11px;
+    line-height: 1.2;
+  }
+}
+
+.block.block-layered-nav {
+  margin-bottom: 25px;
+}
+
+.col-main .page-title.category-title h1 {
+  margin: 10px 0;
+}

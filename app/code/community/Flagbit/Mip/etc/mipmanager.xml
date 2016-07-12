@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!--
+/*                                                                       *
+* This script is part of the MIP project                                  *
+*                                                                        *
+* Mip is free software; you can redistribute it and/or modify it          *
+* under the terms of the GNU General Public License version 2 as         *
+* published by the Free Software Foundation.                             *
+*                                                                        *
+* This script is distributed in the hope that it will be useful, but     *
+* WITHOUT ANY WARRANTY; without even the implied warranty of MERCHAN-    *
+* TABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General      *
+* Public License for more details.                                       *
+*                                                                        */
+
+/**
+* MIP Manager
+*
+*    * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
+* @package MIP
+*/
+-->
+<config>
+    <sections>
+        <!--
+        Please use "mip_" as prefix for sections when you create your own mipmanager.xml files
+         -->
+        <mip_core translate="label" module="mip">
+            <label>General Settings</label>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <settings translate="label">
+                    <label>Developer Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <debug_email translate="label">
+                            <label>Debug E-Mail</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </debug_email>
+                        <auth_type translate="label">
+                            <label>Authentication</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mip/system_config_source_authtype</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </auth_type>
+                    	<ip_mask translate="label">
+                    		<label>Allowed IPs (comma separated)</label>
+                    		<frontend_type>text</frontend_type>
+                    		<sort_order>30</sort_order>
+                    		<show_in_default>1</show_in_default>
+                    		<show_in_website>1</show_in_website>
+                    		<show_in_store>1</show_in_store>
+                    	</ip_mask>
+                        <auth_user translate="label">
+                            <label>Username</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </auth_user>
+                        <auth_pass translate="label">
+                            <label>Password</label>
+                            <frontend_type>password</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </auth_pass>
+                        <devlog translate="label">
+                            <label>Logging enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </devlog>
+                        <task_lifetime translate="label">
+                            <label>Task Expiration Time</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mip/system_config_source_tasklifetime</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </task_lifetime>
+                    </fields>
+                </settings>
+            </groups>
+        </mip_core>
+    </sections>
+</config>

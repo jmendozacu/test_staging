@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+
+	<xsl:template match="/">
+		<data array="true">
+			<xsl:apply-templates select="/OLOrderStatus/NODE_Process"/>
+		</data>
+	</xsl:template>
+    
+	<xsl:template match="/OLOrderStatus/NODE_Process">
+		<datanode>
+	       	<order_id><xsl:value-of select="NODE_Document/DATA_Referenznummer"/></order_id>
+	       	<send_email>true</send_email>
+			<xsl:choose>
+				<xsl:when test="count(NODE_Document/NODE_DocumentPosition) >= '1'">
+	       			<action>
+						<xsl:text>to_shipment</xsl:text>
+	       			</action>
+	       			<status>complete</status>
+	       		</xsl:when>
+	       	</xsl:choose>
+			<xsl:apply-templates select="NODE_Document"/>
+		</datanode>
+    </xsl:template>
+    
+    <xsl:template match="NODE_Document">
+    	<items array="true">
+			<xsl:apply-templates select="NODE_DocumentPosition"/>
+    	</items>
+    </xsl:template>
+    
+	<xsl:template match="NODE_DocumentPosition">
+		<item>
+        	<sku><xsl:value-of select="DATA_BelPosArtikelnummer/text()"/></sku>
+        	<sku_product><xsl:value-of select="DATA_BelPosArtikelnummer/text()"/></sku_product>
+        	<qty_shipped><xsl:value-of select="translate(DATA_Menge/text(), ',.' , '.,' )"/></qty_shipped>
+        </item>
+    </xsl:template>
+  
+	<xsl:template match="InvoiceDHLTrackingLink">
+		<node>
+			<carrier_code>dhl</carrier_code>
+			<title><xsl:value-of select="TrackingID"/></title>
+			<number><xsl:value-of select="TrackingID"/></number>
+		</node>
+	</xsl:template>
+  
+
+
+</xsl:stylesheet>

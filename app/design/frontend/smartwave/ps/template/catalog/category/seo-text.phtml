@@ -1,0 +1,71 @@
+<?php
+
+
+$currentUrl = Mage::app()->getStore()->getCurrentUrl(false);
+
+/*
+echo '<pre>';
+echo '<b>url:</b><br>';
+echo $currentUrl;
+echo '</pre>';
+*/
+
+// create url
+$cmsBlockId = 'seo-text';
+
+
+// get string for category
+$categoryId = Mage::registry('current_category')->getId();
+// create url
+$cmsBlockId .= '-cat-'.$categoryId;
+
+
+// get string for filters
+$currentUrl = Mage::app()->getStore()->getCurrentUrl(false);
+// get the filters from the url
+$currentUrl = str_replace('amp;', '', $currentUrl);
+$parts = parse_url($currentUrl);
+parse_str($parts['query'], $query);
+$appliedFilters = $query['fq'];
+// sort array
+ksort($appliedFilters);
+
+// replace some chars
+$keySearch = array('_');
+$keyReplace = array('-');
+$valSearch = array(' ', '(', ')', '+');
+$valReplace = array('', '', '', '');
+
+foreach ($appliedFilters as $key => $value) {
+    $key = str_replace($keySearch, $keyReplace, $key);
+    $value = strtolower(str_replace($valSearch, $valReplace, $value));
+    $cmsBlockId .=  '-'.$key.'-'.$value;
+}
+
+// print block
+$seoHtml = $this->getLayout()->createBlock('cms/block')->setBlockId($cmsBlockId)->toHtml();;
+if ($seoHtml) {
+    ?>
+    <div class="horizontal-line"></div>
+    <div class="category-description-bottom">
+        <?php echo $seoHtml; ?>
+    </div>
+    <?php
+}
+
+
+
+/*
+// creating the block id
+echo '<pre>';
+echo '<b>calculated block id:</b><br>';
+echo $cmsBlockId;
+echo '</pre>';
+
+
+echo '<pre>';
+echo '<b>cms block output:</b><br>';
+echo $this->getLayout()->createBlock('cms/block')->setBlockId($cmsBlockId)->toHtml();
+echo '</pre>';
+*/
+?>

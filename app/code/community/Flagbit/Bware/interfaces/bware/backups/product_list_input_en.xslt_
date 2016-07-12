@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns="http://mip.flagbit.com/magento-data"  version="1.0">
+
+	<xsl:template match="/">
+		<data array="true">
+			<xsl:apply-templates select="/OLProducts/Product"/>
+		</data>
+	</xsl:template>
+	
+	<xsl:template match="Product">
+		<xsl:apply-templates select="NODE_Variant[DATA_AuspraegungID != '0']" mode="products"/>		
+		<product>
+			<xsl:apply-templates select="*"/>
+		</product>
+	</xsl:template>
+
+	<xsl:template match="NODE_Variant[DATA_AuspraegungID != '0']" mode="products">
+		<product>
+			<sku><xsl:value-of select="./DATA_Produktnummer"/></sku>
+			<type>simple</type>
+			<product_id><xsl:value-of select="./DATA_Produktnummer"/></product_id>
+			<mip_datahash_id><xsl:value-of select="./DATA_Produktnummer"/>_EN</mip_datahash_id>
+			
+			<short_teaser><xsl:value-of select="../NODE_Description[DATA_Sprache='EN']/DATA_Bezeichnung1"/></short_teaser>
+			<description><xsl:value-of select="../NODE_Description[DATA_Sprache='EN']/DATA_USER_Webshoptext"/></description>
+			<xsl:apply-templates select="../NODE_Descriptions"/>
+			<name><xsl:value-of select="../NODE_Descriptions/NODE_Description[DATA_Sprache='EN']/DATA_Bezeichnung1" /> / Color: <xsl:value-of select="./DATA_Auspraegung1[2]"/>, Size: <xsl:value-of select="./DATA_Auspraegung2[2]"/></name>
+			
+			<website_ids array="true">
+				<website_id>1</website_id>
+			</website_ids>
+			<store_ids array="true">
+				<store_id>2</store_id>
+			</store_ids>
+			<set>4</set>
+		</product>
+	</xsl:template>
+
+	<xsl:template match="DATA_Artikelnummer">
+		<sku> 
+			<xsl:value-of select="."/>
+		</sku>	
+		<type>
+			<xsl:choose>
+				<xsl:when test="count(../NODE_Variant[DATA_AuspraegungID != '0']) > 0"><xsl:text>grouped</xsl:text></xsl:when>
+				<xsl:otherwise><xsl:text>simple</xsl:text></xsl:otherwise>
+			</xsl:choose>
+		</type>
+		<product_id>
+			<xsl:value-of select="."/>
+		</product_id>
+		<xsl:apply-templates select="../NODE_Variant[DATA_AuspraegungID = '0']/NODE_Pricelists/NODE_Pricelist[DATA_PreislisteID='3']"/>
+		<mip_datahash_id>
+			<xsl:value-of select="."/>_EN
+		</mip_datahash_id>
+		<weight>1000</weight>
+		<website_ids array="true">
+			<website_id>1</website_id>
+		</website_ids>
+		<store_ids array="true">
+			<store_id>2</store_id>
+		</store_ids>
+
+		<meta_title>
+			<xsl:value-of select="../NODE_Descriptions/NODE_Description[DATA_Sprache='EN']/DATA_USER_MetaTitle"/>
+		</meta_title>
+		<meta_keyword>
+			<xsl:value-of select="../NODE_Descriptions/NODE_Description[DATA_Sprache='EN']/DATA_USER_MetaKeywords"/>
+		</meta_keyword>
+		<meta_description>
+			<xsl:value-of select="../NODE_Descriptions/NODE_Description[DATA_Sprache='EN']/DATA_USER_MetaDescription"/>
+		</meta_description>		
+		<status>1</status>
+	</xsl:template>
+	
+
+
+	
+	<xsl:template match="DATA_USER_Webshoptext">
+		<short_description>
+			<xsl:choose>
+				<xsl:when test=".">
+					<xsl:value-of select="."/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:call-template name="Description" />
+				</xsl:otherwise>
+			</xsl:choose>
+		</short_description>
+		<description>
+			<xsl:choose>
+				<xsl:when test=".">
+					<xsl:value-of select="."/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:call-template name="Description" />
+				</xsl:otherwise>
+			</xsl:choose>			
+		</description>
+	</xsl:template>
+
+	<xsl:template match="NODE_Descriptions">
+		<name>
+			<xsl:call-template name="Description" />
+		</name>
+		<short_teaser>
+			<xsl:value-of select="NODE_Description[DATA_Sprache='EN']/DATA_USER_Webshoptext"/>
+		</short_teaser>
+		<description>
+			<xsl:value-of select="NODE_Description[DATA_Sprache='EN']/DATA_USER_Webshoptext"/>
+		</description>
+	</xsl:template>
+	
+	<xsl:template name="Description">
+		<xsl:choose>
+			<xsl:when test="NODE_Description[DATA_Sprache='EN']/DATA_USER_WebshopBez1/text()">
+				<xsl:value-of select="NODE_Description[DATA_Sprache='EN']/DATA_USER_WebshopBez1"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="NODE_Description[DATA_Sprache='EN']/DATA_Bezeichnung1"/>
+				<xsl:text> </xsl:text>
+				<xsl:value-of select="NODE_Description[DATA_Sprache='EN']/DATA_Bezeichnung2"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template match="*"></xsl:template>
+	
+</xsl:stylesheet>

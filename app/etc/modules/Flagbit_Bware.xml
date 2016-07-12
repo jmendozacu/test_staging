@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Flagbit_Bware>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Flagbit_Bware>
+    </modules>
+</config>

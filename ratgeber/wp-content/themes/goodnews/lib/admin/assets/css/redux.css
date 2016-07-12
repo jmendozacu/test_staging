@@ -1,0 +1,400 @@
+div.redux-container {
+	background: none;
+	background-image: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	-moz-box-shadow: none;
+}
+
+div.redux-container #redux-header {
+	background: #f9f9f9;
+	padding:10px;
+	border-bottom: 1px solid #ddd;
+	text-align:left;
+}
+
+
+div.redux-container #redux-header .display_header{
+	width:100%;
+}
+div.redux-container #redux-header h2{
+	color: #181818;
+	font-weight: 600;
+}
+
+div.redux-container #redux-header .display_header span{
+	color: #fff;
+	background: #e8280b;
+	padding: 5px 10px;
+	border-radius: 3px;
+	float: right;
+	margin:10px 20px;
+}
+div.redux-container #redux-header .display_header span:before{
+	content:'v.';
+}
+.redux-container #info_bar {
+	background: #f9f9f9;
+	border-bottom: 1px solid #dedede;
+	padding: 6px 10px 6px 6px;
+	text-align: right;
+	-moz-box-shadow: inset 0 1px 0 #fcfcfc;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	display:none;
+}
+
+
+.redux-main h3 {
+    text-transform: uppercase;
+    padding: 5px 0 10px;
+    margin: 0;
+}
+.redux-group-tab .redux-section-desc {
+    padding: 5px 10px;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    position: relative;
+    top: -1px;
+}
+.redux-main .description {
+    font-style: normal;
+}
+
+.redux-sidebar{
+	position: relative;
+}
+
+.redux-sidebar:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display:none;
+}
+
+.redux-sidebar.inactive{
+	opacity:0.5;
+}
+.redux-sidebar.inactive:before{
+	display:block;
+}
+.redux-sidebar .redux-group-menu{
+	margin:0;
+}
+.redux-sidebar .redux-group-menu li a {
+	display: block;
+	padding: 15px 4px 15px 14px;
+	background: #f9f9f9;
+	border-bottom: 1px solid #ddd;
+	border-top: 1px solid #ddd;	
+	opacity: 1;
+	color: #000;
+	font-weight: 700;
+	text-decoration: none;
+	-webkit-transition: none;
+	transition: none;
+	outline: none;
+
+}
+.redux-sidebar .redux-group-menu li a:focus{
+	outline:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;	
+
+}
+.redux-sidebar .redux-group-menu li.active:fist-child a,
+.redux-sidebar .redux-group-menu li:fist-child a{
+	border-top:0!important;
+}
+
+.redux-sidebar .redux-group-menu li.active a, 
+.redux-sidebar .redux-group-menu li.active a:hover, 
+.redux-sidebar .redux-group-menu li.activeChild a, 
+.redux-sidebar .redux-group-menu li.activeChild a:hover,
+.redux-sidebar .redux-group-menu li a:hover{
+	background: #e8280b;
+	color:#fff!important;
+	opacity: 1;
+}
+
+.redux-sidebar .redux-group-menu li a:active,
+.redux-sidebar .redux-group-menu li a:focus{
+	outline:0!important;
+}
+
+.redux-sidebar .redux-group-menu li:first-child a{
+	border-top: 0!important;
+}
+
+.redux-main {
+	background: #fff;
+	margin-left: 202px;
+}
+
+@media screen and (max-width: 1124px) {
+	.redux-main {
+		margin-left: 44px;
+	}
+}
+
+div.redux-container #redux-intro-text{
+	display:none;
+}
+
+div.redux-container .button, 
+div.redux-container .button-secondary,
+div.redux-container .button:hover, 
+div.redux-container .button-secondary:hover {
+	color: #222;
+	border-color: #ddd;
+	background: #f9f9f9;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	vertical-align: top;
+	border-radius: 0;
+}
+div.redux-container .button:hover, 
+div.redux-container .button-secondary:hover {
+	opacity:0.8;
+}
+
+div.redux-container .redux-container-switch .cb-disable, 
+div.redux-container .redux-container-switch .cb-enable, 
+div.redux-container .ui-state-default, 
+div.redux-container .ui-widget-content .ui-state-default, 
+div.redux-container .ui-widget-header .ui-state-default,
+div.redux-container .redux-container-switch .cb-enable.selected, 
+div.redux-container .ui-buttonset .ui-state-active{
+	background-image:none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border-radius: 0;
+}
+div.redux-container wp-media-buttons-icon,
+div.redux-container span.wp-media-buttons-icon:before{
+	color:#fff;
+}
+
+
+/* media upload */
+
+div.redux-container .redux-background-input.upload{
+	display:none;
+}
+div.redux-container .redux-main .redux-container-background .background-preview{
+	background-size: cover;
+	background-position: center;
+}
+div.redux-container .of-uploaded-image img {
+	max-width: 100%;
+}
+
+
+/* selects */
+
+div.redux-container a.select2-choice {
+	background-image: none!important;
+	border: 1px solid #ddd!important;
+	border-radius: 0!important;
+	padding: 5px 10px!important;
+}
+div.redux-container .select2-container .select2-choice .select2-arrow {
+    background-image: none;
+    background: none;
+    color: #222;
+    border: 0;
+    top: 4px;
+    right: 4px;
+}
+div.redux-container .select2-container .select2-choice abbr {
+    top: 11px;
+}
+div.redux-container .select2-chosen {
+    color: #222;
+}
+.select2-drop {
+    border: 1px solid!important;
+    border-color: #eee!important;
+}
+.select2-search input {
+    margin: 5px 0;
+    border-color: #ddd!important;
+}
+.select2-results .select2-highlighted {
+    background: #e8280b!important;
+}
+
+
+/* typography */
+
+.redux-main .redux-typography-container .select_wrapper{
+	margin-bottom:15px;
+}
+.redux-main .redux-typography-container .input_wrapper{
+	margin-bottom:15px;
+}
+.redux-main .redux-typography-container .input_wrapper input.mini{
+	height:38px;
+	width:60%;
+	background-image:none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border-radius: 0;	
+}
+.redux-main .input-append .add-on, .redux-main .input-prepend .add-on{
+	text-shadow: none;
+	padding: 0px 6px;
+	border-radius: 0;
+	height: 30px;
+	line-height: 1.7;
+	position: relative;
+	top: 0;
+	font-size: 15px;
+}
+
+.redux-main .ui-widget input, 
+.redux-main .ui-widget select, 
+.redux-main .ui-widget textarea, 
+.redux-main .ui-widget button{
+	font-family: inherit;
+	font-size: 14px;
+}
+
+/* accordion */
+
+.redux-group-tab.ui-accordion table,.redux-group-tab.ui-accordion table {
+    padding: 0!important;
+}
+.redux-group-tab.ui-accordion table td,.redux-group-tab.ui-accordion table th {
+    padding: 0 0 0 20px!important;
+}
+.redux-main .ui-accordion .ui-accordion-header{
+	margin-top:-1px;
+}
+
+.redux-main .ui-accordion .ui-accordion-header .ui-icon{
+	font-size:20px;
+}
+
+.redux-main .ui-accordion .ui-accordion-content.form-table-section {
+    display: block!important;
+    height: 0;
+    top: -1px;
+}
+.redux-main .ui-accordion table.form-table-section.ui-accordion-content-active{
+	display:table!important;
+	height:auto;
+}
+
+.redux-container .redux-section-field {
+	background: #fafafa;
+	border: 1px solid #ddd;
+	padding: 8px 10px;
+}
+
+.redux-container .redux-group-tab .redux-section-field h3{
+	border-bottom:0;
+	margin:0;
+	padding:0 0 0 25px;
+}
+
+.redux-main .ui-widget{
+	font-family: inherit;
+}
+
+
+/* slider */
+
+.redux-container-slider .redux-slider-label {
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    margin-left: 0;
+}
+.redux-container-slider .redux-slider-container{
+	width:75%;
+}
+
+@media screen and (max-width: 570px) {
+	.redux-container-slider .redux-slider-container{
+		
+		width:200px;
+	}
+}
+
+/* footer */
+
+#footer-thankyou{
+	display:none;
+}
+
+
+/* Disabled Tabs */
+
+.redux-main .ui-accordion .ui-accordion-header.disabled .redux-section-desc {
+    background: transparent;
+    position: absolute;
+    right: 15px;
+    top: 16px;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+.redux-main .ui-accordion .ui-accordion-header.disabled .redux-section-desc p{
+    color: #666666;
+    font-weight:bold;
+    font-size:12px;
+    margin: 0;
+}
+
+.redux-main .ui-accordion .ui-accordion-header.disabled + table.form-table-section:after{
+    content: "";
+    position:absolute;
+    width: 101%;
+    height: 101%;
+    background: rgba(255,255,255,0.7);
+    z-index:10;
+    top: 1px;
+    left: 0px; 
+}
+
+@media screen and (max-width: 780px) {
+	
+	.redux-main .ui-accordion .ui-accordion-header.disabled .redux-section-desc p {
+	    display:none;
+	}
+	.redux-main .ui-accordion .ui-accordion-header.disabled .redux-section-desc:before {
+	    content: "N/A";
+	}
+
+}
+
+
+@media screen and (max-width: 1124px) {
+
+	div.redux-container #redux-header .display_header span {
+		float: none;
+		margin: 15px 0 0;
+		display: inline-block;
+	}
+
+	.redux-group-tab.ui-accordion .ui-widget-content table td, .redux-group-tab.ui-accordion .ui-widget-content table th{
+		padding:0!important;
+	}
+	.redux_field_th{
+		padding-top:20px;
+		padding-bottom: 5px;
+	}
+	.redux-main .redux-field-container {
+		padding-bottom: 20px;
+		padding-top:20px;
+	}
+}
+
+
+
+table.acf-input-table.row_layout > tbody > tr > td{
+	width:100%;
+}

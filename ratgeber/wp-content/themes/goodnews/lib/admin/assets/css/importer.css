@@ -1,0 +1,96 @@
+.xt-importer {
+	position: relative;
+}
+.xt-importer p {
+    font-size: 15px;
+    line-height: 1;
+}
+.xt-importer .loader{
+	display:none;
+	position:absolute;
+	background-image:url(../img/ajax-loader.gif);
+	background-repeat:no-repeat;
+	width:31px;
+	height:31px;
+	top: 30px;
+	right: 30px;
+	z-index: 100;
+}
+.xt-importer .status{
+	display:none;
+	border:1px solid #ddd;
+	padding:20px;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	background: #fff;
+	box-sizing: border-box;
+	overflow: auto;
+}
+.xt-importer .status.error{
+	border:1px solid red;
+	margin: 0;
+}
+.xt-importer .status.success{
+	border:1px solid green;
+}
+	
+.xt-importer .theme-browser .themes {
+    clear: none;
+}
+
+.xt-importer .theme-browser .theme {
+    width: 30%;
+}
+
+.xt-importer .theme-browser .theme {
+    width: 30%;
+    -webkit-box-shadow: none;
+    box-shadow: none;    
+}
+
+.xt-importer .theme-browser .theme:nth-child(4n) {
+    margin: 0 3% 3% 0;
+}
+.xt-importer .theme-browser .theme:nth-child(2n) {
+    margin-right: 0;
+}
+
+.xt-importer .theme-browser .theme .theme-name {
+    margin: 0;
+    padding: 10px 15px 20px;
+    box-shadow: inherit!important;
+    border-bottom: 0;
+}
+
+.xt-importer .theme-browser .theme .theme-actions .button-secondary {
+    margin-top: 0;
+}
+
+@media only screen and (max-width: 1080px) {
+	.xt-importer .theme-browser .theme {
+	    width: 47%;
+	}	
+}
+
+@media only screen and (max-width: 780px) {
+	
+	.xt-importer .theme-browser .theme {
+	    width: 100%;
+	}
+
+	.xt-importer .theme:focus .more-details, 
+	.xt-importer .theme:hover .more-details, 
+	.xt-importer .theme:not(.active):focus .theme-actions, 
+	.xt-importer .theme:not(.active):hover .theme-actions{
+		display:inherit;
+	}
+
+}
+
+@media only screen and (min-width: 2000px){
+	#wpwrap .xt-importer .theme-browser .theme {
+	    width: 24%;
+	}
+}

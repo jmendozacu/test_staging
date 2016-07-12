@@ -1,0 +1,5 @@
+<?php if(strlen(trim($this->getCurrentCategory()->getDescription())) > 0 ): ?>
+  <div class="seo-wrapper">
+    <?php echo $this->getCurrentCategory()->getDescription(); ?>
+  </div>
+<?php endif; ?>

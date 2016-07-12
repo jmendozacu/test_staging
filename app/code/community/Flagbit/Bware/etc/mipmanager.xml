@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <mip_bware translate="label" module="mip">
+            <label>BüroWARE Shop Interface</label>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>				
+            <groups>
+                <products translate="label">
+                    <label>Product Import</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+		            <show_in_default>1</show_in_default>
+		            <show_in_website>1</show_in_website>
+		            <show_in_store>1</show_in_store>					
+                    <fields>
+                        <store_id translate="label">
+                            <label>default Store</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mip/system_config_source_store</source_model>
+                            <sort_order>10</sort_order>
+				            <show_in_default>1</show_in_default>
+				            <show_in_website>1</show_in_website>
+				            <show_in_store>1</show_in_store>							
+                        </store_id>
+                        <website_id translate="label">
+                            <label>default Website</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_website</source_model>
+                            <sort_order>20</sort_order>
+				            <show_in_default>1</show_in_default>
+				            <show_in_website>1</show_in_website>
+				            <show_in_store>1</show_in_store>							
+                        </website_id>						                    	
+                        <attribute_set translate="label">
+                            <label>default Attribute Set</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>mip/system_config_source_attributeset</source_model>
+                            <sort_order>30</sort_order>
+							<comment>Magento Attribute Set ID</comment>
+				            <show_in_default>1</show_in_default>
+				            <show_in_website>1</show_in_website>
+				            <show_in_store>1</show_in_store>							
+                        </attribute_set>
+                        <pricelist_id translate="label">
+                            <label>BüroWARE Pricelist ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+				            <show_in_default>1</show_in_default>
+				            <show_in_website>1</show_in_website>
+				            <show_in_store>1</show_in_store>							
+                        </pricelist_id> 
+                        <manage_stock translate="label">
+                            <label>Manage Stock</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </manage_stock>												                    
+                    </fields>
+                </products>  
+                <tax translate="label">
+                    <label>Tax Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+		            <show_in_default>1</show_in_default>
+		            <show_in_website>1</show_in_website>
+		            <show_in_store>1</show_in_store>					
+                    <fields>
+                        <price_type translate="label">
+                            <label>Price Type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>tax/system_config_source_priceType</source_model>
+                            <sort_order>10</sort_order>
+				            <show_in_default>1</show_in_default>
+				            <show_in_website>1</show_in_website>
+				            <show_in_store>1</show_in_store>							
+                        </price_type>
+                        <regular_tax translate="label">
+                            <label>regular tax rate</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_shipping_taxclass</source_model>
+							<comment><![CDATA[Select Magento Tax Rate which fits to German <b>regular Tax Rate</b>]]></comment>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </regular_tax>
+                        <reduced_tax translate="label">
+                            <label>reduced tax rate</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_shipping_taxclass</source_model>
+							<comment><![CDATA[Select Magento Tax Rate which fits to German <b>reduced Tax Rate</b>]]></comment>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </reduced_tax>																								                    
+                    </fields>
+                </tax>
+                <category translate="label">
+                    <label>Category Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+		            <show_in_default>1</show_in_default>
+		            <show_in_website>1</show_in_website>
+		            <show_in_store>1</show_in_store>					
+                    <fields>
+                        <root translate="label">
+                            <label>Root Category</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_category</source_model>
+                            <sort_order>10</sort_order>
+				            <show_in_default>1</show_in_default>
+				            <show_in_website>1</show_in_website>
+				            <show_in_store>1</show_in_store>							
+                        </root>
+                        <bware_parent_id translate="label">
+                            <label>BüroWARE Parent Category</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+				            <show_in_default>1</show_in_default>
+				            <show_in_website>1</show_in_website>
+				            <show_in_store>1</show_in_store>							
+                        </bware_parent_id>						
+                        <delete_old_childs translate="label">
+                            <label>delete old Categories</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </delete_old_childs>
+					</fields>
+                </category> 	
+				<customer translate="label">
+                    <label>Customer Import</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+		            <show_in_default>1</show_in_default>
+		            <show_in_website>1</show_in_website>
+		            <show_in_store>1</show_in_store>					
+                    <fields>
+                        <store_id translate="label">
+                            <label>default Store</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mip/system_config_source_store</source_model>
+                            <sort_order>10</sort_order>
+				            <show_in_default>1</show_in_default>
+				            <show_in_website>1</show_in_website>
+				            <show_in_store>1</show_in_store>							
+                        </store_id>
+                        <website_id translate="label">
+                            <label>default Website</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_website</source_model>
+                            <sort_order>20</sort_order>
+				            <show_in_default>1</show_in_default>
+				            <show_in_website>1</show_in_website>
+				            <show_in_store>1</show_in_store>							
+                        </website_id>
+                        <group_id translate="label">
+                            <label>default Customer Group</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_customer_group</source_model>
+                            <sort_order>20</sort_order>
+				            <show_in_default>1</show_in_default>
+				            <show_in_website>1</show_in_website>
+				            <show_in_store>1</show_in_store>							
+                        </group_id>	                        												                    												                    
+                    </fields>
+                </customer>
+            </groups>
+        </mip_bware>
+    </sections>
+</config>
+ 

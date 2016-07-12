@@ -1,0 +1,713 @@
+<div id="iways-configurator">
+	<div class="configurator-step step-1" data-step="1">
+		<p class="configurator-question">Für wen benötigen Sie die Matratze?</p>
+		<ul class="who">
+			<li>
+				<a href="#" data-who="oneperson">
+					<img src="<?php echo $this->getSkinUrl('images/configurator/mann.png') ?>" />
+					<span>Einzelperson</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" data-who="couple">
+					<img src="<?php echo $this->getSkinUrl('images/configurator/paar.png') ?>" />
+					<span>Paar</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" data-who="kid">
+					<img src="<?php echo $this->getSkinUrl('images/configurator/kind.png') ?>" />
+					<span>Kind (bis 12 Jahre)</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="configurator-step step-2" data-step="2">
+		<p class="configurator-question">Größe des Bettes</p>
+		<ul class="bed">
+			<li>
+				<img src="<?php echo $this->getSkinUrl('images/configurator/bett-breite.png') ?>" />
+				<p><input name="width" /></p>
+				<p><strong>Breite</strong> (in cm)</p>
+				<span class="error error-width">Bitte geben Sie die Breite ein. <br/></span>
+			</li>
+			<li>
+				<img src="<?php echo $this->getSkinUrl('images/configurator/bett-laenge.png') ?>" />
+				<p><input name="length" /></p>
+				<p><strong>L&auml;nge</strong> (in cm):</p>
+				<span class="error error-length">Bitte geben Sie die L&auml;nge ein. <br/></span>
+			</li>
+		</ul>
+		<div class="next"><a href="#" class="next-step">Weiter</a></div>
+		<p class="tip top-oneperson">Hinweis: Bitte prüfen Sie Ihren Lattenrost, denn dieser ist die Basis eines angenehmen und gesunden Liegens. Achten Sie darauf, dass er genügend Spannung aufweist und der Abstand der Leisten zueinander maximal 5 cm beträgt. Sollte sich der Lattenrost für Ihre mit Hilfe von SLEEPSTER gefundene Matratze nicht eignen, nutzen Sie unseren ausführlichen Lattenrost-Berater für weitere Informationen oder kontaktieren Sie uns direkt.</p>
+		<p class="tip tip-couple">Hinweis: Bitte prüfen Sie Ihr Lattenrost. Dieser ist die Basis eines gutes Liegens. Achten Sie darauf, dass der Lattenrost genügend Spannung aufweist und dass die Leisten maximal 5 cm Abstand haben
+		Sollte der latternost nicht geeignet sein, schauen Sie im Anschluß an diese Konfiguration auf die empfohlenen Lattenroste. Ein Blick, der sich lohnt.</p>
+		<p class="tip tip-kid">Hinweis: Bitte prüfen Sie den Lattenrost Ihres Kindes (erst ab ca. 6 Jahren notwendig). , denn dieser ist die Basis eines angenehmen und gesunden Liegens. Achten Sie darauf, dass er genügend Spannung aufweist und der Abstand der Leisten zueinander maximal 5 cm beträgt. Sollte sich der Lattenrost für Ihre mit Hilfe von SLEEPSTER gefundene Matratze nicht eignen, nutzen Sie unseren ausführlichen Lattenrost-Berater für weitere Informationen oder kontaktieren Sie uns direkt.</p>
+	</div>
+	<div class="configurator-step step-3" data-step="3">
+		<p class="configurator-question configurator-question-oneperson">Ihre Persönlichen Angaben</p>
+		<p class="configurator-question configurator-question-couple">Persönliche Angaben zur ersten Person</p>
+		<p class="configurator-question configurator-question-kid">Persönliche Angaben des Kindes</p>
+		<ul class="person">
+			<li>
+				<img src="<?php echo $this->getSkinUrl('images/configurator/frau.png') ?>" />
+				<p><input style="margin-left: 5px;" type="radio" name="gender" value="weiblich"/></p>
+				<p>weiblich:</p> 
+				<span class="error error-gender">Bitte geben Sie das Geschlecht an.</span>
+			</li>
+			<li>
+				<img src="<?php echo $this->getSkinUrl('images/configurator/mann.png') ?>" />
+				<p><input style="margin-left: 5px;" type="radio" name="gender" value="männlich"/></p>
+				<p>männlich:</p>
+				<span class="error error-gender">Bitte geben Sie das Geschlecht an.</span>
+			</li>
+			<li>
+				<img src="<?php echo $this->getSkinUrl('images/configurator/gewicht.png') ?>" />
+				<p><input name="weight" /></p>
+				<p>Gewicht (in kg):</p>
+				<span class="error error-weight">Bitte geben Sie das Gewicht ein. </span>
+			</li>
+			<li>
+				<img src="<?php echo $this->getSkinUrl('images/configurator/groesse.png') ?>" />
+				<p><input name="height" /></p>
+				<p>Gr&ouml;&szlige (in cm):</p>
+				<span class="error error-height">Bitte geben Sie die Größe ein.</span>
+			</li>
+			<li class="button">
+				<div class="next"><a href="#" class="next-step">Weiter</a></div>
+			</li>
+		</ul>
+		
+		<p class="tip tip-oneperson">Unser Expertentipp: <br />
+			Das Verhältnis zwischen Gewicht und Größe ist entscheidend für den Härtegrad der Matratze. Grundsätzlich gilt: Je breiter und länger die Matratze, desto höher der persönliche Liegekomfort. Im Optimalfall sollte daher die Matratze rund 30 Zentimeter länger sein als Ihre Körpergröße. Als Mindestmaß hinsichtlich der Breite empfehlen wir 90 Zentimeter pro Person, um genügend Bewegungsfreiraum zu haben. 
+		</p>
+		<p class="tip tip-couple">Unser Expertentipp: <br /> Um für ein Paar - also 2 individuelle Persönlichkeiten - die passenden Matratzen herauszufinden, benötigt Sleepster zusätzliche Angaben.</p>
+		<p class="tip tip-kid">Unser Expertentipp: <br /> Für ein Baby empfiehlt sich eine abgestimmte Schlafunterlage, die trotz angenehmer Weichheit und einer hohen Elastizität nicht zu weich ausfällt. Die noch nicht vollständig ausgebildete Wirbelsäule sowie die kindlichen Muskeln brauchen eine gewisse Unterstützung seitens der Kindermatratze. <br />Für ältere Kinder eignen sich Matratzenmodelle, die über Mehrzonen-Stützsysteme verfügen - am geläufigsten sind hier 5- oder 7-Zonen-Systeme.</p>
+	</div>
+	<div class="configurator-step step-4" data-step="4">
+		<p class="configurator-question">Persönliche Angaben Ihres Partners / Ihrer Partnerin</p>
+		<ul class="person">
+			<li>
+				<img src="<?php echo $this->getSkinUrl('images/configurator/frau.png') ?>" />
+				<p><input style="margin-left: 5px;" type="radio" name="gender2" value="weiblich"/></p>
+				<p>weiblich:</p> 
+				<span class="error error-gender2">Bitte geben Sie das Geschlecht an.</span>
+			</li>
+			<li>
+				<img src="<?php echo $this->getSkinUrl('images/configurator/mann.png') ?>" />
+				<p><input style="margin-left: 5px;" type="radio" name="gender2" value="männlich"/></p>
+				<p>männlich:</p>
+				<span class="error error-gender2">Bitte geben Sie das Geschlecht an.</span>
+			</li>
+			<li>
+				<img src="<?php echo $this->getSkinUrl('images/configurator/gewicht.png') ?>" />
+				<p><input name="weight2" /></p>
+				<p>Gewicht (in kg):</p>
+				<span class="error error-weight2">Bitte geben Sie das Gewicht ein. </span>
+			</li>
+			<li>
+				<img src="<?php echo $this->getSkinUrl('images/configurator/groesse.png') ?>" />
+				<p><input name="height2" /></p>
+				<p>Gr&ouml;&szlige (in cm):</p>
+				<span class="error error-height2">Bitte geben Sie die Größe ein.</span>
+			</li>
+			<li class="button">
+				<div class="next"><a href="#" class="next-step">Weiter</a></div>
+			</li>
+		</ul>
+		<p class="tip tip-couple">Unser Expertentipp: <br />Hier gilt das Motto: „Je breiter die Liegefläche, desto höher der Komfort“. Selbst für 2 sehr unterschiedliche gebaute Personen besteht die Möglichkeit auf eine Partnermatratze mit einer durchgehendenden Liegefläche.<br />
+		Bei Partnermatratzen handelt es sich um überbreite Matratzen, die aus 2 unterschiedlich festen Seiten mit einem gemeinsamen Bezug bestehen.</p>
+	</div>
+	<div class="configurator-step step-5" data-step="5">
+		<p class="configurator-question configurator-question-oneperson">Wie schlafen Sie lieber?</p>
+		<p class="configurator-question configurator-question-couple">Wie schlafen Sie lieber?</p>
+		<p class="configurator-question configurator-question-kid">Wie schläft Ihr Kind lieber?</p>
+		<ul class="firmness">
+			<li>
+				<a href="#" data-firmness="hard">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/fest.png') ?>" />
+					<span class="c-option-oneperson">fest</span>
+					<span class="c-option-couple">beide fest</span>
+					<span class="c-option-kid">fest</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" data-firmness="soft">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/weich.png') ?>" />
+					<span class="c-option-oneperson">weich</span>
+					<span class="c-option-couple">beide weich</span>
+					<span class="c-option-kid">weich</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" data-firmness="no">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/keine-vorlieben.png') ?>" />
+					<span class="c-option-oneperson">keine Vorlieben</span>
+					<span class="c-option-couple">keine Vorlieben</span>
+					<span class="c-option-kid">keine Vorlieben</span>
+				</a>
+			</li>
+		</ul>
+		<p class="tip">Unser Expertentipp:<br />
+			Neben der Körpergröße im Zusammenhang mit dem Körpergewicht, ist an dieser Stelle das subjektive Empfinden, ob man gerne weicher oder eher etwas fester liegen möchten, entscheidend.
+		</p>
+	</div>
+	<div class="configurator-step step-6" data-step="6">
+		<p class="configurator-question configurator-question-oneperson">Ihre bevorzugte Schlaflage?</p>
+		<p class="configurator-question configurator-question-couple">Ihre bevorzugte Schlaflage?</p>
+		<p class="configurator-question configurator-question-kid">Die bevorzugte Schlaflage Ihres Kindes?</p>
+		<ul class="position">
+			<li>
+				<a href="#" data-position="different">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/unterschiedlich.png') ?>" />
+					<span class="c-option-oneperson">unterschiedlich</span>
+					<span class="c-option-couple">unterschiedlich</span>
+					<span class="c-option-kid">unterschiedlich</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" data-position="back">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/rueckenlage.png') ?>" />
+					<span class="c-option-oneperson">Rücken</span>
+					<span class="c-option-couple">beide Rücken</span>
+					<span class="c-option-kid">Rücken</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" data-position="side">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/seitenlage.png') ?>" />
+					<span class="c-option-oneperson">Seite</span>
+					<span class="c-option-couple">beide Seite</span>
+					<span class="c-option-kid">Seite</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" data-position="belly">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/bauchlage.png') ?>" />
+					<span class="c-option-oneperson">Bauch</span>
+					<span class="c-option-couple">beide Bauch</span>
+					<span class="c-option-kid">Bauch</span>
+				</a>
+			</li>
+		</ul>
+		<p class="tip">Unser Expertentipp:<br />
+				Bauchlage bedeutet, dass man tatsächlich platt auf dem Bauch liegt. Die meisten Menschen nehmen aber eher eine „stabile Seitenlage“ ein, also halb auf dem Bauch liegend, mit abgewinkeltem Arm und Hand in der Nähe des Kopfes und angewinkeltem Knie. <br>
+				Da sich der Mensch lediglich an die Einschlaf- und Aufwachphase bewusst erinnert, sich aber in der Nacht häufig bewegt, könnte Ihr Partner oder eine außenstehende Person oftmals genauer sagen, wie Sie nachts liegen. 
+				</p>
+	</div>
+	<div class="configurator-step step-7" data-step="7">
+		<p class="configurator-question configurator-question-oneperson">Ihre Körperform / Silhouette</p>
+		<p class="configurator-question configurator-question-couple">Körperform / Silhouette der ersten Person?</p>
+		<p class="configurator-question configurator-question-kid">Körperform / Silhouette Ihres Kindes?</p>
+		<ul class="form">
+			<li>
+				<a href="#" data-form="straight">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/gerade.png') ?>" />
+					<span class="c-option">gerade</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" data-form="pear">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/dreieck.png') ?>" />
+					<span class="c-option">Dreieck</span>
+					<!-- (schmale Schulterpartie/ breitere Hüfte) -->
+				</a>
+			</li>
+			<li>
+				<a href="#" data-form="trapeze">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/umgedrehtes-dreieck.png') ?>" />
+					<span class="c-option">umgedrehtes Dreieck</span>
+					 <!-- (Breite Schulter/schmale Hüfte) -->
+				</a>
+			</li>
+		</ul>
+		<p class="tip tip-oneperson">Unser Expertentipp:<br /> Jeder Körper ist einzigartig. Dennoch ist es für Sleepster möglich, Ihre eigene Individualität abzubilden. Eine „breite Schulter“ bedeutet beispielsweise, dass die Matratze im Schulterbereich extra nachgeben muss. Dementsprechend sucht Sleepster für Sie genau die richtigen Matratzen mit dieser Eigenschaft heraus.</p>
+		<p class="tip tip-couple">Unser Expertentipp:<br /> Jeder Körper ist einzigartig. Dennoch ist es für Sleepster möglich, Ihre eigene Individualität abzubilden. Eine „breite Schulter“ bedeutet beispielsweise, dass die Matratze im Schulterbereich extra nachgeben muss. Dementsprechend sucht Sleepster für Sie genau die richtigen Matratzen mit dieser Eigenschaft heraus.</p>
+		<p class="tip tip-kid">Unser Expertentipp:<br /> Jeder Körper ist einzigartig. Dennoch ist es für Sleepster möglich, Ihre eigene Individualität abzubilden. Eine „breite Schulter“ bedeutet beispielsweise, dass die Matratze im Schulterbereich extra nachgeben muss. Dementsprechend sucht Sleepster für Sie genau die richtigen Matratzen mit dieser Eigenschaft heraus.</p>
+	</div>
+	<div class="configurator-step step-8" data-step="8">
+		<p class="configurator-question">Körperform / Silhouette Ihres Partners / Ihrer Partnerin?</p>
+		<ul class="form">
+			<li>
+				<a href="#" data-form2="straight">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/gerade.png') ?>" />
+					<span class="c-option">gerade</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" data-form2="pear">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/dreieck.png') ?>" />
+					<span class="c-option">Dreieck</span>
+					<!-- (schmale Schulterpartie/ breitere Hüfte) -->
+				</a>
+			</li>
+			<li>
+				<a href="#" data-form2="trapeze">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/umgedrehtes-dreieck.png') ?>" />
+					<span class="c-option">umgedrehtes Dreieck</span>
+					 <!-- (Breite Schulter/schmale Hüfte) -->
+				</a>
+			</li>
+		</ul>
+		<p class="tip tip-couple">Unser Expertentipp:<br />Ob eine gerade Körperform, ein Dreieck oder ein umgedrehtes Dreieck: Die Matratze muss die Silhouette des Körpers schonend tragen. Personen mit einer eher breiten Hüfte benötigen eine Schlafunterlage mit einem nicht zu festen mittleren Bereich. Die Hüfte soll mittelfest in die Matratze einsinken und damit nicht zu viel Druck ausgesetzt sein. So vermeiden Sie bspw., dass Ihnen ein Bein einschläft und Sie davon aufwachen.  </p>
+	</div>
+	<div class="configurator-step step-9" data-step="9">
+		<p class="configurator-question configurator-question-oneperson">Ihre Schwitzneigung?</p>
+		<p class="configurator-question configurator-question-couple">Ihre Schwitzneigung?</p>
+		<p class="configurator-question configurator-question-kid">Die Schwitzneigung Ihres Kindes?</p>
+		<ul class="sweat">
+			<li>
+				<a href="#" data-sweat="normal">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/normal-schwitzen.png') ?>" />
+					<span class="c-option">normal</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" data-sweat="more">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/mehr-schwitzen.png') ?>" />
+					<span class="c-option">mehr</span>
+				</a>
+			</li>
+		</ul>
+		<p class="tip">Unsere Expertenmeinung: <br />
+			Um Transpiration zu regulieren, muss Feuchtigkeit weggeleitet oder von den Fasern aufgenommen werden. Das gilt auch für die Transpiration in der Nacht. Der richtige Aufbau einer Matratze sowie deren Materialien müssen eine solche Regulation zulassen.</p>
+	</div>
+	<div class="configurator-step step-10" data-step="10">
+		<p class="configurator-question configurator-question-oneperson">Leiden Sie unter Haustauballergien bzw. Allergien gegen Naturhaar?</p>
+		<p class="configurator-question configurator-question-couple">Leidet eine(r) von Ihnen unter Haustauballergien bzw. Allergien gegen Naturhaar?</p>
+		<p class="configurator-question configurator-question-kid">Leidet Ihr Kind unter Haustauballergien bzw. Allergien gegen Naturhaar?</p>
+		<ul class="allergic">
+			<li>
+				<a href="#" data-allergic="no">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/keine-vorlieben.png') ?>" />
+					<span class="c-option">nein</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" data-allergic="yes">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/allergie.png') ?>" />
+					<span class="c-option">ja</span>
+				</a>
+			</li>
+		</ul>
+		<p class="tip tip-oneperson">Unsere Expertenmeinung: <br />
+			In Deutschland leidet jeder Zehnte unter einer Hausstauballergie. Niesen, Augentränen, Juckreiz und sogar Atembeschwerden sind häufige Symptome. <br />
+			Die richtige Wahl der Matratze, die Verwendung von allergendichten Bezügen und ein Austauschen der alten Matratze nach maximal acht Jahren, nehmen wesentlichen Einfluss auf die Linderung der Symptome. </p>
+		<p class="tip tip-couple">Unsere Expertenmeinung: <br />
+			In Deutschland leidet jeder Zehnte unter einer Hausstauballergie. Niesen, Augentränen, Juckreiz und sogar Atembeschwerden sind häufige Symptome. <br />
+			Die richtige Wahl der Matratze, die Verwendung von allergendichten Bezügen und ein Austauschen der alten Matratze nach maximal acht Jahren, nehmen wesentlichen Einfluss auf die Linderung der Symptome. </p>
+		<p class="tip tip-kid">Unsere Expertenmeinung: <br />
+			Oft bilden sich bei Kindern noch vor der Pubertät gewisse Allergien heraus. Eltern können mit einer entsprechenden Matratzenauflage, bzw. einem pflegeleichten Bezug aus schonenden Materialien Ihren Kindern Erleichterung verschaffen.</p>
+	</div>
+	<div class="configurator-step step-11" data-step="11">
+		<p class="configurator-question configurator-question-oneperson">Haben Sie Beschwerden?</p>
+		<p class="configurator-question configurator-question-couple">Haben Sie oder Ihr Partner / Ihre Partnerin Beschwerden?</p>
+		<p class="configurator-question configurator-question-kid">Hat Ihr Kind Beschwerden?</p>
+		<ul class="disorders">
+			<li>
+				<a href="#" data-disorders="no">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/keine-vorlieben.png') ?>" />
+					<span class="c-option">nein</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" data-disorders="bottom">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/beschwerden-lende-huefte.png') ?>" />
+					<span class="c-option">Lende/H&uuml;fte</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" data-disorders="top">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/beschwerden-nacken-schulter.png') ?>" />
+					<span class="c-option">Nacken/Schulter</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" data-disorders="back">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/beschwerden-ruecken.png') ?>" />
+					<span class="c-option">gesamter Rücken</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" data-disorders="bedfast">
+					<img class="c-option" src="<?php echo $this->getSkinUrl('images/configurator/beschwerden-bettlaegrig.png') ?>" />
+					<span class="c-option">Bettlägerigkeit</span>
+				</a>
+			</li>
+		</ul>
+		<p class="tip">Unser Expertentipp: <br />
+				Ein optimales Zusammenspiel von Matratze und Lattenrost hilft dabei, Schmerzen vorzubeugen. <br />
+				Die Kombination aus ausreichender Bewegung am Tag und einer entlastenden Schlafposition in der Nacht trägt dazu bei, Schmerzen zu reduzieren oder gar zu beseitigen.</p>
+	</div>
+</div>
+
+<script type="text/javascript">
+	jQuery('.tip-oneperson, .tip-couple, .tip-kid').hide();
+        jQuery('.configurator-question-oneperson, .configurator-question-couple, .configurator-question-kid').hide();
+        jQuery('.c-option-oneperson, .c-option-couple, .c-option-kid').hide();
+        
+	var configurator = {
+			data: {
+				who: null,
+				width:null,
+				length:null,
+				gender:null,
+				weight:null,
+				height:null,
+				gender2:null,
+				weight2:null,
+				height2:null,
+				firmness:null,
+				position:null,
+				form:null,
+				form2:null,
+				sweat:null,
+				allergic:null,
+				disorders:null,
+				hardness:new Array(),
+			},
+			h1: "soft - H1 unter 60 kg",
+			h2: "medium - H2 bis 80 kg",
+			h3: "fest - H3 bis 120 kg",
+			h4: "extra fest - H4 über 120 kg",
+			h5: "XXL - H5 über 150 kg",
+			hU: "universeller Härtegrad bis max. 115 kg",
+			hk: "Kinder - HK2 bis 30 kg", 
+			h1h2: "H1 (soft) %2B H2 (medium)",
+			h2h1: "H1 (soft) %2B H2 (medium)",
+			h1h3: "H1 (soft) %2B H3 (fest)",
+			h3h1: "H1 (soft) %2B H3 (fest)",
+ 			h2h3: "H2 (medium) %2B H3 (fest)",
+ 			h3h2: "H2 (medium) %2B H3 (fest)",
+			h2h4: "H2 (medium) %2B H4 (extra+fest)",
+			h4h2: "H2 (medium) %2B H4 (extra+fest)",
+			h3h4: "H3 (fest) %2B H4 (extra+fest)",
+			h4h3: "H3 (fest) %2B H4 (extra+fest)",
+			setClickStep: function(step, name, element, filter) {
+				configurator.data[name] = element.data(name);
+				
+				if(filter) {
+					configurator.filter();
+				}else {
+					jQuery('.step-'+step).hide();
+					if (configurator.data.who != "couple" && step == 7) {
+						jQuery('.step-'+(step+2)).show();
+					} else {
+						jQuery('.step-'+(step+1)).show();
+					}
+				}
+				
+				jQuery('.tip-' + configurator.data.who).show();
+				jQuery('.configurator-question-' + configurator.data.who).show();
+				jQuery('.c-option-' + configurator.data.who).show();
+			},
+			setInputStep: function(step, names, filter) {
+				var error = false;
+				for (var i = 0; i < names.length; ++i) {
+					if(jQuery('input[name="'+names[i]+'"]').val()) {
+						configurator.data[names[i]] = jQuery('input[name="'+names[i]+'"]').val();
+						jQuery('.error-'+names[i]).hide();
+						jQuery('input[name="'+names[i]+'"]').removeClass('error');
+					
+					}else{
+						jQuery('input[name="'+names[i]+'"]').addClass('error');
+						jQuery('.error-'+names[i]).show();
+						error = true;
+					}
+					if (step == 3) {
+						if (jQuery('input[name="gender"]:checked').val()) {
+							jQuery('.error-gender').hide();
+							jQuery('input[name="gender"]').removeClass('error');
+						}else{
+							jQuery('input[name="gender"]').addClass('error');
+							jQuery('.error-gender').show();
+							error = true;
+						}
+					} 
+					if (step == 4) {
+						if (jQuery('input[name="gender2"]:checked').val()) {
+							jQuery('.error-gender2').hide();
+							jQuery('input[name="gender2"]').removeClass('error');
+						}else{
+							jQuery('input[name="gender2"]').addClass('error');
+							jQuery('.error-gender2').show();
+							error = true;
+						}
+					} 
+					
+				}
+				
+				if(filter) {
+					configurator.filter();
+				}else if(error == false){
+					jQuery('.step-'+step).hide();
+					if (configurator.data.who != "couple" && step == 3) {
+						jQuery('.step-'+(step+2)).show();
+					} else {
+						jQuery('.step-'+(step+1)).show();
+					}
+				}
+			},
+			calcHardness: function () {
+				var gender = jQuery('input[name="gender"]:checked').val();
+				var gender2 = jQuery('input[name="gender2"]:checked').val();
+				if(configurator.data.who == "oneperson") {
+					var hardness  = configurator.calcBmiHardness(gender, configurator.data.weight, configurator.data.height);
+				} else if (configurator.data.who == "couple") {
+					var hardness1  = configurator.calcBmiHardness(gender, configurator.data.weight, configurator.data.height);
+					var hardness2 = configurator.calcBmiHardness(gender2, configurator.data.weight2, configurator.data.height2);
+					if (hardness1[0] != hardness2[0]) {
+						var hardness = new Array (hardness1[0]+hardness2[0]) // mache aus h1 + h2 -> h1h2
+					} else {
+						var hardness = hardness1; // venwende h3 Anstatt h3h3
+					}
+				} else if (configurator.data.who == "kid") {
+					var hardness  = new Array ("h1", "h2", "hk")
+				}
+				configurator.data.hardness = new Array();
+				hardness.each(function(hn){
+					configurator.data.hardness.push(configurator[hn]);
+				});
+				//configurator.data.hardness = new Array(configurator.h1, configurator.h2);
+				
+			},
+			calcSize: function() {
+				configurator.data.size = configurator.data.width+'x'+configurator.data.length;
+				return configurator.data.size;
+			},
+			calcBmi: function() {
+				var bmi = parseInt(configurator.data.weight) / Math.pow((parseInt(configurator.data.height)/100),  2);
+				//if(configurator.data.firmness && configurator.data.firmness=="soft") {
+				//	bmi -= 0.5;
+				//}
+				configurator.data.bmi = bmi;
+				return configurator.data.bmi;
+			},
+			calcBmiHardness: function(gender, weight, height) {
+				var bmi = parseInt(weight) / Math.pow((parseInt(height)/100),  2);
+				switch(true) {
+					case ((gender == "männlich" && bmi <= 20) || (gender == "weiblich" && bmi < 19)):
+						var hardness = new Array("h1");
+						break;
+					case ((gender == "männlich" && bmi <= 25) || (gender == "weiblich" && bmi < 24)):
+						var hardness = new Array("h2");
+						break;
+					case (bmi <= 30):
+						var hardness = new Array("h3");
+						break;
+					case (bmi <= 40):
+						var hardness = new Array("h4");
+						break; 
+					default:
+						var hardness = new Array("h5");
+				};
+				
+				//if(configurator.data.firmness && configurator.data.firmness=="soft") {
+				//	bmi2 -= 0.5;
+				//}
+				if (bmi <= 40 && configurator.data.who != "couple") hardness.push("hU")
+				return hardness;
+			},
+			buildUrl: function() {
+				var urlQuery = '/matratzen/?configurator=iways&';
+				var data = configurator.data;
+				var ps_mattress_type = new Array();
+				var ps_cut_technique = new Array();
+				var ps_shoulderzone = false;
+				var ps_lorden = false;
+				var ps_sweating = false;
+				var ps_cleaning = false;
+				var ps_cover_removable = false;
+				var ps_suitable_for_allergic = false;
+				
+				//Prepare data
+				if(data.firmness) {
+					if(data.firmness == "hard") {
+						ps_cut_technique = new Array('XXL', 'F', 'MF');
+					} else if(data.firmness == "soft") {
+						ps_cut_technique = new Array('S', 'M');
+					} else if(data.firmness == "no") {
+						ps_cut_technique = new Array('XXL', 'F', 'MF', 'M', 'S');
+					}
+				}
+
+				if(data.position && data.position == "side") {
+					ps_shoulderzone = "ja";
+				}
+
+				if(data.form) {
+					if(data.form == "trapeze" || data.form2 == "trapeze") {
+						ps_shoulderzone = "ja";	
+						ps_lorden = "ja";
+					}
+					if(data.form == "pear" || data.form2 == "pear") {
+						ps_lorden = "ja"
+					}
+				}
+
+				if(data.allergic && data.allergic == "yes") {
+					ps_suitable_for_allergic = "ja";
+					ps_cleaning = "ja";
+					ps_cover_removable = "ja";
+					ps_mattress_type = new Array('Federkern', 'Gel', 'Kaltschaum', 'Taschenfederkern', 'Visco');
+				}
+
+				if(data.sweat) {
+					if(data.sweat == "more") {
+						ps_cleaning = "ja";
+						ps_cover_removable = "ja";
+						ps_sweating = "ja";
+					}
+				}
+
+				if(data.disorders) {
+					if(data.disorders == "top") {
+						ps_shoulderzone = "ja";
+						ps_mattress_type = new Array('Gel', 'Kaltschaum', 'Latex', 'Visco');
+						if(data.allergic && data.allergic == "yes") {
+							ps_mattress_type = new Array('Gel', 'Kaltschaum', 'Visco');
+						}
+					}else if (data.disorders == "bottom") {
+						ps_lorden = "ja";
+						ps_mattress_type = new Array('Gel', 'Kaltschaum', 'Latex', 'Visco');
+						if(data.allergic && data.allergic == "yes") {
+							ps_mattress_type = new Array('Gel', 'Kaltschaum', 'Visco');
+						}
+					}else if (data.disorders == "back") {
+						ps_shoulderzone = "ja";
+						ps_lorden = "ja";
+						ps_mattress_type = new Array('Gel', 'Kaltschaum', 'Latex', 'Visco');
+						if(data.allergic && data.allergic == "yes") {
+							ps_mattress_type = new Array('Gel', 'Kaltschaum', 'Visco');
+						}
+					}else if (data.disorders == "bedfast") {
+						//ps_cut_technique = new Array('S');
+						ps_mattress_type = new Array('Visco');
+					}
+				}
+
+				if(data.size) {
+					urlQuery += 'fq[ps_size]='+data.size+'&';
+				}
+				if(data.hardness.length) {
+						for (i=0; i < data.hardness.length; i++) { 
+							urlQuery += 'fq[ps_hardness_level][]='+data.hardness[i]+'&'; 
+						}
+				}
+
+				if(ps_cut_technique.length) {
+						for (i=0; i<ps_cut_technique.length; i++) { 
+							urlQuery += 'fq[ps_cut_technique][]='+ps_cut_technique[i]+'&'; 
+						}
+				}
+
+
+				if(ps_mattress_type.length) {
+						for (i=0; i<ps_mattress_type.length; i++) { 
+							urlQuery += 'fq[ps_mattress_type][]='+ps_mattress_type[i]+'&'; 
+						}
+				}
+
+				if(ps_shoulderzone) {
+					urlQuery += 'fq[ps_shoulderzone]='+ps_shoulderzone+'&'; 
+				}
+
+				if(ps_lorden) {
+					urlQuery += 'fq[ps_lorden]='+ps_lorden+'&'; 
+				}
+                                
+                                if(ps_sweating) {
+					urlQuery += 'fq[ps_sweating]='+ps_sweating+'&'; 
+				}
+
+				if(ps_cleaning) {
+					urlQuery += 'fq[ps_cleaning]='+ps_cleaning+'&'; 
+				}
+
+				if(ps_cover_removable) {
+					urlQuery += 'fq[ps_cover_removable]='+ps_cover_removable+'&'; 
+				}
+				
+				if(ps_suitable_for_allergic) {
+					urlQuery += 'fq[ps_suitable_for_allergic]='+ps_suitable_for_allergic+'&'; 
+				}
+				/*
+				ps_size
+				ps_hardness_level
+				ps_suitable_for_allergic
+				ps_mattress_type
+				- Visco
+				- Federkern
+				- Kaltschaum
+				- Taschenfederkern
+				- Gel
+				- Latex
+				ps_cover_removable
+				ps_cleaning > neues Attribut als Ersatz für Bezug waschbar, Werte folgen am Dienstag! 
+				ps_shoulderzone
+				ps_lorden
+				
+				*/
+				return urlQuery;
+			},
+			filter: function() {
+				configurator.calcSize();
+				configurator.calcHardness();
+				window.location.href = configurator.buildUrl();
+			}
+	};
+
+	jQuery('.step-1 a').click(function(e) {
+		e.preventDefault();
+		configurator.setClickStep(1, 'who', jQuery(this));
+	});
+	jQuery('.step-2 .next-step').click(function(e) {
+		e.preventDefault();
+		configurator.setInputStep(2, ['width', 'length'], false);
+	});
+
+	jQuery('.step-3 .next-step').click(function(e) {
+		e.preventDefault();
+		configurator.setInputStep(3, ['height', 'weight'], false);
+	});
+
+	jQuery('.step-4 .next-step').click(function(e) {
+		e.preventDefault();
+		configurator.setInputStep(4, ['height2', 'weight2'], false);
+	});
+
+	jQuery('.step-5 a').click(function(e) {
+		e.preventDefault();
+		configurator.setClickStep(5, 'firmness', jQuery(this), false);
+	});
+
+	jQuery('.step-6 a').click(function(e) {
+		e.preventDefault();
+		configurator.setClickStep(6, 'position', jQuery(this), false);
+	});
+
+	jQuery('.step-7 a').click(function(e) {
+		e.preventDefault();
+		configurator.setClickStep(7, 'form', jQuery(this), false);
+	});
+
+	jQuery('.step-8 a').click(function(e) {
+		e.preventDefault();
+		configurator.setClickStep(8, 'form2', jQuery(this), false);
+	});
+
+	jQuery('.step-9 a').click(function(e) {
+		e.preventDefault();
+		configurator.setClickStep(9, 'sweat', jQuery(this), false);
+	});
+	
+	jQuery('.step-10 a').click(function(e) {
+		e.preventDefault();
+		configurator.setClickStep(10, 'allergic', jQuery(this), false);
+	});
+	
+        jQuery('.step-11 a').click(function(e) {
+		e.preventDefault();
+		configurator.setClickStep(11, 'disorders', jQuery(this), true);
+	});
+</script>

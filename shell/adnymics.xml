@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+ * This is the FEED API (Adnymics)
+ *
+ * @package shell
+ * @author André Manikofski <manikofski@sleepz.com>
+ * @version 1.0.0.1
+-->
+<configdata>
+    <export>
+        <products>
+            <filename>ps_de_product_feed</filename>
+            <csv>
+                <adnymics>
+                    <fields>
+                        <item_number/>
+                        <name/>
+                        <price/>
+                        <manufacturer/>
+                        <category/>
+                        <url/>
+                        <image/>
+                        <description/>
+                        <lang/>
+                        <generic_string_1/>
+                    </fields>
+                </adnymics>
+                <!-- Typedefinition of Magento Columns related to adnymics-->
+                <magento>
+                    <fields>
+                        <sku>item_number</sku>
+                        <name>name</name>
+                        <price>price</price>
+                        <msrp>price2</msrp>
+                        <ps_brand>manufacturer</ps_brand>
+                        <path>category</path>
+                        <url_key>url</url_key>
+                        <small_image>image</small_image>
+                        <description>description</description>
+                    </fields>
+                </magento>
+            </csv>
+        </products>
+    </export>
+</configdata>

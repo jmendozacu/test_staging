@@ -1,0 +1,16 @@
+<?php
+
+    // formatting url
+    $urlToShare = rawurlencode(Mage::helper('core/url')->getCurrentUrl());
+
+?>
+
+
+<div class="social-links">
+    <span class="title">Diesen Artikel empfehlen</span>
+    <ul>
+        <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $urlToShare ?>" class="fb"></a></li>
+        <li><a target="_blank" href="https://plus.google.com/share?url=<?php echo $urlToShare ?>" class="gp"></a></li>
+        <li><a target="_blank" href="https://pinterest.com/pin/create/button/?url=&media=<?php echo $urlToShare ?>&description=" class="pn"></a></li>
+    </ul>
+</div>

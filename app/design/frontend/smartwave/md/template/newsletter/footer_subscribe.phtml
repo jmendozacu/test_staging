@@ -1,0 +1,42 @@
+<?php
+/**
+ * Made by Smartwave.
+ */
+?>
+<?php
+$store = Mage::app()->getStore();
+$code = $store->getCode();
+$footer = Mage::getStoreConfig('porto_settings/footer', $code);
+?>
+<div class="block block-subscribe">
+
+    <div class="col-md-3 text-left">
+        <p class="fs-small title"><b><?php echo $footer['footer_newsletter_title']; ?></b></p>
+        <p class="fs-small"><?php echo $footer['footer_newsletter']; ?></p>
+    </div>
+    <div class="col-md-5">
+        <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="footer-newsletter-validate-detail"
+              onsubmit="setNewsletterCookie()">
+            <div class="block-content">
+                <div class="input-box row">
+                    <div class="col-xs-8">
+                        <input type="text" name="email" id="newsletter_footer"
+                               title="<?php echo $this->__('Sign up for our newsletter') ?>"
+                               placeholder="<?php echo $this->__('Enter your e-mail Address'); ?>"
+                               class="input-text required-entry validate-email"/>
+                    </div>
+                    <div class="col-xs-4 text-left pd-0">
+                        <button type="submit" title="<?php echo $this->__('Subscribe') ?>" class="button">
+                            <span><span><?php echo $this->__('Subscribe') ?></span></span></button>
+                        <div class="clearer"></div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <script type="text/javascript">
+            //<![CDATA[
+            var footernewsletterSubscriberFormDetail = new VarienForm('footer-newsletter-validate-detail');
+            //]]>
+        </script>
+    </div>
+</div>

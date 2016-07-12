@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+		    
+	<xsl:template match="OLAttributes">
+		<data array="true">			
+			<attribut>
+				<attribute_code><xsl:value-of select="./DATA_Code"/></attribute_code> 
+				<frontend_input><xsl:value-of select="./DATA_Art"/></frontend_input> 
+                <backend_type>int</backend_type>
+				<option array="true">
+					<option>
+						
+					</option>
+            	</option>
+			</attribut>									
+		</data>
+	</xsl:template>	
+	
+</xsl:stylesheet>

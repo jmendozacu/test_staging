@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config>
+    <miplog>
+        <configuration xmlns="http://logging.apache.org/log4php/">
+
+             <appenders>
+
+                <file name="file" class="LoggerAppenderRollingFile">
+                    <layout class="LoggerLayoutPattern">
+                        <param name="conversionPattern" value="%date %-6level (%r/%mem) [%logger] %message%newline" />
+                    </layout>
+                    <params>
+                        <file name="file" value="var/log/mip.log" />
+                        <size name="maxFileSize" value="10MB" />
+                        <max name="maxBackupIndex" value="5" />
+                    </params>
+                </file>
+
+             </appenders>
+
+            <root>
+                <level value="TRACE" />
+                <appenders_ref>
+                    <ref_file ref="file" />
+                </appenders_ref>
+            </root>
+
+        </configuration>
+    </miplog>
+</config>

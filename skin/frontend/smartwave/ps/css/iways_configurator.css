@@ -1,0 +1,231 @@
+@CHARSET "UTF-8";
+
+.sleepster {text-align: center; }
+.sleepster span{font-weight: 400; text-transform: none; }
+
+#iways-configurator {
+	position:relative;
+	height: auto;
+	min-height:450px;
+	overflow:hidden;
+	margin: 10px 0;
+	background-color: #FFFFFF; 
+	color: #000000;
+	padding: 20px 10px;
+	font-family: 'Raleway', sans-serif;
+	font-size: 16px; 
+	border: 1px solid #b9c2c7;
+}
+
+#iways-configurator .configurator-question{
+	font-size: 20px;
+	text-transform: uppercase; 
+	text-align: center; 
+}
+
+#iways-configurator .configurator-question span{
+	text-transform: none;
+	font-size: 12px; 
+}
+
+#iways-configurator a{
+	color: #333333;
+}
+
+#iways-configurator ul {
+	text-align: center;
+}
+
+#iways-configurator li{
+	display: inline-block;
+}
+
+#iways-configurator input{
+	background: #ffffff;
+    border-radius: 4px;
+    color: #333333;
+    font-size: 12px;
+    margin: 6px;
+    text-indent: 0;
+    width: 182px;
+    height: 30px;
+    border: 1px solid #b2c7c2;
+    text-align: center; 
+}
+
+#iways-configurator .person input{
+	width: 100px; 
+}
+
+.tip {
+    padding: 10px 50px;
+    text-align: center;
+    clear: both;
+    margin-top: 20px; 
+}
+
+#iways-configurator ul li{
+	text-align: center; 
+}
+
+#iways-configurator ul li a{
+	background-color: #ffffff;
+    display: inline-block;
+    text-align: center; 
+    width: 190px; 
+}
+#iways-configurator ul li img{
+	margin-bottom: 20px; 
+}
+#iways-configurator ul li a span{
+	border: 1px solid #b2c7c2;
+    border-radius: 3px;
+    padding: 5px;
+    text-align: center;
+    width: 180px;
+    display: inline-block;
+}
+
+#iways-configurator ul.who li{
+	width: 285px;
+	height: 100px; 
+	margin: 50px 41px; 
+}
+
+#iways-configurator ul.bed li{
+	width: 190px;
+	height: 100px; 
+	margin: 50px 41px;
+}
+
+#iways-configurator ul.person li{
+	height: 100px;
+    margin: 50px 31px;
+    width: 150px;
+}
+
+#iways-configurator ul.firmness li{
+	width: 285px;
+	height: 100px; 
+	margin: 50px 41px;
+}
+
+#iways-configurator ul.position li{
+	width: 190px;
+	height: 100px; 
+	margin: 50px 41px;
+}
+
+#iways-configurator ul.form li{
+	width: 285px;
+	height: 100px; 
+	margin: 50px 41px;
+}
+
+#iways-configurator ul.sweat li{
+	width: 300px;
+	height: 100px; 
+	margin: 50px 41px;
+}
+
+#iways-configurator ul.allergic li{
+	width: 300px;
+	height: 100px; 
+	margin: 50px 41px;
+}
+
+#iways-configurator ul.disorders li{
+	width: 150px;
+	height: 100px; 
+	margin: 50px 31px;
+}
+
+#iways-configurator .configurator-step{
+	display:none;
+	/*position:absolute;
+	height: 300px;*/
+	width:100%;
+}
+
+#iways-configurator .configurator-step.step-1 {
+	display:block;
+}
+#iways-configurator .next{
+	text-align: right;
+	position: relative;
+	top: -72px; 
+	right: 130px; 
+	float: right;
+	width: 190px; 
+}
+
+#iways-configurator .person .next{
+	position: static;
+}
+
+#iways-configurator .person .button {
+	height: auto;
+	margin-top: 0; 
+	margin-bottom: 35px; 
+}
+
+
+#iways-configurator .next-step{
+	display: inline-block;
+	width: 150px; 
+	background-color: #000000; 
+	color: #FFFFFF; 
+	height: 30px;
+	text-align: center; 
+	line-height: 30px;
+	border: 1px solid #FFFFFF;
+	text-transform: uppercase;
+	text-decoration: none; 
+}
+
+#iways-configurator .error {}
+#iways-configurator input.error {border: 1px solid red;}
+#iways-configurator span.error{display:none;}
+
+.configurator-result {
+	background: none repeat scroll 0 0 #fdc700;
+  	background: -moz-linear-gradient(top,  #fdc700 0%, #FEA000 100%); /* FF3.6+ */
+  	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fdc700), color-stop(100%,#FEA000)); /* Chrome,Safari4+ */
+  	background: -webkit-linear-gradient(top,  #fdc700 0%,#FEA000 100%); /* Chrome10+,Safari5.1+ */
+  	background: -o-linear-gradient(top,  #fdc700 0%,#FEA000 100%); /* Opera 11.10+ */
+  	background: -ms-linear-gradient(top,  #fdc700 0%,#FEA000 100%); /* IE10+ */
+  	background: linear-gradient(to bottom,  #fdc700 0%,#FEA000 100%); /* W3C */
+  	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdc700', endColorstr='#FEA000',GradientType=0 ); /* IE6-9 */
+  	padding: 5px; 
+}
+
+.configurator-result h1{
+	color: #FFFFFF;
+	margin: 0; 
+}
+
+.empty-result{
+	margin-top: 20px;
+}
+@media (max-width: 1200px) {
+	#iways-configurator .next {
+		position: static;
+		float: none;
+		width: 100%;
+		text-align: center;
+		margin-top: 20px;
+	}
+}
+@media (max-width: 979px) {
+
+	#iways-configurator{height: auto; }
+	#iways-configurator .configurator-step{height: auto; }
+	#iways-configurator .next{position: static; float: none; width: 100%; text-align: center; }
+	#iways-configurator .person .button {
+    	display: block !important;
+    	margin: 30px 0;
+    	text-align: center;
+    	width: 100% !important;
+	}
+
+}

@@ -1,0 +1,81 @@
+<?php $catgoryname_original = Mage::getSingleton('catalog/layer')->getCurrentCategory()->getName(); 
+$from = array('-', ' ', 'ä', 'ö', 'ü', 'ß','&','.','_');
+$to =   array('', '', 'ae', 'oe', 'ue', 'ss','', '', '');
+$catgoryname = strtolower(str_replace($from, $to, $catgoryname_original)); 
+$currentcategory = Mage::registry('current_category');
+$suffix = Mage::getStoreConfig('design/head/title_suffix');
+?>
+<?php     
+    if (isset($_GET['configurator'])) {
+        $is_configurator_page = true; 
+    } else {
+        $is_configurator_page = false; 
+    }
+?>
+<?php if ($is_configurator_page == true): ?>
+    <?php
+        $metadescription = $this->getLayout()->createBlock('cms/block')->setBlockId('configurator-result-description')->toHtml();
+        $metatitle = $this->getLayout()->createBlock('cms/block')->setBlockId('configurator-result-head')->toHtml();
+    ?>
+<?php elseif ($this->isLayerNavigationActive()):?>
+    <?php if($this->isSelectedFacetActive()) : ?>
+        <?php $filtercounter = count($this->getFilterQuery()); ?>
+        <?php if ($filtercounter == 1): ?>
+    		<?php foreach($filterQuery = $this->getFilterQuery() as $key=>$values): ?>
+                <?php if (count($values) == 1): ?>
+					<?php foreach($values as $v): ?>
+						<?php if ($key != 'category_id'):?>
+    						<?php $face_key = substr($key, 0, strrpos($key, '_'))?>
+    						<?php $selectedFacetValue = $v;
+                                $filtername_original = $selectedFacetValue;
+                                $facetlabel = $this->getFacetLabel($key);
+    						    if ($face_key == 'price'){
+    						         $selectedFacetValue = $this->formatFacetPrice($v);
+    							}?>
+                                <?php if ($face_key == 'ps_brand'): ?>
+    						    <?php 
+                                    $filtername = strtolower(str_replace($from, $to, $filtername_original)); 
+                                    $block = 'metadescription_'.$catgoryname.'_'.$filtername; 
+                                    $blocktitle = 'metatitle_'.$catgoryname.'_'.$filtername;
+                                    if ( Mage::getModel('cms/block')->load($block)->getIsActive() ) {
+                                        $metadescription =  $this->getLayout()->createBlock('cms/block')->setBlockId($block)->toHtml();
+                                    }else {
+                                        $metadescription = $filtername_original .' '.$currentcategory->getMetaDescription();
+                                    }
+                                    $metatitle = $facetlabel.' '.$filtername_original.': '.$catgoryname_original.' '.$suffix;
+                                ?>
+                                <?php elseif ($face_key == 'ps_suitable_for_allergic'): ?>
+                                    <?php
+                                        $metadescription = $filtername_original .': '.$currentcategory->getMetaDescription();
+                                        $metatitle = $catgoryname_original.' '.$suffix;
+                                    ?>
+                                <?php else: ?>
+                                    <?php
+                                        $metadescription = $facetlabel.' '.$filtername_original .': '.$currentcategory->getMetaDescription();
+                                        $metatitle = $filtername_original.' '.$catgoryname_original.' '.$suffix;
+                                    ?>
+                                <?php endif; ?>
+						<?php endif;?>
+					<?php endforeach; ?>
+                <?php else: ?>
+                    <?php
+                        $metadescription = $currentcategory->getMetaDescription();
+                        $metatitle = $this->getLayout()->getBlock('head')->getTitle();
+                    ?>
+                <?php endif; ?>
+			<?php endforeach; ?>
+        <?php else: ?>
+            <?php
+                $metadescription = $currentcategory->getMetaDescription();
+                $metatitle = $this->getLayout()->getBlock('head')->getTitle();
+            ?>
+        <?php endif; ?>
+    <?php else: ?>
+        <?php
+        	$metadescription = $currentcategory->getMetaDescription();
+        	$metatitle = $this->getLayout()->getBlock('head')->getTitle();
+        ?>
+	<?php endif; ?>       
+<?php endif;?>
+<title><?php echo $metatitle; ?></title>
+<meta name="description" content="<?php echo $metadescription; ?>" />

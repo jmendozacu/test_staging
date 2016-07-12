@@ -1,0 +1,157 @@
+@mixin reset-bg-and-border {
+  border: none;
+  background: none;
+}
+
+@mixin md-text-shadow {
+  text-shadow: 1px 1px 0px #bf290e, -1px -1px 0px #bf290e, 1px 1px #aa2f1b, 2px 2px #aa2f1b, 3px 3px #aa2f1b, 4px 4px #aa2f1b, 5px 5px #aa2f1b, 6px 6px #aa2f1b, 7px 7px #aa2f1b, 8px 8px #aa2f1b, 9px 9px #aa2f1b, 10px 10px #aa2f1b, 11px 11px #aa2f1b, 12px 12px #aa2f1b, 13px 13px #aa2f1b, 14px 14px #aa2f1b, 15px 15px #aa2f1b, 16px 16px #aa2f1b, 17px 17px #aa2f1b, 18px 18px #aa2f1b, 19px 19px #aa2f1b, 20px 20px #aa2f1b, 21px 21px #aa2f1b, 22px 22px #aa2f1b, 23px 23px #aa2f1b, 24px 24px #aa2f1b, 25px 26px #aa2f1b, 26px 26px #aa2f1b, 27px 27px #aa2f1b, 28px 28px #aa2f1b, 29px 29px #aa2f1b, 30px 30px #aa2f1b;
+}
+
+// --------------------------------------------------
+// Fonts
+// --------------------------------------------------
+
+@mixin fw-light {
+  font-weight: 300;
+}
+@mixin fw-regular {
+  font-weight: 400;
+}
+
+@mixin font-light {
+  @include fw-light;
+}
+
+@mixin font-regular {
+  @include fw-regular;
+}
+
+
+@mixin fs-small {
+  font-size: $font-small;
+  line-height: $line-height-small;
+}
+
+@mixin fs-normal {
+  font-size: $font-normal;
+  line-height: $line-height-normal;
+}
+
+@mixin fs-medium {
+  font-size: $font-medium;
+  line-height: $line-height-medium;
+}
+
+@mixin fs-big {
+  font-size: $font-big;
+  line-height: $line-height-big;
+}
+
+@mixin fs-heavy {
+  font-size: $font-heavy;
+  line-height: $line-height-heavy;
+}
+
+@mixin fc-blue {
+  color: $blue;
+}
+@mixin fc-darkblue {
+  color: $darkblue;
+}
+
+@mixin fc-black {
+  color: $standard;
+}
+
+@mixin fc-white {
+  color: $white;
+}
+
+@mixin fc-grey {
+  color: $grey;
+}
+
+@mixin font-dosis-regular {
+  font-family: "dosis",Helvetica, Arial, sans-serif;
+  font-weight: 300;
+}
+
+@mixin font-dosis-medium {
+  font-family: "dosis",Helvetica, Arial, sans-serif;
+  font-weight: 400;
+}
+
+@mixin font-dosis-bold {
+  font-family: "dosis",Helvetica, Arial, sans-serif;
+  font-weight: 600;
+}
+
+// --------------------------------------------------
+// Margins
+// --------------------------------------------------
+
+//TOP
+@mixin mg-tp($mg){ margin-top: #{$mg}px; }
+//BOTTOM
+@mixin mg-bt($mg){ margin-bottom: #{$mg}px; }
+//LEFT
+@mixin mg-left($mg){ margin-left: #{$mg}px; }
+//RIGHT
+@mixin mg-right($mg){ margin-right: #{$mg}px; }
+
+//ZAHL 0
+@mixin mg-horizontalzero($mg){ margin:  #{$mg}px 0px; }
+//0 ZAHL
+@mixin mg-verticalzero($mg){ margin: 0px  #{$mg}px; }
+
+//FULL
+@mixin mg($mg) {margin: #{$mg}px; }
+
+// --------------------------------------------------
+// Paddings
+// --------------------------------------------------
+// TOP
+@mixin pd-tp($pd){ padding-top: #{$pd}px; }
+//BOTTOM
+@mixin pd-bt($pd)  {padding-bottom: #{$pd}px; }
+//LEFT
+@mixin pd-left($pd)  {padding-left: #{$pd}px; }
+//RIGHT
+@mixin pd-right($pd)  {padding-right: #{$pd}px; }
+
+//ZAHL 0
+@mixin pd-horizontalzero($pd){ padding:  #{$pd}px 0px; }
+//0 ZAHL
+@mixin pd-verticalzero($pd)  {padding: 0px  #{$pd}px; }
+//FULL
+@mixin pd($pd){ padding: #{$pd}px; }
+
+// --------------------------------------------------
+// Something other
+// --------------------------------------------------
+@mixin no-indent {
+  text-indent: -9000px;
+}
+@mixin no-decoration {
+  text-decoration: none;
+}
+
+@mixin no-transform {
+  text-transform: none;
+}
+
+@mixin background-gradient {
+  background: #e71f00; /* Old browsers */
+  background: -moz-linear-gradient(top, #e71f00 0%, #b31600 83%, #b31600 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #e71f00 0%, #b31600 83%, #b31600 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #e71f00 0%, #b31600 83%, #b31600 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e71f00', endColorstr='#b31600', GradientType=0); /* IE6-9 */
+}
+
+@mixin background-gradient-hover {
+  background: #f7b329; /* Old browsers */
+  background: -moz-linear-gradient(top,  #f7b329 0%, #e98900 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #f7b329 0%,#e98900 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #f7b329 0%,#e98900 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7b329', endColorstr='#e98900',GradientType=0 ); /* IE6-9 */
+}

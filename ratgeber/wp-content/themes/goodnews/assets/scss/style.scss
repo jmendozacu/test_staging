@@ -1,0 +1,105 @@
+ /**
+ * Table of Contents:
+ *
+ * 1.0 - Base
+ *   1.1 - Include Foundation Framework
+ * 2.0 - General
+ *	 2.0 - Typography
+ *   2.1 - Helper Classes
+ *   2.2 - Component Animations
+ *   2.3 - Responsive Assets
+ *   2.4 - Icons
+ *   2.5 - Social Networks
+ *   2.6 - Common classes / tags 
+ * 3.0 - Structure
+ *   3.1 - Container
+ *   3.2 - Sidebar
+ * 4.0 - Header
+ *   4.1 - Site Header
+ *   4.2 - Navigation
+ *   4.3 - Breadcrumbs
+ *   4.4 - Login / Register
+ * 5.0 - Content
+ *   5.1 - Single Article
+ *   5.2 - Endless Articles 
+ *   5.3 - News
+ *   5.4 - Videos
+ *   5.5 - Photo Albums
+ *   5.6 - Pagination
+ *	 5.7 - Sliders / Galleries
+ *   5.8 - 404 Page
+ * 6.0 - Forms
+ *   6.1 - Site Forms
+ *   6.2 - Contact Form 7
+ *   6.3 - Alerts
+ *   6.4 - Accordions 
+ *   6.5 - Tabs 
+ * 7.0 - Widgets
+ *   7.1 - WordPress Widgets 
+ *   7.2 - Thirdparty Widgets
+ *   7.3 - Ad Widget
+ *   7.4 - Twitter Widget 
+ *   7.5 - News Widget
+ *   7.6 - Newsletter 
+ *   7.7 - Tabs Widget
+ *   7.8 - Title Divider
+ *   7.9 - Comments Widget 
+ * 8.0 - Footer
+ *   8.1 - Site Footer
+ *   8.2 - Copyright
+ * 9.0 - Plugins
+ *   Visual Composer
+ *   WooCommerce
+ *   BuddyPress
+ *
+ * Stylesheet outline based on Principles of writing consistent, idiomatic CSS
+ * by Nicolas Gallagher.
+ *
+ * @see https://github.com/necolas/idiomatic-css
+ * ==========================================================================
+ */
+ 
+
+/* ==========================================================================
+   1.0 Import Foundation
+   ========================================================================== */
+
+@import "settings";
+@import "../../bower_components/foundation/scss/normalize";
+@import "../../bower_components/foundation/scss/foundation";
+@import "components/mixins";  
+@import "components/extendables";
+@import "components/extend";
+
+/* ==========================================================================
+   2.0 - 8.0 Main App
+   ========================================================================== */
+   
+@import "components/main/general"; 
+@import "components/main/structure"; 
+@import "components/main/header"; 
+@import "components/main/content"; 
+@import "components/main/components";
+@import "components/main/widgets";
+@import "components/main/footer";
+
+/* ==========================================================================
+   9.0 Plugins
+   ========================================================================== */
+   
+@import "components/prettyphoto";   
+@import "components/visualcomposer";
+
+@if ($woocommerce == true) { 
+	@import "components/woocommerce";
+}
+
+@if ($buddypress == true) { 
+	@import "components/buddypress";
+}
+
+@if ($ubermenu == true) { 
+	@import "components/ubermenu/common";
+	@import "components/ubermenu/main_menu";
+	@import "components/ubermenu/push_menu";
+}	

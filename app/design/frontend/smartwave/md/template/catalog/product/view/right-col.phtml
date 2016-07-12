@@ -1,0 +1,62 @@
+<?php $_product = $this->getProduct() ?>
+<?php $_msrpPrice = ($_product->getMsrp() ? $this->helper('core')->currency($_product->getMsrp(),true,true) : false) ?>
+<?php $buttonTitle = $this->__('In den Warenkorb'); ?>
+
+<div class="addtocart-wrapper white-box">
+	<div class="msrp-banner block-title">
+		<?php if($_msrpPrice): ?>
+			<h2>UVP <span class="strike"><?php echo $_msrpPrice ?></span></h2>
+			<div class="savings">
+				<span class="percentage">- <?php echo intval($_product->getPrice()/$_product->getMsrp()*100) ?> %</span>
+			</div>
+		<?php else: ?>
+			<h2>Unser</h2>
+			<div class="savings bestprice">
+				<span class="best">Bestpreis</span>
+			</div>
+		<?php endif; ?>
+	</div>
+	<div class="block-content">
+		<?php echo $this->getPriceHtml($_product, false, '_clone') ?>
+		<div class="tax-wrapper">
+			<?php //if(Mage::helper('tax')->priceIncludesTax()): ?>
+				<p>inkl. 19% MwSt, zzgl. <a href="versand" style="color: #ef2000" target="_blank">Versandkosten</a></p>
+			<?php //else: ?>
+				<!-- <p>zzgl. 19% MwSt und <a href="versand">Versandkosten</a></p> -->
+			<?php //endif; ?>
+		</div>
+		<div class="buttons-set">
+			<?php if($_product->isSaleable()): ?>
+				<button type="button" title="<?php echo $buttonTitle ?>" class="large orange expand" onclick="productAddToCartForm.submit(this)"><?php echo $buttonTitle ?></button>
+			<?php endif; ?>
+		</div>
+		<div class="payment-methods">
+			<img src="<?php echo $this->getSkinUrl('img/paypal-ico.jpg') ?>" />
+			<img src="<?php echo $this->getSkinUrl('img/amazon-ico.jpg') ?>" />
+			<img src="<?php echo $this->getSkinUrl('img/sofortueberweisung-ico.jpg') ?>" />
+
+			<img src="<?php echo $this->getSkinUrl('img/visa-ico.jpg') ?>" />
+			<img src="<?php echo $this->getSkinUrl('img/mastercard-ico.jpg') ?>" />
+			<img src="<?php echo $this->getSkinUrl('img/barzahlen-ico.jpg') ?>" />
+
+			<img src="<?php echo $this->getSkinUrl('img/ratepay-ico.jpg') ?>" />
+			<img src="<?php echo $this->getSkinUrl('img/rechnung-ico.jpg') ?>" />
+			<img src="<?php echo $this->getSkinUrl('img/vorkasse-ico.jpg') ?>" />
+		</div>
+	</div>
+</div>
+<div class="trusted-shop-wrapper box-white pad-10">
+	<h2>Gepr&uuml;fte Leistung</h2>
+	<div>
+		<ul class="unstyled">
+			<li>Kostenlose Lieferung schon ab 49 €<em>1</em></li>
+			<li>Kostenlose R&uuml;cklieferung</li>
+			<li>Sichere Zahlung</li>
+			<li>14 Tage R&uuml;ckgaberecht</li>
+			<li>K&auml;uferschutz</li>
+		</ul>
+	</div>
+	<div class="trusted-shop-banner">
+		<img src="<?php echo $this->getSkinUrl('img/trusted_shops-productview.gif') ?>" />
+	</div>
+</div>

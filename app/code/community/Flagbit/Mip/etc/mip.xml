@@ -1,0 +1,367 @@
+<?xml version="1.0"?>
+<!--
+/*                                                                       *
+* This script is part of the MIP project                                  *
+*                                                                        *
+* Mip is free software; you can redistribute it and/or modify it          *
+* under the terms of the GNU General Public License version 2 as         *
+* published by the Free Software Foundation.                             *
+*                                                                        *
+* This script is distributed in the hope that it will be useful, but     *
+* WITHOUT ANY WARRANTY; without even the implied warranty of MERCHAN-    *
+* TABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General      *
+* Public License for more details.                                       *
+*                                                                        */
+
+/**
+* MIP Config
+*
+*    * @license http://opensource.org/licenses/gpl-license.php GNU Public License, version 2
+* @package MIP
+*/
+-->
+<config>
+    <mip>
+
+
+    <!-- ####################################################
+         ################# Scheduled Tasks ##################
+         #################################################### -->
+<!--
+        <cron>
+            <mip_products>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>olsi</interface>
+                    <resource>product</resource>
+                    <action>items</action>
+                    <file>/var/products.xml</file>
+                    <direction>output</direction>
+                </settings>
+            </mip_products>
+
+            <mip_attributes>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>olsi</interface>
+                    <resource>product</resource>
+                    <action>attributes</action>
+                    <file>/var/attributes.xml</file>
+                    <direction>output</direction>
+                </settings>
+            </mip_attributes>
+
+            <mip_customer_tax>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>olsi</interface>
+                    <resource>tax</resource>
+                    <action>customerTaxes</action>
+                    <file>/var/customer_tax.xml</file>
+                    <direction>output</direction>
+                </settings>
+            </mip_customer_tax>
+
+            <mip_product_tax>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <settings>
+                    <trigger>file</trigger>
+                    <interface>olsi</interface>
+                    <resource>tax</resource>
+                    <action>customerProductTaxes</action>
+                    <file>/var/product_tax.xml</file>
+                    <direction>output</direction>
+                </settings>
+            </mip_product_tax>
+        </cron>
+-->
+
+   <!-- ####################################################
+        ################### Events Tasks ###################
+        #################################################### -->
+
+        <event>
+            <!--
+            <sales_order_save_after>
+
+                <mip_orders>
+                    <settings>
+                        <trigger>file</trigger>
+                        <interface>olsi</interface>
+                        <resource>order</resource>
+                        <action>info</action>
+                        <params>
+                            <orderIncrementId>{{order/increment_id}}</orderIncrementId>
+                        </params>
+                        <file>/var/order_{{order/increment_id}}.xml</file>
+                        <direction>output</direction>
+                    </settings>
+                </mip_orders>
+
+            </sales_order_save_after>
+            -->
+        </event>
+
+   <!-- ####################################################
+        #################### Interfaces ####################
+        #################################################### -->
+        <interfaces>
+            <default>
+                <module>Flagbit_Mip</module>
+                <adapter>xml</adapter>
+                <handler>default</handler>
+                <active>1</active>
+            </default>
+        </interfaces>
+
+
+
+
+
+   <!-- ####################################################
+        ######### Trigger, Adapters and Handler ############
+        #################################################### -->
+        <triggers>
+            <url>
+                <model>mip/server_trigger_url</model>
+            </url>
+            <ftp>
+                <model>mip/server_trigger_ftp</model>
+            </ftp>
+            <file>
+                <model>mip/server_trigger_file</model>
+            </file>
+            <queue>
+                <model>mip/server_trigger_queue</model>
+            </queue>
+        </triggers>
+        <adapters>
+            <csv>
+                <model>mip/server_adapter_csv</model>
+                <active>1</active>
+                <processor>xslt</processor>
+            </csv>
+            <xml>
+                <model>mip/server_adapter_xml</model>
+                <active>1</active>
+                <processor>xslt</processor>
+            </xml>
+            <xml_old>
+                <model>mip/server_adapter_xmlold</model>
+                <active>1</active>
+                <processor>xslt</processor>
+            </xml_old>
+            <json>
+                <model>mip/server_adapter_json</model>
+                <active>1</active>
+            </json>
+            <standard>
+                <model>mip/server_adapter_default</model>
+                <active>1</active>
+                <processor>xslt</processor>
+            </standard>
+            <default>
+                <use>standard</use>
+            </default>
+        </adapters>
+        <handlers>
+            <default>
+                <model>mip/server_handler_default</model>
+            </default>
+        </handlers>
+        <processors>
+            <default>
+                <use>xslt</use>
+            </default>
+            <xslt>
+                <model>mip/server_adapter_processor_xslt</model>
+                <settings>
+                    <callbacks>
+                        <mip>
+                            <xmlns>mip:tools</xmlns>
+                            <prefix>mip</prefix>
+                            <model>mip/server_adapter_processor_xslt_tools</model>
+                        </mip>
+                    </callbacks>
+                </settings>
+            </xslt>
+            <xslt2>
+                <model>mip/server_adapter_processor_xslt2</model>
+                <settings>
+                    <exec_file>/usr/bin/saxonb-xslt</exec_file>
+                    <source_param>-s:</source_param>
+                    <template_param>-xsl:</template_param>
+                </settings>
+            </xslt2>
+        </processors>
+        <faults>
+            <unknown>
+                <code>0</code>
+                <message>Unknown Error</message>
+            </unknown>
+            <internal>
+                <code>1</code>
+                <message>Internal Error. Please see log for details.</message>
+            </internal>
+            <access_denied>
+                <code>2</code>
+                <message>Access denied.</message>
+            </access_denied>
+            <resource_path_invalid>
+                <code>3</code>
+                <message>Invalid api path.</message>
+            </resource_path_invalid>
+            <resource_path_not_callable>
+                <code>4</code>
+                <message>Resource path is not callable.</message>
+            </resource_path_not_callable>
+            <session_expired>
+                <code>5</code>
+                <message>Session expired. Try to relogin.</message>
+            </session_expired>
+        </faults>
+
+
+    <!-- ####################################################
+         #################### RESOURCES #####################
+         #################################################### -->
+
+        <resources>
+            <order module="mip">
+                <model>mip/resource_order</model>
+                <methods>
+                    <list module="mip">
+                        <output_method>items</output_method>
+                    </list>
+                    <masscreate module="mip">
+                        <output_method>items</output_method>
+                        <input_method>massCreate</input_method>
+                    </masscreate>
+                    <update module="mip">
+                        <input_method>update</input_method>
+                    </update>
+                    <massupdate module="mip">
+                        <input_method>massUpdate</input_method>
+                    </massupdate>
+                    <info module="mip">
+                        <output_method>info</output_method>
+                        <input_method>saveOrder</input_method>
+                    </info>
+                    <comment module="mip">
+                        <input_method>addComment</input_method>
+                    </comment>
+                    <massstatus module="mip">
+                        <input_method>massStatusUpdate</input_method>
+                    </massstatus>
+                </methods>
+            </order>
+            <productdb module="mip">
+                <model>mip/resource_importexport_product</model>
+                <methods>
+                    <list module="mip">
+                        <input_method>saveItems</input_method>
+                    </list>
+                </methods>
+            </productdb>
+            <product module="mip">
+                <model>mip/resource_product</model>
+                <methods>
+                    <itemfast module="mip">
+                        <output_method>itemsFast</output_method>
+                    </itemfast>
+                    <list module="mip">
+                        <output_method>items</output_method>
+                        <input_method>saveItems</input_method>
+                    </list>
+                    <item module="mip">
+                        <output_method>info</output_method>
+                        <input_method>saveItems</input_method>
+                    </item>
+                    <remove module="mip">
+                        <input_method>deleteItems</input_method>
+                    </remove>
+                    <attributes module="mip">
+                        <input_method>saveAttributes</input_method>
+                        <output_method>attributes</output_method>
+                    </attributes>
+                </methods>
+            </product>
+            <customer module="mip">
+                <model>mip/resource_customer</model>
+                <methods>
+                    <list module="mip">
+                        <output_method>items</output_method>
+                        <input_method>saveItems</input_method>
+                    </list>
+                    <info module="mip">
+                        <output_method>info</output_method>
+                    </info>
+                </methods>
+            </customer>
+            <tax module="mip">
+                <model>mip/resource_category</model>
+                <acl>mip/category</acl>
+                <methods>
+                    <customer module="mip">
+                        <output_method>customerTaxes</output_method>
+                    </customer>
+                    <product module="mip">
+                        <output_method>customerProductTaxes</output_method>
+                    </product>
+                </methods>
+            </tax>
+            <category module="mip">
+                <model>mip/resource_category</model>
+                <methods>
+                    <list module="mip">
+                        <output_method>items</output_method>
+                        <input_method>saveItems</input_method>
+                    </list>
+                    <attributes module="mip">
+                        <input_method>saveAttributes</input_method>
+                    </attributes>
+                </methods>
+            </category>
+            <attribute module="mip">
+                <model>mip/resource_attribute</model>
+                <methods>
+                    <list module="mip">
+                        <output_method>items</output_method>
+                        <input_method>saveItems</input_method>
+                    </list>
+                    <detailed module="mip">
+                        <output_method>attributes</output_method>
+                    </detailed>
+                </methods>
+            </attribute>
+            <balance module="mip">
+                <model>mip/resource_balance</model>
+                <methods>
+                    <list module="mip">
+                        <output_method>items</output_method>
+                        <input_method>saveItems</input_method>
+                    </list>
+                    <info module="mip">
+                        <output_method>info</output_method>
+                    </info>
+                </methods>
+            </balance>
+            <creditmemo module="mip">
+                <model>mip/resource_creditmemo</model>
+                <methods>
+                    <list module="mip">
+                        <output_method>items</output_method>
+                        <input_method>saveItems</input_method>
+                    </list>
+                    <item module="mip">
+                        <output_method>info</output_method>
+                        <input_method>create</input_method>
+                    </item>
+                </methods>
+            </creditmemo>
+        </resources>
+    </mip>
+</config>

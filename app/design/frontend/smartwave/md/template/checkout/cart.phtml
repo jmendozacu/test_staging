@@ -1,0 +1,130 @@
+<?php
+$lastProduct = null;
+$max = 0;
+// $this->getItems();
+foreach($this->getItems() as $item) {
+  if($item->getId() > $max) {
+    $max = $item->getId();
+    $lastProduct = $item->getProduct();
+  }
+}
+?>
+<?php $itemsCount = $this->getQuote()->getItemsCount(); ?>
+<?php $grandTotal = $this->getQuote()->getGrandTotal(); ?>
+
+<div class="top-cart">
+  <div class="row">
+    <?php if($lastProduct): ?>
+    <h3 style="padding-left:15px;"><i class="fa fa-check green" style="margin-right: 10px;"></i><?php echo $this->__('Zuletzt hinzugef&uuml;gt') ?></h3>
+    <div class="last-item-container col-xs-12 col-md-4">
+      <div class="last-item">
+        <!-- img, name, price -->
+        <div class="product-image">
+            <a href="<?php echo $lastProduct->getProductUrl() ?>" title="<?php echo $this->htmlEscape($lastProduct->getName()) ?>">
+              <img src="<?php echo $this->helper('catalog/image')->init($lastProduct, 'thumbnail')->keepAspectRatio(true)->resize(250,180); ?>" alt="<?php echo $this->htmlEscape($lastProduct->getName()) ?>" class="img-responsive" />
+            </a>
+        </div>
+        <div class="product-name-wrapper">
+          <p class="manufacturer">
+            <!-- Hersteller ? -->
+          </p>
+          <p class="product-name">
+            <a href="<?php echo $lastProduct->getProductUrl() ?>">
+              <?php echo $this->htmlEscape($lastProduct->getName()) ?>
+            </a>
+          </p>
+        </div>
+        <div class="product-price">
+          <?php $incl = Mage::helper('tax')->getPrice($lastProduct, $lastProduct->getFinalPrice()); ?>
+          <?php echo 'Einzelpreis: ' . $this->helper('checkout')->formatPrice($incl) ?>
+        </div>
+      </div>
+    </div>
+    <?php endif; ?>
+    <div class="express-checkout-wrapper col-xs-12 <?php echo ($lastProduct ? 'col-md-8' : 'col-md-12' ) ?>">
+      <h1>
+        <?php echo $this->__('Ihr Einkaufswagen enth&auml;lt <span class="cart-qty">%s</span> Artikel (Summe: %s)', $itemsCount, $this->helper('core')->formatPrice($grandTotal, false)) ?>
+      </h1>
+      <div class="checkout-button-wrapper">
+        <?php echo $this->getChildHtml('top_methods'); ?>
+        <!-- <button class="medium fw-bold">Bezahlen mit Paypal</button>
+        <button class="medium fw-bold">Bezahlen mit Amazon</button>
+        <a class="btn medium red" href="<?php echo Mage::helper('checkout/url')->getCheckoutUrl(); ?>"><?php echo $this->__('zur Kasse gehen') ?></a> -->
+      </div>
+    </div>
+  </div>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="cart">
+    <div class="cart-table-wrapper">
+      <?php echo $this->getChildHtml('form_before') ?>
+      <form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post">
+          <?php echo $this->getBlockHtml('formkey'); ?>
+            <fieldset>
+                <table id="shopping-cart-table" class="data-table cart-table">
+                    <?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
+                    <thead>
+                    <tr>
+                        <th><span class="nobr"><?php echo $this->__('Artikelname') ?></span></th>
+                        <th class="a-center"><?php echo $this->__('Einzelpreis') ?></th>
+                        <th class="a-center"><?php echo $this->__('Menge') ?></th>
+                        <th class="last a-right"><?php echo $this->__('Zwischensumme') ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($this->getItems() as $_item): ?>
+                        <?php echo $this->getItemHtml($_item) ?>
+                    <?php endforeach ?>
+                    </tbody>
+                </table>
+                <script type="text/javascript">decorateTable('shopping-cart-table')</script>
+                <script type="text/javascript">
+                    //<![CDATA[
+                    jQuery(function($){
+                        $(".cart .discount h2,.cart .shipping h2").click(function(){
+                            if ($(this).hasClass('opened')) {
+                                $(this).removeClass('opened');
+                                $(this).next().slideUp();
+                            } else {
+                                $(this).addClass('opened');
+                                $(this).next().slideDown();
+                            }
+                        });
+                    })
+                    //]]>
+                </script>
+            </fieldset>
+        </form>
+        <div class="cart-collaterals">
+          <table id="shopping-cart-footer">
+            <tbody>
+              <tr>
+                <td class="width-30">
+                  <?php echo $this->getChildHtml('trusted-shop-cart') ?>
+                </td>
+                <td class="width-40">
+                    <?php echo $this->getChildHtml('coupon') ?>
+                </td>
+                <td class="width-30 totals">
+                  <?php echo $this->getChildHtml('totals'); ?>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+            <?php //if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping'); endif; ?>
+        </div>
+    </div>
+    <?php echo $this->getChildHtml('crosssell') ?>
+</div>
+<?php echo $this->getLayout()->createBlock('cms/block')->setTemplate('checkout/cart/addon.phtml')->toHtml(); ?>
+<div class="cart-buttons">
+  <?php if($this->getContinueShoppingUrl()): ?>
+  <button class="medium fw-bold left" onclick="setLocation('<?php echo $this->getUrl('') ?>')"><?php echo $this->__('Weiter einkaufen') ?></button>
+  <?php endif; ?>
+  <a class="btn medium red right" href="<?php echo Mage::helper('checkout/url')->getCheckoutUrl(); ?>"><?php echo $this->__('zur Kasse gehen') ?></a>
+</div>
+<script>
+  jQuery('.cart-toggle').click(function() {
+    jQuery('.cart').toggle();
+  })
+</script>

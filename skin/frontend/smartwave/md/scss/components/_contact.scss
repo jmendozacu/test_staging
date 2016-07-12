@@ -1,0 +1,34 @@
+.contact-container {
+  background-color: #fff;
+  padding: 15px;
+
+  h2 {
+    font-weight: $fw-bold;
+
+  }
+
+  #contactForm {
+    .input-area {
+      border: 1px solid $border-color-grey;
+
+      h2.title {
+        padding: 5px 10px;
+        background-color: #F9F9F9;
+        @include fs-normal;
+      }
+
+      ul {
+        width: 75%;
+        list-style: none;
+
+        &.inputs {
+          li {
+            width: 30%;
+            float: left;
+            margin: 0 20px 0 0;
+          }
+        }
+      }
+    }
+  }
+}

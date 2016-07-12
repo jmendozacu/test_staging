@@ -1,0 +1,27 @@
+<?php
+/**
+ Made by Sleepz.
+ */
+?>
+<?php
+    $store = Mage::app()->getStore();
+    $code  = $store->getCode();
+    $footer = Mage::getStoreConfig('porto_settings/footer',$code);
+?>
+<div class="block block-subscribe">
+    
+    <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="footer-newsletter-validate-detail" onsubmit="setNewsletterCookie()">
+        <div class="block-content">
+            <div class="input-box">
+                <input type="text" name="email" id="newsletter_footer" placeholder="E-Mail eingeben (Abmeldung jederzeit möglich)" title="<?php echo $this->__('Sign up for our newsletter') ?>" class="input-text required-entry validate-email" />
+                <button type="submit" title="<?php echo $this->__('Submit') ?>" class="button"><span><span>ABONNIEREN</span></span></button>
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var footernewsletterSubscriberFormDetail = new VarienForm('footer-newsletter-validate-detail');
+    //]]>
+    </script>
+</div>

@@ -1,0 +1,80 @@
+<?php
+$productId = $this->getProduct_id();
+$_product = Mage::getModel('catalog/product')->load($productId); //load the product
+$producturl = $_product->getProductUrl();
+if (substr($producturl,-1,1)!="/") {
+    $producturl.="/";
+}
+$finalprice = Mage::helper('tax')->getPrice($_product, $_product->getPrice(), true, null, null, null, null, false);
+$msrpprice = $_product->getMsrp();
+?>
+<div class="lp-product lp-singleproduct">
+    <div class="row-fluid">
+        <div class="col-sm-3">
+            <a href="<?php echo $producturl; ?>" title="<?php echo $_product->getName(); ?>">
+                <img src="<?php echo Mage::helper('catalog/image')->init($_product, 'image')->resize(400, 240)->setQuality(84); ?>" alt="<?php echo $_product->getName();?>" title="<?php echo $_product->getName();?>" width="400"  height="240"  />
+            </a>
+        </div>
+        <div class="col-sm-9">
+            <div class="single-info">
+                <a href="<?php echo $producturl; ?>" title="<?php echo $_product->getName(); ?>">
+                    <p class="product-name"><?php echo $_product->getName(); ?></p>
+                </a>
+                <div class="row-fluid">
+                    <div class="col-sm-6">
+                        <div class="description">
+                            <div class="short-description"><?php echo Mage::getModel('catalog/product')->load($_product->getId())->getShortDescription(); ?></div>
+                            <?php echo Mage::getModel('catalog/product')->load($_product->getId())->getDescription(); ?>
+                        </div>
+                        <div class="p-info">
+                            <div class="item-price">
+                                <div class="special-price msrp strike">
+                                    <?php if ($_product->getMsrp() and $msrpprice > $finalprice): ?>
+                                        <?php echo Mage::helper('core')->currency($_product->getMsrp(),true,true); ?>
+                                    <?php endif; ?>
+                                </div> <!--  / .special-price msrp -->
+                                <?php
+                                $priceFromText = ' ';
+                                if($_product->getData('type_id') == 'configurable'){
+                                    $priceFromText = Mage::helper('tax')->__('from ');
+                                }
+                                ?>
+                                <div class="price-box">
+                                    <span class="regular-price">
+                                        <span class="price">
+                                            <?php $pricewithtax = $this->helper('tax')->getPrice($_product, $_product->getFinalPrice()); ?>
+                                            <?php echo $priceFromText ?><?php echo $this->helper('core')->currency($pricewithtax,true,false); ?>
+                                        </span>
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-to-cart">
+                            <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo Mage::helper('checkout/cart')->getAddUrl($_product); ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+                        </div>
+                    </div>
+                    <div class="product-attributes-wrapper col-sm-6">
+                        <?php $attributes = $_product->getAttributes(); ?>
+                        <strong class="details"><?php echo $this->__('Details') ?></strong>
+                        <dl class="data-table additional-details" id="product-attribute-specs-table">
+                            <?php foreach ($attributes as $attribute): ?>
+                                <?php $value = $attribute->getFrontend()->getValue($_product); ?>
+                                <?php if (($attribute->getIsVisibleOnFront()) && ($value) && ($value != 'Nein')): ?>
+                                    <dt class="label"><?php echo $attribute->getFrontendLabel(); ?></dt>
+                                    <dd class="data"><?php echo $value; ?></dd>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </dl>
+                        <!--<script type="text/javascript">decorateTable('product-attribute-specs-table')</script>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+
+        </div>
+    </div>
+</div>

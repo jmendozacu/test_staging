@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+		
+	<xsl:variable name="data1" select="/OLProducts" />
+	<xsl:variable name="data2" select="document(concat(mip:getBaseDir(),'/var/mip/bware/Varianten.XML'))/OLProducts" />	
+	<xsl:variable name="variantsdef" select="document(concat(mip:getBaseDir(),'/var/mip/bware/VariantsDef.XML'))/OLProducts" />
+		    
+	<xsl:template match="/OLProducts">
+		<data array="true">			
+			<attribut>
+				<attribute_code>ol_betrag</attribute_code>
+				<frontend_input>select</frontend_input>
+				<option array="true">			
+					<xsl:apply-templates mode="def1" select="$variantsdef/Product[DATA_BezAuspraegung1 = 'Betrag']"/>
+					<xsl:apply-templates mode="def2" select="$variantsdef/Product[DATA_BezAuspraegung2 = 'Betrag']"/>
+				</option>
+			</attribut>				
+			<attribut>
+				<attribute_code>ol_farbe</attribute_code>
+				<frontend_input>select</frontend_input>
+				<option array="true">			
+					<xsl:apply-templates mode="def1" select="$variantsdef/Product[DATA_BezAuspraegung1 = 'Farbe']"/>
+					<xsl:apply-templates mode="def2" select="$variantsdef/Product[DATA_BezAuspraegung2 = 'Farbe']"/>
+				</option>
+			</attribut>	
+			<attribut>
+				<attribute_code>ol_gewicht</attribute_code>
+				<frontend_input>select</frontend_input>
+				<option array="true">			
+					<xsl:apply-templates mode="def1" select="$variantsdef/Product[DATA_BezAuspraegung1 = 'Gewicht']"/>
+					<xsl:apply-templates mode="def2" select="$variantsdef/Product[DATA_BezAuspraegung2 = 'Gewicht']"/>
+				</option>
+			</attribut>	
+			<attribut>
+				<attribute_code>ol_groesse</attribute_code>
+				<frontend_input>select</frontend_input>
+				<option array="true">			
+					<xsl:apply-templates mode="def1" select="$variantsdef/Product[DATA_BezAuspraegung1 = 'Groesse']"/>
+					<xsl:apply-templates mode="def2" select="$variantsdef/Product[DATA_BezAuspraegung2 = 'Groesse']"/>
+				</option>
+			</attribut>				
+			<attribut>
+				<attribute_code>ol_laenge</attribute_code>
+				<frontend_input>select</frontend_input>
+				<option array="true">			
+					<xsl:apply-templates mode="def1" select="$variantsdef/Product[DATA_BezAuspraegung1 = 'Laenge']"/>
+					<xsl:apply-templates mode="def2" select="$variantsdef/Product[DATA_BezAuspraegung2 = 'Laenge']"/>
+				</option>
+			</attribut>	
+			<attribut>
+				<attribute_code>ol_material</attribute_code>
+				<frontend_input>select</frontend_input>
+				<option array="true">			
+					<xsl:apply-templates mode="def1" select="$variantsdef/Product[DATA_BezAuspraegung1 = 'Material']"/>
+					<xsl:apply-templates mode="def2" select="$variantsdef/Product[DATA_BezAuspraegung2 = 'Material']"/>
+				</option>
+			</attribut>										
+		</data>
+	</xsl:template>
+	
+	<xsl:template match="Product" mode="def1">
+		<xsl:variable name="variante" select="current()/DATA_Variante"/>
+		<xsl:apply-templates select="$data1/Product[DATA_Variante=$variante]" mode="data1"/>
+		<xsl:apply-templates select="$data2/Product[DATA_Variante=$variante]" mode="data1"/>
+	</xsl:template>	
+	
+	<xsl:template match="Product" mode="def2">
+		<xsl:variable name="variante" select="current()/DATA_Variante"/>
+		<xsl:apply-templates select="$data1/Product[DATA_Variante=$variante]" mode="data2"/>
+		<xsl:apply-templates select="$data2/Product[DATA_Variante=$variante]" mode="data2"/>
+	</xsl:template>	
+
+	<xsl:template match="*" mode="data1">	
+		<xsl:if test="DATA_Auspraegung1 != ''">
+		<option>
+			<option_id><xsl:value-of select="DATA_Auspraegung1"/></option_id>
+			<name array="true">
+				<node>
+					<value><xsl:value-of select="DATA_Auspraegung1"/></value>
+					<store_id>0</store_id>
+				</node>
+                <node>
+                    <value><xsl:value-of select="DATA_Auspraegung1"/></value>
+                    <store_id>1</store_id>
+                </node>
+			</name>	
+			<order><xsl:value-of select="DATA_Sortierung1"/></order>
+		</option>
+		</xsl:if>
+	</xsl:template>
+	
+	<xsl:template match="*" mode="data2">	
+		<xsl:if test="DATA_Auspraegung2 != ''">
+		<option>
+			<option_id><xsl:value-of select="DATA_Auspraegung2"/></option_id>
+			<name array="true">
+				<node>
+					<value><xsl:value-of select="DATA_Auspraegung2"/></value>
+					<store_id>0</store_id>
+				</node>
+                <node>
+                    <value><xsl:value-of select="DATA_Auspraegung2"/></value>
+                    <store_id>1</store_id>
+                </node>
+			</name>	
+			<order><xsl:value-of select="DATA_Sortierung2"/></order>
+		</option>
+		</xsl:if>
+	</xsl:template>	
+	
+</xsl:stylesheet>

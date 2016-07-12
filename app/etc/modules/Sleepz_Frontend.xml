@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Sleepz_Frontend>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+              <Mage_Catalog />
+              <OrganicInternet_SimpleConfigurableProducts />
+            </depends>
+        </Sleepz_Frontend>
+    </modules>
+</config>

@@ -1,0 +1,134 @@
+
+
+
+
+
+<div id="wrapper-promo">
+
+          <?php
+    $_productCollection=$this->getLoadedProductCollection();
+    $_helper = $this->helper('catalog/output');
+?>
+<?php if(!$_productCollection->count()): ?>
+<p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<?php else: ?>
+    <?php $_collectionSize = $_productCollection->count() ?>
+    <?php //$_columnCount = $this->getColumnCount(); ?>
+    <?php foreach ($_productCollection as $_product): ?>
+            <div class="products">
+
+               <div class="catalog-image">
+
+                   <a href="<?php echo $_product->getProductUrl() ?>?utm_source=lvz&utm_medium=klick&utm_campaign=LVZ" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image xxsetQuality85">
+                   <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(360,217)->setQuality(85); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+                    <?php //Sale Icons ?>
+                        <?php $specialprice = $_product->getSpecialPrice(); ?>
+                        <?php $specialPriceFromDate = $_product->getSpecialFromDate(); ?>
+                        <?php $specialPriceToDate = $_product->getSpecialToDate(); ?>
+                        <?php $today =  time(); ?>
+                        <?php $_msrpPrice = $this->helper('core')->currency($_product->getMsrp(),true,true) ?>
+                        <?php // New Icons ?>
+                        <?php $this->_productCollection->addAttributeToSelect('news_from_date')->addAttributeToSelect('news_to_date');?>
+                        <?php $this->_productCollection; ?>
+                        <?php $now = date("Y-m-d"); ?>
+                        <?php $newsFrom= substr($_product->getData('news_from_date'),0,10); ?>
+                        <?php $newsTo=  substr($_product->getData('news_to_date'),0,10); ?>
+                        <?php $_price = $this->helper('tax')->getPrice($_product, $_product->getMsrp()) ?>
+                        <?php $regularprice = Mage::helper('core')->currency($_product->getPrice()); ?>
+                        <?php //$finalprice = Mage::helper('core')->currency($_product->getFinalPrice()); ?>
+                        <?php $finalprice = Mage::helper('tax')->getPrice($_product, $_product->getPrice(), true, null, null, null, null, false); ?>
+                        <?php $specialprice = Mage::helper('tax')->getPrice($_product, $_product->getFinalPrice(), true, null, null, null, null, false); ?>
+                        <?php //if($_product->getData('type_id') != 'configurable'): ?>
+                            <?php $msrpprice = $_product->getMsrp(); ?>
+                            <?php if ($now>=$newsFrom && $now<=$newsTo):?>
+                                    <img src="<?php echo $this->getSkinUrl('images/labels/neu.png') ?>" width="50" height="30" class="onsaleicon" alt="<?php echo $this->__('New on perfekt-schlafen.de'); ?>"/>
+                            <?php elseif ($_product->getMsrp() and $msrpprice > $specialprice): ?>
+                                <?php if($today >= strtotime( $specialPriceFromDate) && $today <= strtotime($specialPriceToDate) || $today >= strtotime( $specialPriceFromDate) && is_null($specialPriceToDate)): ?>
+                                    <?php $totalPercent = ($specialprice / $msrpprice *100) - 100;?>
+                                    <?php //if ($totalPercent < -50): ?>
+                                        <?php /* <div class="topdeal"><?php echo $this->__("Topdeal") ?></div> */ ?>
+                                    <?php if ($totalPercent < -2): ?>
+                                        <div class="savings">
+                                            <span class="percentage"><?php echo round($totalPercent); ?></span> %
+                                        </div>
+                                    <?php endif;?>
+                                <?php endif; ?>
+                            <?php else: ?>
+
+                            <?php endif; ?>
+                        <?php //endif; ?>
+
+                    <?php // End of Sale & New Icons ?>
+                    </a>
+
+
+
+                 </div> <!-- / .catalog-image -->
+                 <div class="misc">
+                    <div class="item-price">
+                         <?php
+                            $priceFromText = ' ';
+                            if($_product->getData('type_id') == 'configurable'){
+                                $priceFromText = Mage::helper('tax')->__('from ');
+                            }
+                        ?>
+                        <div class="price-box">
+                            <span class="regular-price">
+                                <span class="price">
+                                    <?php $pricewithtax = $this->helper('tax')->getPrice($_product, $_product->getFinalPrice()); ?>
+                                    <span><?php echo $priceFromText ?></span><?php echo $this->helper('core')->currency($pricewithtax,true,false); ?>
+                                </span>
+                            </span>
+                        </div>
+                       <?php //echo $this->getPriceHtml($_product, true) ?>
+                    </div>
+
+                    <p class="product-name"><a href="<?php echo $_product->getProductUrl() ?>?utm_source=lvz&utm_medium=klick&utm_campaign=LVZ" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></p>
+                    <div class="rating-wishlist">
+                    <?php echo $this->getReviewsSummaryHtml($_product, "short", true)?>
+                    <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                            <div class="div-wishlist"><span class="link-wishlist m-link m-remove"><?php echo $this->__('Add to Wishlist') ?></span></div>
+                    <?php endif; ?>
+                    </div>
+
+                    <div class="delivery-time">
+                        <?php if($_product->getData('type_id') == 'configurable'): ?>
+                            <?php echo $this->__('Delivery model dependent') ?>
+                        <?php else: ?>
+                            <?php if ($_product->getDelivery_time()):?>
+                                <?php echo $this->__('Delivery in') ?> <?php echo $this->htmlEscape($_product->getDelivery_time()) ?>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    </div>
+
+
+
+
+                </div> <!-- / .misc -->
+
+
+        <?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
+        </div>
+        <?php endif ?>
+        <?php endforeach ?>
+
+
+
+<?php endif; ?>
+
+
+
+</div>
+
+
+
+<script>
+    jQuery('#wrapper-promo').owlCarousel({
+        autoPlay: true,
+        items : 5,
+        nav : true, // Show next and prev buttons
+        pagination : false, // Show next and prev buttons
+        navText: ["",""],
+        loop:true,
+    });
+</script>
